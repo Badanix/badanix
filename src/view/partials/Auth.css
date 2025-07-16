@@ -1,0 +1,46 @@
+
+.scrollbar-thin {
+    scrollbar-width: thin; 
+    scrollbar-color: #d1d5db #f3f4f6; /* Firefox */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+    height: 8px; /* Height of the scrollbar */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #f3f4f6; /* Track color */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #d1d5db; /* Scrollbar color */
+    border-radius: 20px; /* Optional: rounded corners */
+  }
+  /* Add this to your CSS file or <style> block */
+.tooltip {
+  position: absolute;
+  bottom: 100%; /* Positioned above the icon */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0.5rem;
+  background-color: #333;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.group:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media only screen and (min-width: 600px) {
+  .show-on-mobile{
+    display:none !important;
+  }
+}

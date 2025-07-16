@@ -1,0 +1,81 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+/* Light mode styles */
+body {
+    @apply bg-white text-black;
+  }
+  
+  /* Dark mode styles */
+  body.dark {
+    @apply bg-[#171616] text-white;
+  }
+
+
+  .fjfj{
+    border-color: #e61017
+  }
+  /* styles.css */
+.icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-yellow {
+  color: #ffeb3b; /* Yellow color */
+}
+
+.icon-black {
+  color: #000; /* Black color */
+}
+
+/* Custom style for shading effect */
+.icon-yellow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: #ffeb3b; /* Yellow color */
+  clip-path: path('M0,0 L0,50% L100%,50% L100%,0 Z'); /* Adjust according to the icon shape */
+}
+
+.icon-black::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: #000; /* Black color */
+  clip-path: path('M0,50% L0,100% L100%,100% L100%,50% Z'); /* Adjust according to the icon shape */
+}
+
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate {
+  animation: rotate 60s linear infinite; /* Rotates once every minute */
+}
+
+
+/* Clip-path for a left-facing arc shape */
+.clip-arc {
+  position: absolute;
+  clip: rect(0px,60px,200px,0px);
+}
+

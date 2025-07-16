@@ -1,0 +1,1181 @@
+[
+ 
+    {
+        "data-mobile_code": "93",
+        "value": "Afghanistan",
+        "data-code": "AF",
+        "language": "Pashto",
+        "option": "Afghanistan"
+    },
+    {
+        "data-mobile_code": "358",
+        "value": "Aland Islands",
+        "data-code": "AX",
+        "option": "Aland Islands "
+    },
+    {
+        "data-mobile_code": "355",
+        "value": "Albania",
+        "data-code": "AL",
+        "option": "Albania"
+    },
+    {
+        "data-mobile_code": "213",
+        "value": "Algeria",
+        "data-code": "DZ",
+        "option": "Algeria"
+    },
+    {
+        "data-mobile_code": "1684",
+        "value": "AmericanSamoa",
+        "data-code": "AS",
+        "option": "AmericanSamoa "
+    },
+    {
+        "data-mobile_code": "376",
+        "value": "Andorra",
+        "data-code": "AD",
+        "option": "Andorra"
+    },
+    {
+        "data-mobile_code": "244",
+        "value": "Angola",
+        "data-code": "AO",
+        "option": "Angola"
+    },
+    {
+        "data-mobile_code": "1264",
+        "value": "Anguilla",
+        "data-code": "AI",
+        "option": "Anguilla"
+    },
+    {
+        "data-mobile_code": "672",
+        "value": "Antarctica",
+        "data-code": "AQ",
+        "option": "Antarctica"
+    },
+    {
+        "data-mobile_code": "1268",
+        "value": "Antigua and Barbuda",
+        "data-code": "AG",
+        "option": "Antigua and Barbuda"
+    },
+    {
+        "data-mobile_code": "54",
+        "value": "Argentina",
+        "data-code": "AR",
+        "option": "Argentina"
+    },
+    {
+        "data-mobile_code": "374",
+        "value": "Armenia",
+        "data-code": "AM",
+        "option": "Armenia"
+    },
+    {
+        "data-mobile_code": "297",
+        "value": "Aruba",
+        "data-code": "AW",
+        "option": "Aruba"
+    },
+    {
+        "data-mobile_code": "61",
+        "value": "Australia",
+        "data-code": "AU",
+        "option": "Australia"
+    },
+    {
+        "data-mobile_code": "43",
+        "value": "Austria",
+        "data-code": "AT",
+        "option": "Austria"
+    },
+    {
+        "data-mobile_code": "994",
+        "value": "Azerbaijan",
+        "data-code": "AZ",
+        "option": "Azerbaijan"
+    },
+    {
+        "data-mobile_code": "1242",
+        "value": "Bahamas",
+        "data-code": "BS",
+        "option": "Bahamas"
+    },
+    {
+        "data-mobile_code": "973",
+        "value": "Bahrain",
+        "data-code": "BH",
+        "option": "Bahrain"
+    },
+    {
+        "data-mobile_code": "880",
+        "value": "Bangladesh",
+        "data-code": "BD",
+        "option": "Bangladesh"
+    },
+    {
+        "data-mobile_code": "1246",
+        "value": "Barbados",
+        "data-code": "BB",
+        "option": "Barbados"
+    },
+    {
+        "data-mobile_code": "375",
+        "value": "Belarus",
+        "data-code": "BY",
+        "option": "Belarus"
+    },
+    {
+        "data-mobile_code": "32",
+        "value": "Belgium",
+        "data-code": "BE",
+        "option": "Belgium"
+    },
+    {
+        "data-mobile_code": "501",
+        "value": "Belize",
+        "data-code": "BZ",
+        "option": "Belize"
+    },
+    {
+        "data-mobile_code": "229",
+        "value": "Benin",
+        "data-code": "BJ",
+        "option": "Benin"
+    },
+    {
+        "data-mobile_code": "1441",
+        "value": "Bermuda",
+        "data-code": "BM",
+        "option": "Bermuda"
+    },
+    {
+        "data-mobile_code": "975",
+        "value": "Bhutan",
+        "data-code": "BT",
+        "option": "Bhutan"
+    },
+    {
+        "data-mobile_code": "591",
+        "value": "Plurinational State of Bolivia",
+        "data-code": "BO",
+        "option": "Plurinational State of Bolivia"
+    },
+    {
+        "data-mobile_code": "387",
+        "value": "Bosnia and Herzegovina",
+        "data-code": "BA",
+        "option": "Bosnia and Herzegovina"
+    },
+    {
+        "data-mobile_code": "267",
+        "value": "Botswana",
+        "data-code": "BW",
+        "option": "Botswana"
+    },
+    {
+        "data-mobile_code": "55",
+        "value": "Brazil",
+        "data-code": "BR",
+        "option": "Brazil"
+    },
+    {
+        "data-mobile_code": "246",
+        "value": "British Indian Ocean Territory",
+        "data-code": "IO",
+        "option": "British Indian Ocean Territory"
+    },
+    {
+        "data-mobile_code": "673",
+        "value": "Brunei Darussalam",
+        "data-code": "BN",
+        "option": "Brunei Darussalam"
+    },
+    {
+        "data-mobile_code": "359",
+        "value": "Bulgaria",
+        "data-code": "BG",
+        "option": "Bulgaria"
+    },
+    {
+        "data-mobile_code": "226",
+        "value": "Burkina Faso",
+        "data-code": "BF",
+        "option": "Burkina Faso"
+    },
+    {
+        "data-mobile_code": "257",
+        "value": "Burundi",
+        "data-code": "BI",
+        "option": "Burundi"
+    },
+    {
+        "data-mobile_code": "855",
+        "value": "Cambodia",
+        "data-code": "KH",
+        "option": "Cambodia"
+    },
+    {
+        "data-mobile_code": "237",
+        "value": "Cameroon",
+        "data-code": "CM",
+        "option": "Cameroon"
+    },
+    {
+        "data-mobile_code": "1",
+        "value": "Canada",
+        "data-code": "CA",
+        "option": "Canada"
+    },
+    {
+        "data-mobile_code": "238",
+        "value": "Cape Verde",
+        "data-code": "CV",
+        "option": "Cape Verde"
+    },
+    {
+        "data-mobile_code": "1345",
+        "value": "Cayman Islands",
+        "data-code": "KY",
+        "option": "Cayman Islands"
+    },
+    {
+        "data-mobile_code": "236",
+        "value": "Central African Republic",
+        "data-code": "CF",
+        "option": "Central African Republic"
+    },
+    {
+        "data-mobile_code": "235",
+        "value": "Chad",
+        "data-code": "TD",
+        "option": "Chad"
+    },
+    {
+        "data-mobile_code": "56",
+        "value": "Chile",
+        "data-code": "CL",
+        "option": "Chile"
+    },
+    {
+        "data-mobile_code": "86",
+        "value": "China",
+        "data-code": "CN",
+        "option": "China"
+    },
+    {
+        "data-mobile_code": "61",
+        "value": "Christmas Island",
+        "data-code": "CX",
+        "option": "Christmas Island"
+    },
+    {
+        "data-mobile_code": "61",
+        "value": "Cocos (Keeling) Islands",
+        "data-code": "CC",
+        "option": "Cocos (Keeling) Islands"
+    },
+    {
+        "data-mobile_code": "57",
+        "value": "Colombia",
+        "data-code": "CO",
+        "option": "Colombia"
+    },
+    {
+        "data-mobile_code": "269",
+        "value": "Comoros",
+        "data-code": "KM",
+        "option": "Comoros"
+    },
+    {
+        "data-mobile_code": "242",
+        "value": "Congo",
+        "data-code": "CG",
+        "option": "Congo"
+    },
+    {
+        "data-mobile_code": "243",
+        "value": "Democratic Republic of the Congo",
+        "data-code": "CD",
+        "option": "Democratic Republic of the Congo"
+    },
+    {
+        "data-mobile_code": "682",
+        "value": "Cook Islands",
+        "data-code": "CK",
+        "option": "Cook Islands"
+    },
+    {
+        "data-mobile_code": "506",
+        "value": "Costa Rica",
+        "data-code": "CR",
+        "option": "Costa Rica"
+    },
+    {
+        "data-mobile_code": "385",
+        "value": "Croatia",
+        "data-code": "HR",
+        "option": "Croatia"
+    },
+    {
+        "data-mobile_code": "53",
+        "value": "Cuba",
+        "data-code": "CU",
+        "option": "Cuba"
+    },
+    {
+        "data-mobile_code": "357",
+        "value": "Cyprus",
+        "data-code": "CY",
+        "option": "Cyprus"
+    },
+    {
+        "data-mobile_code": "420",
+        "value": "Czech Republic",
+        "data-code": "CZ",
+        "option": "Czech Republic"
+    },
+    {
+        "data-mobile_code": "45",
+        "value": "Denmark",
+        "data-code": "DK",
+        "option": "Denmark"
+    },
+    {
+        "data-mobile_code": "253",
+        "value": "Djibouti",
+        "data-code": "DJ",
+        "option": "Djibouti"
+    },
+    {
+        "data-mobile_code": "1767",
+        "value": "Dominica",
+        "data-code": "DM",
+        "option": "Dominica"
+    },
+    {
+        "data-mobile_code": "1849",
+        "value": "Dominican Republic",
+        "data-code": "DO",
+        "option": "Dominican Republic"
+    },
+    {
+        "data-mobile_code": "593",
+        "value": "Ecuador",
+        "data-code": "EC",
+        "option": "Ecuador"
+    },
+    {
+        "data-mobile_code": "20",
+        "value": "Egypt",
+        "data-code": "EG",
+        "option": "Egypt"
+    },
+    {
+        "data-mobile_code": "503",
+        "value": "El Salvador",
+        "data-code": "SV",
+        "option": "El Salvador"
+    },
+    {
+        "data-mobile_code": "240",
+        "value": "Equatorial Guinea",
+        "data-code": "GQ",
+        "option": "Equatorial Guinea"
+    },
+    {
+        "data-mobile_code": "291",
+        "value": "Eritrea",
+        "data-code": "ER",
+        "option": "Eritrea"
+    },
+    {
+        "data-mobile_code": "372",
+        "value": "Estonia",
+        "data-code": "EE",
+        "option": "Estonia"
+    },
+    {
+        "data-mobile_code": "251",
+        "value": "Ethiopia",
+        "data-code": "ET",
+        "option": "Ethiopia"
+    },
+    {
+        "data-mobile_code": "500",
+        "value": "Falkland Islands (Malvinas)",
+        "data-code": "FK",
+        "option": "Falkland Islands (Malvinas)"
+    },
+    {
+        "data-mobile_code": "298",
+        "value": "Faroe Islands",
+        "data-code": "FO",
+        "option": "Faroe Islands"
+    },
+    {
+        "data-mobile_code": "679",
+        "value": "Fiji",
+        "data-code": "FJ",
+        "option": "Fiji"
+    },
+    {
+        "data-mobile_code": "358",
+        "value": "Finland",
+        "data-code": "FI",
+        "option": "Finland"
+    },
+    {
+        "data-mobile_code": "33",
+        "value": "France",
+        "data-code": "FR",
+        "option": "France"
+    },
+    {
+        "data-mobile_code": "594",
+        "value": "French Guiana",
+        "data-code": "GF",
+        "option": "French Guiana"
+    },
+    {
+        "data-mobile_code": "689",
+        "value": "French Polynesia",
+        "data-code": "PF",
+        "option": "French Polynesia"
+    },
+    {
+        "data-mobile_code": "262",
+        "value": "Mayotte",
+        "data-code": "YT",
+        "option": "Mayotte"
+    },
+    {
+        "data-mobile_code": "381",
+        "value": "Kosovo",
+        "data-code": "XK",
+        "option": "Kosovo"
+    },
+    {
+        "data-mobile_code": "352",
+        "value": "Luxembourg",
+        "data-code": "LU",
+        "option": "Luxembourg"
+    },
+    {
+        "data-mobile_code": "853",
+        "value": "Macau",
+        "data-code": "MO",
+        "option": "Macau"
+    },
+    {
+        "data-mobile_code": "853",
+        "value": "Macau",
+        "data-code": "MO",
+        "option": "Macau"
+    },
+    {
+        "data-mobile_code": "389",
+        "value": "Macedonia",
+        "data-code": "MK",
+        "option": "Macedonia"
+    },
+    {
+        "data-mobile_code": "261",
+        "value": "Madagascar",
+        "data-code": "MG",
+        "option": "Madagascar"
+    },
+    {
+        "data-mobile_code": "265",
+        "value": "Malawi",
+        "data-code": "MW",
+        "option": "Malawi"
+    },
+    {
+        "data-mobile_code": "960",
+        "value": "Maldives",
+        "data-code": "MV",
+        "option": "Maldives"
+    },
+    {
+        "data-mobile_code": "223",
+        "value": "Mali",
+        "data-code": "ML",
+        "option": "Mali"
+    },
+    {
+        "data-mobile_code": "223",
+        "value": "Mali",
+        "data-code": "ML",
+        "option": "Mali"
+    },
+    {
+        "data-mobile_code": "356",
+        "value": "Malta",
+        "data-code": "MT",
+        "option": "Malta"
+    },
+    {
+        "data-mobile_code": "596",
+        "value": "Martinique",
+        "data-code": "MQ",
+        "option": "Martinique"
+    },
+    {
+        "data-mobile_code": "222",
+        "value": "Mauritania",
+        "data-code": "MR",
+        "option": "Mauritania"
+    },
+    {
+        "data-mobile_code": "230",
+        "value": "Mauritius",
+        "data-code": "MU",
+        "option": "Mauritius"
+    },
+    {
+        "data-mobile_code": "262",
+        "value": "Mayotte",
+        "data-code": "YT",
+        "option": "Mayotte"
+    },
+    {
+        "data-mobile_code": "52",
+        "value": "Mexico",
+        "data-code": "MX",
+        "option": "Mexico"
+    },
+    {
+        "data-mobile_code": "377",
+        "value": "Monaco",
+        "data-code": "MC",
+        "option": "Monaco"
+    },
+    {
+        "data-mobile_code": "976",
+        "value": "Mongolia",
+        "data-code": "MN",
+        "option": "Mongolia"
+    },
+    {
+        "data-mobile_code": "382",
+        "value": "Montenegro",
+        "data-code": "ME",
+        "option": "Montenegro"
+    },
+    {
+        "data-mobile_code": "1",
+        "value": "Montserrat",
+        "data-code": "MS",
+        "option": "Montserrat"
+    },
+    {
+        "data-mobile_code": "212",
+        "value": "Western Sahara",
+        "data-code": "EH",
+        "option": "Western Sahara"
+    },
+    {
+        "data-mobile_code": "212",
+        "value": "Western Sahara",
+        "data-code": "EH",
+        "option": "Western Sahara"
+    },
+    {
+        "data-mobile_code": "95",
+        "value": "Myanmar",
+        "data-code": "MM",
+        "option": "Myanmar"
+    },
+    {
+        "data-mobile_code": "264",
+        "value": "Namibia",
+        "data-code": "NA",
+        "option": "Namibia"
+    },
+    {
+        "data-mobile_code": "674",
+        "value": "Nauru",
+        "data-code": "NR",
+        "option": "Nauru"
+    },
+    {
+        "data-mobile_code": "977",
+        "value": "Nepal",
+        "data-code": "NP",
+        "option": "Nepal"
+    },
+    {
+        "data-mobile_code": "31",
+        "value": "Netherlands",
+        "data-code": "NL",
+        "option": "Netherlands"
+    },
+    {
+        "data-mobile_code": "687",
+        "value": "New Caledonia",
+        "data-code": "NC",
+        "option": "New Caledonia"
+    },
+    {
+        "data-mobile_code": "64",
+        "value": "New Zealand",
+        "data-code": "NZ",
+        "option": "New Zealand"
+    },
+    {
+        "data-mobile_code": "505",
+        "value": "Nicaragua",
+        "data-code": "NI",
+        "option": "Nicaragua"
+    },
+    {
+        "data-mobile_code": "227",
+        "value": "Niger",
+        "data-code": "NE",
+        "option": "Niger"
+    },
+    {
+        "data-mobile_code": "234",
+        "value": "Nigeria",
+        "data-code": "NG",
+        "option": "Nigeria"
+    },
+    {
+        "data-mobile_code": "683",
+        "value": "Niue",
+        "data-code": "NU",
+        "option": "Niue"
+    },
+    {
+        "data-mobile_code": "672",
+        "value": "Norfolk Island",
+        "data-code": "NF",
+        "option": "Norfolk Island"
+    },
+    {
+        "data-mobile_code": "1670",
+        "value": "Northern Mariana Islands",
+        "data-code": "MP",
+        "option": "Northern Mariana Islands"
+    },
+    {
+        "data-mobile_code": "850",
+        "value": "North Korea",
+        "data-code": "KP",
+        "option": "North Korea"
+    },
+    {
+        "data-mobile_code": "47",
+        "value": "Norway",
+        "data-code": "NO",
+        "option": "Norway"
+    },
+    {
+        "data-mobile_code": "968",
+        "value": "Oman",
+        "data-code": "OM",
+        "option": "Oman"
+    },
+    {
+        "data-mobile_code": "92",
+        "value": "Pakistan",
+        "data-code": "PK",
+        "option": "Pakistan"
+    },
+    {
+        "data-mobile_code": "680",
+        "value": "Palau",
+        "data-code": "PW",
+        "option": "Palau"
+    },
+    {
+        "data-mobile_code": "970",
+        "value": "Palestine",
+        "data-code": "PS",
+        "option": "Palestine"
+    },
+    {
+        "data-mobile_code": "507",
+        "value": "Panama",
+        "data-code": "PA",
+        "option": "Panama"
+    },
+    {
+        "data-mobile_code": "675",
+        "value": "Papua New Guinea",
+        "data-code": "PG",
+        "option": "Papua New Guinea"
+    },
+    {
+        "data-mobile_code": "595",
+        "value": "Paraguay",
+        "data-code": "PY",
+        "option": "Paraguay"
+    },
+    {
+        "data-mobile_code": "51",
+        "value": "Peru",
+        "data-code": "PE",
+        "option": "Peru"
+    },
+    {
+        "data-mobile_code": "63",
+        "value": "Philippines",
+        "data-code": "PH",
+        "option": "Philippines"
+    },
+    {
+        "data-mobile_code": "64",
+        "value": "Pitcairn",
+        "data-code": "PN",
+        "option": "Pitcairn"
+    },
+    {
+        "data-mobile_code": "48",
+        "value": "Poland",
+        "data-code": "PL",
+        "option": "Poland"
+    },
+    {
+        "data-mobile_code": "351",
+        "value": "Portugal",
+        "data-code": "PT",
+        "option": "Portugal"
+    },
+    {
+        "data-mobile_code": "1",
+        "value": "Puerto Rico",
+        "data-code": "PR",
+        "option": "Puerto Rico"
+    },
+    {
+        "data-mobile_code": "974",
+        "value": "Qatar",
+        "data-code": "QA",
+        "option": "Qatar"
+    },
+    {
+        "data-mobile_code": "383",
+        "value": "Republic of Kosovo",
+        "data-code": "XK",
+        "option": "Republic of Kosovo"
+    },
+    {
+        "data-mobile_code": "262",
+        "value": "Reunion",
+        "data-code": "RE",
+        "option": "Reunion"
+    },
+    {
+        "data-mobile_code": "40",
+        "value": "Romania",
+        "data-code": "RO",
+        "option": "Romania"
+    },
+    {
+        "data-mobile_code": "7",
+        "value": "Russia",
+        "data-code": "RU",
+        "option": "Russia"
+    },
+    {
+        "data-mobile_code": "250",
+        "value": "Rwanda",
+        "data-code": "RW",
+        "option": "Rwanda"
+    },
+    {
+        "data-mobile_code": "590",
+        "value": "Saint Barthelemy",
+        "data-code": "BL",
+        "option": "Saint Barthelemy"
+    },
+    {
+        "data-mobile_code": "290",
+        "value": "Saint Helena",
+        "data-code": "SH",
+        "option": "Saint Helena"
+    },
+    {
+        "data-mobile_code": "1869",
+        "value": "Saint Kitts and Nevis",
+        "data-code": "KN",
+        "option": "Saint Kitts and Nevis"
+    },
+    {
+        "data-mobile_code": "1758",
+        "value": "Saint Lucia",
+        "data-code": "LC",
+        "option": "Saint Lucia"
+    },
+    {
+        "data-mobile_code": "590",
+        "value": "Saint Martin",
+        "data-code": "MF",
+        "option": "Saint Martin"
+    },
+    {
+        "data-mobile_code": "508",
+        "value": "Saint Pierre and Miquelon",
+        "data-code": "PM",
+        "option": "Saint Pierre and Miquelon"
+    },
+    {
+        "data-mobile_code": "1784",
+        "value": "Saint Vincent and the Grenadines",
+        "data-code": "VC",
+        "option": "Saint Vincent and the Grenadines"
+    },
+    {
+        "data-mobile_code": "685",
+        "value": "Samoa",
+        "data-code": "WS",
+        "option": "Samoa"
+    },
+    {
+        "data-mobile_code": "378",
+        "value": "San Marino",
+        "data-code": "SM",
+        "option": "San Marino"
+    },
+    {
+        "data-mobile_code": "239",
+        "value": "Sao Tome and Principe",
+        "data-code": "ST",
+        "option": "Sao Tome and Principe"
+    },
+    {
+        "data-mobile_code": "966",
+        "value": "Saudi Arabia",
+        "data-code": "SA",
+        "option": "Saudi Arabia"
+    },
+    {
+        "data-mobile_code": "221",
+        "value": "Senegal",
+        "data-code": "SN",
+        "option": "Senegal"
+    },
+    {
+        "data-mobile_code": "381",
+        "value": "Serbia",
+        "data-code": "RS",
+        "option": "Serbia"
+    },
+    {
+        "data-mobile_code": "248",
+        "value": "Seychelles",
+        "data-code": "SC",
+        "option": "Seychelles"
+    },
+    {
+        "data-mobile_code": "232",
+        "value": "Sierra Leone",
+        "data-code": "SL",
+        "option": "Sierra Leone"
+    },
+    {
+        "data-mobile_code": "65",
+        "value": "Singapore",
+        "data-code": "SG",
+        "option": "Singapore"
+    },
+    {
+        "data-mobile_code": "1",
+        "value": "Sint Maarten",
+        "data-code": "SX",
+        "option": "Sint Maarten"
+    },
+    {
+        "data-mobile_code": "421",
+        "value": "Slovakia",
+        "data-code": "SK",
+        "option": "Slovakia"
+    },
+    {
+        "data-mobile_code": "386",
+        "value": "Slovenia",
+        "data-code": "SI",
+        "option": "Slovenia"
+    },
+    {
+        "data-mobile_code": "677",
+        "value": "Solomon Islands",
+        "data-code": "SB",
+        "option": "Solomon Islands"
+    },
+    {
+        "data-mobile_code": "252",
+        "value": "Somalia",
+        "data-code": "SO",
+        "option": "Somalia"
+    },
+    {
+        "data-mobile_code": "27",
+        "value": "South Africa",
+        "data-code": "ZA",
+        "option": "South Africa"
+    },
+    {
+        "data-mobile_code": "500",
+        "value": "South Georgia and the South Sandwich Islands",
+        "data-code": "GS",
+        "option": "South Georgia and the South Sandwich Islands"
+    },
+    {
+        "data-mobile_code": "82",
+        "value": "South Korea",
+        "data-code": "KR",
+        "option": "South Korea"
+    },
+    {
+        "data-mobile_code": "211",
+        "value": "South Sudan",
+        "data-code": "SS",
+        "option": "South Sudan"
+    },
+    {
+        "data-mobile_code": "34",
+        "value": "Spain",
+        "data-code": "ES",
+        "option": "Spain"
+    },
+    {
+        "data-mobile_code": "94",
+        "value": "Sri Lanka",
+        "data-code": "LK",
+        "option": "Sri Lanka"
+    },
+    {
+        "data-mobile_code": "249",
+        "value": "Sudan",
+        "data-code": "SD",
+        "option": "Sudan"
+    },
+    {
+        "data-mobile_code": "597",
+        "value": "Suriname",
+        "data-code": "SR",
+        "option": "Suriname"
+    },
+    {
+        "data-mobile_code": "47",
+        "value": "Svalbard and Jan Mayen",
+        "data-code": "SJ",
+        "option": "Svalbard and Jan Mayen"
+    },
+    {
+        "data-mobile_code": "268",
+        "value": "Swaziland",
+        "data-code": "SZ",
+        "option": "Swaziland"
+    },
+    {
+        "data-mobile_code": "46",
+        "value": "Sweden",
+        "data-code": "SE",
+        "option": "Sweden"
+    },
+    {
+        "data-mobile_code": "41",
+        "value": "Switzerland",
+        "data-code": "CH",
+        "option": "Switzerland"
+    },
+    {
+        "data-mobile_code": "963",
+        "value": "Syria",
+        "data-code": "SY",
+        "option": "Syria"
+    },
+    {
+        "data-mobile_code": "886",
+        "value": "Taiwan",
+        "data-code": "TW",
+        "option": "Taiwan"
+    },
+    {
+        "data-mobile_code": "992",
+        "value": "Tajikistan",
+        "data-code": "TJ",
+        "option": "Tajikistan"
+    },
+    {
+        "data-mobile_code": "255",
+        "value": "Tanzania",
+        "data-code": "TZ",
+        "option": "Tanzania"
+    },
+    {
+        "data-mobile_code": "66",
+        "value": "Thailand",
+        "data-code": "TH",
+        "option": "Thailand"
+    },
+    {
+        "data-mobile_code": "670",
+        "value": "Timor-Leste",
+        "data-code": "TL",
+        "option": "Timor-Leste"
+    },
+    {
+        "data-mobile_code": "228",
+        "value": "Togo",
+        "data-code": "TG",
+        "option": "Togo"
+    },
+    {
+        "data-mobile_code": "690",
+        "value": "Tokelau",
+        "data-code": "TK",
+        "option": "Tokelau"
+    },
+    {
+        "data-mobile_code": "676",
+        "value": "Tonga",
+        "data-code": "TO",
+        "option": "Tonga"
+    },
+    {
+        "data-mobile_code": "1868",
+        "value": "Trinidad and Tobago",
+        "data-code": "TT",
+        "option": "Trinidad and Tobago"
+    },
+    {
+        "data-mobile_code": "216",
+        "value": "Tunisia",
+        "data-code": "TN",
+        "option": "Tunisia"
+    },
+    {
+        "data-mobile_code": "90",
+        "value": "Turkey",
+        "data-code": "TR",
+        "option": "Turkey"
+    },
+    {
+        "data-mobile_code": "993",
+        "value": "Turkmenistan",
+        "data-code": "TM",
+        "option": "Turkmenistan"
+    },
+    {
+        "data-mobile_code": "1649",
+        "value": "Turks and Caicos Islands",
+        "data-code": "TC",
+        "option": "Turks and Caicos Islands"
+    },
+    {
+        "data-mobile_code": "688",
+        "value": "Tuvalu",
+        "data-code": "TV",
+        "option": "Tuvalu"
+    },
+    {
+        "data-mobile_code": "1340",
+        "value": "U.S. Virgin Islands",
+        "data-code": "VI",
+        "option": "U.S. Virgin Islands"
+    },
+    {
+        "data-mobile_code": "256",
+        "value": "Uganda",
+        "data-code": "UG",
+        "option": "Uganda"
+    },
+    {
+        "data-mobile_code": "380",
+        "value": "Ukraine",
+        "data-code": "UA",
+        "option": "Ukraine"
+    },
+    {
+        "data-mobile_code": "971",
+        "value": "United Arab Emirates",
+        "data-code": "AE",
+        "option": "United Arab Emirates"
+    },
+    {
+        "data-mobile_code": "44",
+        "value": "United Kingdom",
+        "data-code": "GB",
+        "option": "United Kingdom"
+    },
+    {
+        "data-mobile_code": "1",
+        "value": "United States",
+        "data-code": "US",
+        "language": "English",
+        "option": "United States"
+    },
+    {
+        "data-mobile_code": "598",
+        "value": "Uruguay",
+        "data-code": "UY",
+        "option": "Uruguay"
+    },
+    {
+        "data-mobile_code": "998",
+        "value": "Uzbekistan",
+        "data-code": "UZ",
+        "option": "Uzbekistan"
+    },
+    {
+        "data-mobile_code": "678",
+        "value": "Vanuatu",
+        "data-code": "VU",
+        "option": "Vanuatu"
+    },
+    {
+        "data-mobile_code": "379",
+        "value": "Vatican",
+        "data-code": "VA",
+        "option": "Vatican"
+    },
+    {
+        "data-mobile_code": "58",
+        "value": "Venezuela",
+        "data-code": "VE",
+        "option": "Venezuela"
+    },
+    {
+        "data-mobile_code": "84",
+        "value": "Vietnam",
+        "data-code": "VN",
+        "option": "Vietnam"
+    },
+    {
+        "data-mobile_code": "681",
+        "value": "Wallis and Futuna",
+        "data-code": "WF",
+        "option": "Wallis and Futuna"
+    },
+    {
+        "data-mobile_code": "212",
+        "value": "Western Sahara",
+        "data-code": "EH",
+        "option": "Western Sahara"
+    },
+    {
+        "data-mobile_code": "967",
+        "value": "Yemen",
+        "data-code": "YE",
+        "option": "Yemen"
+    },
+    {
+        "data-mobile_code": "260",
+        "value": "Zambia",
+        "data-code": "ZM",
+        "option": "Zambia"
+    },
+    {
+        "data-mobile_code": "263",
+        "value": "Zimbabwe",
+        "data-code": "ZW",
+        "option": "Zimbabwe"
+    }
+]

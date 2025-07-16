@@ -1,0 +1,102 @@
+{
+    "General Practitioners (GPs) or Family Physicians": {
+      "description": "Provide primary care and manage common illnesses, chronic diseases, and preventive care."
+    },
+    "Cardiologists": {
+      "description": "Focus on heart-related issues (e.g., hypertension, heart disease)."
+    },
+    "Dermatologists": {
+      "description": "Handle skin, hair, and nail disorders (e.g., acne, eczema, psoriasis)."
+    },
+    "Endocrinologists": {
+      "description": "Treat hormonal disorders (e.g., diabetes, thyroid issues)."
+    },
+    "Gastroenterologists": {
+      "description": "Deal with digestive system conditions (e.g., ulcers, IBS)."
+    },
+    "Neurologists": {
+      "description": "Manage nervous system disorders (e.g., migraines, epilepsy)."
+    },
+    "Oncologists": {
+      "description": "Focus on cancer diagnosis and treatment."
+    },
+    "Psychiatrists": {
+      "description": "Provide mental health care, including medication management for conditions like anxiety, depression, and schizophrenia."
+    },
+    "Pulmonologists": {
+      "description": "Specialize in respiratory issues (e.g., asthma, COPD)."
+    },
+    "Rheumatologists": {
+      "description": "Treat autoimmune diseases and joint disorders (e.g., arthritis, lupus)."
+    },
+    "Urologists": {
+      "description": "Handle urinary tract and male reproductive issues (e.g., kidney stones, prostate problems)."
+    },
+    "Pediatricians": {
+      "description": "Provide medical care for infants, children, and adolescents."
+    },
+    "Obstetricians and Gynecologists (OB/GYNs)": {
+      "description": "Specialize in female reproductive health, pregnancy, and childbirth."
+    },
+    "Psychologists": {
+      "description": "Provide counseling and therapy for mental health disorders, but cannot prescribe medication."
+    },
+    "Allergists/Immunologists": {
+      "description": "Diagnose and treat allergies, asthma, and immune system disorders."
+    },
+    "Orthopedic Surgeons": {
+      "description": "Focus on musculoskeletal conditions, though virtual consultations may primarily involve advice or pre-/post-surgery consultation."
+    },
+    "ENT Specialists (Otolaryngologists)": {
+      "description": "Treat conditions related to the ear, nose, and throat."
+    },
+    "Ophthalmologists": {
+      "description": "Eye specialists who treat conditions like glaucoma, cataracts, and perform vision assessments."
+    },
+    "Podiatrists": {
+      "description": "Treat foot, ankle, and lower extremity disorders."
+    },
+    "Dietitians/Nutritionists": {
+      "description": "Provide advice on nutrition, diet plans, and managing health conditions through diet."
+    },
+    "Physiotherapists": {
+      "description": "Offer advice and guidance on physical rehabilitation for injuries, post-surgery recovery, and chronic pain management."
+    },
+    "Pharmacists (Clinical)": {
+      "description": "Can offer consultations on medication management, drug interactions, and therapy optimization."
+    },
+    "Occupational Therapists": {
+      "description": "Assist patients in managing daily activities affected by physical or mental health conditions."
+    },
+    "Speech and Language Therapists": {
+      "description": "Help patients with speech, language, and communication disorders."
+    },
+    "Radiologists": {
+      "description": "Can interpret imaging studies (e.g., X-rays, CT scans) and provide virtual consultations based on results."
+    },
+    "Chiropractors": {
+      "description": "Provide consultations for spine and musculoskeletal conditions, particularly for pain management."
+    },
+    "Psychiatric Nurse Practitioners": {
+      "description": "Provide mental health care, including prescribing medications and offering therapy for mental health conditions."
+    },
+    "Geriatricians": {
+      "description": "Specialize in elderly care, managing age-related issues such as dementia, mobility problems, and chronic conditions."
+    },
+    "Nephrologists": {
+      "description": "Manage kidney-related conditions, including chronic kidney disease and dialysis management."
+    },
+    "Hematologists": {
+      "description": "Specialize in blood disorders such as anemia, leukemia, and clotting disorders."
+    },
+    "Infectious Disease Specialists": {
+      "description": "Manage infections, including viral, bacterial, and parasitic infections (e.g., HIV, tuberculosis)."
+    },
+    "Pain Management Specialists": {
+      "description": "Provide care for chronic pain conditions, including non-surgical treatment options."
+    },
+    "Public Health Practitioners": {
+      "description": "Offer advice on preventive care, vaccinations, and managing public health crises like epidemics."
+    }
+  }
+  
