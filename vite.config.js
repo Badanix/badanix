@@ -5,9 +5,9 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/', // ✅ Keeps routing working in dev & on Render
+  base: '/', 
   build: {
-    outDir: 'dist', // ✅ Make sure "dist" is set as "Publish Directory" on Render
+    outDir: 'dist', 
     rollupOptions: {
       external: ['@react-oauth/google', 'react-qr-code']
     }
