@@ -1,6 +1,6 @@
 import { NAMES, INSTITUTIONTOPBARMENU,INSTITUTIONSIDEBARMENU } from "../../components/Constants";
 import TopBar from "../../components/TopBar"
-import UseTopMenu from "@hooks/useTopMenu";
+import UseTopMenu from "../../hooks/UseTopMenu";
 import UseSideBarMenu from "@hooks/UseSideBarMenu";
 import MobileTopBar from "../../components/MobileTopBar";
 
