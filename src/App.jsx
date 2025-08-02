@@ -30,7 +30,6 @@ import {
   Hospitals,
   Pharmacies,
   Laboratories,
-  BlogDetail,
   Wallet,
   Activity,
   Settings,
@@ -934,19 +933,7 @@ function AppRouter({ toggleMode, darkMode }) {
             }
           />
 
-          <Route
-            path="/blog"
-            element={
-              <InactivityProtectedRoute>
-                <ProtectedRoute
-                  component={BlogDetail}
-                  allowedRoles={[1]}
-                  toggleMode={toggleMode}
-                  darkMode={darkMode}
-                />
-              </InactivityProtectedRoute>
-            }
-          />
+       
 
           <Route
             path="/doctors"
