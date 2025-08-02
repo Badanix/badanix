@@ -111,7 +111,7 @@ import InstiForgotPassword from "./view/guest/auth/InstiForgotPassword";
 import InstiResetCode from "./view/guest/auth/InstiResetCode";
 import PatientForgotPassword from "./view/guest/auth/PatientForgotPassword";
 import PatientResetCode from "./view/guest/auth/PatientResetCode";
-import OnBoarding from "./view/loggedIn/secured/institution/hospital/Onboarding";
+
 
 const siteTitle = NAMES.SITE_TITLE;
 const pagesWithPreloader = ["/"];

@@ -12,7 +12,7 @@ import axios from "axios";
 import HospitalHeader from "../../../../partials/HospitalHeader";
 import { useNavigate } from "react-router-dom";
 
-const OnBoarding = () => {
+const HospitalOnBoarding = () => {
   const siteTitle = NAMES.SITE_TITLE;
   const APIInstitutionOnboarding = APIURLS.APIInstitutionOnboarding;
   const { isSidebarOpen, toggleSidebar } = UseSideBarMenu();
@@ -922,4 +922,4 @@ const OnBoarding = () => {
   );
 };
 
-export default OnBoarding;
+export default HospitalOnBoarding;

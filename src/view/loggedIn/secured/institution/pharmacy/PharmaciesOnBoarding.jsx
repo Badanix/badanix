@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  LABORATORYSIDEBARMENU,
+  PHARMACYSIDEBARMENU,
   NAMES,
   APIURLS,
 } from "../../../../../components/Constants";
@@ -9,10 +9,10 @@ import UseSideBarMenu from "@hooks/UseSideBarMenu";
 import countriesData from "../../../../../components/country.json";
 import Swal from "sweetalert2";
 import axios from "axios";
-import LaboratoryHeader from "../../../../partials/LaboratoryHeader";
+import PharmacyHeader from "../../../../partials/PharmacyHeader";
 import { useNavigate } from "react-router-dom";
 
-const OnBoarding = () => {
+const PharmaciesOnBoarding = () => {
   const siteTitle = NAMES.SITE_TITLE;
   const APIInstitutionOnboarding = APIURLS.APIInstitutionOnboarding;
   const { isSidebarOpen, toggleSidebar } = UseSideBarMenu();
@@ -104,7 +104,7 @@ const OnBoarding = () => {
         text: response.data.message || "Your profile has been updated.",
       });
       // window.location.href = '/auth-login';
-      navigate("/institution/Laboratory/LabImageUpload");
+      navigate("/institution/pharmacy/PharmImageUpload");
 
       console.log(` your institution data: ${response.data}`);
     } catch (error) {
@@ -126,7 +126,7 @@ const OnBoarding = () => {
       <SideBarMenu
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
-        menuItems={LABORATORYSIDEBARMENU}
+        menuItems={PHARMACYSIDEBARMENU}
       />
 
       {/* Main Content */}
@@ -136,7 +136,7 @@ const OnBoarding = () => {
         }  transition-all duration-300`}
       >
         {/* Topbar */}
-        <LaboratoryHeader />
+        <PharmacyHeader />
         {/* Form Content */}
         <main className="p-6 bg-gray-100 flex-grow">
           <div className="text-center">
@@ -922,4 +922,4 @@ const OnBoarding = () => {
   );
 };
 
-export default OnBoarding;
+export default PharmaciesOnBoarding;
