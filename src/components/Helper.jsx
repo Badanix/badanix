@@ -77,7 +77,7 @@ export const getUserData = () => {
       return null;
     }
 
-    console.log("Retrieved User Data:", userData);  
+    // console.log("Retrieved User Data:", userData);  
     return userData;
   } catch (error) {
     console.error("Error parsing user data from localStorage:", error);
