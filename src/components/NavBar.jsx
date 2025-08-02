@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom"; // To get the current path
 import { NAMES } from "./Constants";
 
-const NavBar = ({  textColor,className }) => {
+const NavBar = ({ textColor, className }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -42,10 +42,12 @@ const NavBar = ({  textColor,className }) => {
     <>
       {/* Menu Bar */}
       <nav
-        className={`p-6 md:py-4 bg-white text-primary shadow-xl flex justify-between items-center w-full z-10 fixed top-0 left-0 transition-all duration-300 rounded-b-lg ${className}`}>
+        className={`p-6 md:py-4 bg-white text-primary shadow-xl flex justify-between items-center w-full z-10 fixed top-0 left-0 transition-all duration-300 rounded-b-lg ${className}`}
+      >
         <div className="flex items-center space-x-8 custom-sm:space-x-0">
           <a href="/">
-          <img src={logo}
+            <img
+              src={logo}
               alt="Logo"
               className="w-3/4 h-6 sm:h-8 sm:mr-[150px] custom-sm:mr-5"
             />
@@ -81,7 +83,7 @@ const NavBar = ({  textColor,className }) => {
                 scrolled ? "text-primary" : `${textColor}`
               }`}
             >
-             testimonals
+              testimonals
             </a>
           </div>
         </div>
@@ -106,26 +108,31 @@ const NavBar = ({  textColor,className }) => {
         </div>
 
         <div className="hidden lg:flex items-center space-x-6">
-        <Link
-      to={'./auth-register'}
-      className={`p-2 rounded-xl hover:bg-secondary hover:text-white capitalize ${scrolled ? "text-primary" : `${textColor}`}`}
-      onMouseEnter={() => setHovered(true)}  
-      onMouseLeave={() => setHovered(false)}  
-    >
-      {hovered ? 'Register either as a Doctor or as an Institution' : 'Partner With Us'}
-    </Link>
-          <Link to={'./register'}>
-          <button
-            className={`bg-secondary border-primary text-primary border-2 px-4 py-2 rounded-lg shadow hover:bg-secondary hover:text-white hover:border-2  ${
-              scrolled
-                ? "bg-primary text-white hover:bg-white hover:text-primary"
-                : "bg-white text-primary"
+          <Link
+            to={"./auth-register"}
+            className={`p-2 rounded-xl hover:bg-secondary hover:text-white capitalize ${
+              scrolled ? "text-primary" : `${textColor}`
             }`}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
           >
-            Get Started
-          </button>
+            {hovered
+              ? "Register either as a Doctor or as an Institution"
+              : "Partner With Us"}
           </Link>
-          <Link to={'./auth-login'}
+          <Link to={"./register"}>
+            <button
+              className={`bg-secondary border-primary text-primary border-2 px-4 py-2 rounded-lg shadow hover:bg-secondary hover:text-white hover:border-2  ${
+                scrolled
+                  ? "bg-primary text-white hover:bg-white hover:text-primary"
+                  : "bg-white text-primary"
+              }`}
+            >
+              Get Started
+            </button>
+          </Link>
+          <Link
+            to={"./auth-login"}
             className={`p-2 rounded-xl hover:bg-secondary hover:text-white ${
               scrolled ? "text-primary" : `${textColor}`
             }`}
@@ -187,12 +194,12 @@ const NavBar = ({  textColor,className }) => {
               >
                 Get Started
               </a>
-              <a
-                href="./auth-login"
+              <Link
+                to={"./auth-login"}
                 className="block hover:bg-white hover:text-primary p-2 rounded-xl border-2 text-center border-gray-400 mt-6 sm:my-4"
               >
                 Login
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -203,9 +210,9 @@ const NavBar = ({  textColor,className }) => {
 
 // Validate the other props
 NavBar.propTypes = {
-  navBgColor: PropTypes.string.isRequired, 
-  textColor: PropTypes.string.isRequired,  
-  className: PropTypes.string.isRequired, 
+  navBgColor: PropTypes.string.isRequired,
+  textColor: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 export default NavBar;
