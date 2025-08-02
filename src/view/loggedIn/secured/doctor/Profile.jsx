@@ -5,7 +5,7 @@ import SideBarMenu from '../../../../components/SideBarMenu';
 import UseSideBarMenu from '@hooks/UseSideBarMenu';
 
 import TopBar from '../../../../components/TopBar';
-import UseTopMenu from '@hooks/useTopMenu';
+import UseTopMenu from '../../../../hooks/UseTopMenu';
 import DefaultProfile from '../../../../components/DefaultProfile';
 
 const Profile = () => {
