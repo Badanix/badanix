@@ -188,7 +188,7 @@ const NavBar = ({  textColor,className }) => {
                 Get Started
               </a>
               <a
-                href="/login"
+                href="./auth-login"
                 className="block hover:bg-white hover:text-primary p-2 rounded-xl border-2 text-center border-gray-400 mt-6 sm:my-4"
               >
                 Login
