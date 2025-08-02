@@ -604,11 +604,6 @@
   resolved "https://registry.npmjs.org/@pkgjs/parseargs/-/parseargs-0.11.0.tgz"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@react-oauth/google@^0.12.2":
-  version "0.12.2"
-  resolved "https://registry.npmjs.org/@react-oauth/google/-/google-0.12.2.tgz"
-  integrity sha512-d1GVm2uD4E44EJft2RbKtp8Z1fp/gK8Lb6KHgs3pHlM0PxCXGLaq8LLYQYENnN4xPWO1gkL4apBtlPKzpLvZwg==
-
 "@remix-run/router@1.21.0":
   version "1.21.0"
   resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.21.0.tgz"
@@ -1114,10 +1109,9 @@ classnames@^2.2.5:
   version "0.0.0"
   dependencies:
     "@fortawesome/fontawesome-free" "^6.6.0"
-    "@react-oauth/google" "^0.12.2"
     agora-rtc-sdk-ng "^4.22.2"
     axios "^1.7.7"
-    client "file:../../Users/user/AppData/Local/Yarn/Cache/v6/npm-client-0.0.0-eeca64b6-2b14-45be-b878-62ed781c4167-1754139212051/node_modules/client"
+    client "file:../../Users/user/AppData/Local/Yarn/Cache/v6/npm-client-0.0.0-dd1902d4-22b8-4d1e-a3bf-e3a1293cab7b-1754143689223/node_modules/client"
     country-state-city "^3.2.1"
     currency-symbol "^1.0.6"
     daisyui "^4.12.23"
@@ -1131,7 +1125,6 @@ classnames@^2.2.5:
     react-i18next "^15.1.0"
     react-icons "^5.3.0"
     react-multi-date-picker "^4.5.2"
-    react-qr-code "^2.0.15"
     react-router-dom "^6.26.1"
     react-select "^5.9.0"
     react-slick "^0.30.2"
@@ -2709,11 +2702,6 @@ punycode@^2.1.0:
   resolved "https://registry.npmjs.org/punycode/-/punycode-2.3.1.tgz"
   integrity sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==
 
-qr.js@0.0.0:
-  version "0.0.0"
-  resolved "https://registry.npmjs.org/qr.js/-/qr.js-0.0.0.tgz"
-  integrity sha512-c4iYnWb+k2E+vYpRimHqSu575b1/wKl4XFeJGpFmrJQz5I88v9aY2czh7s0w36srfCM1sXgC/xpoJz5dJfq+OQ==
-
 queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
@@ -2772,14 +2760,6 @@ react-multi-date-picker@^4.5.2:
   dependencies:
     react-date-object "^2.1.8"
     react-element-popper "^2.1.6"
-
-react-qr-code@^2.0.15:
-  version "2.0.15"
-  resolved "https://registry.npmjs.org/react-qr-code/-/react-qr-code-2.0.15.tgz"
-  integrity sha512-MkZcjEXqVKqXEIMVE0mbcGgDpkfSdd8zhuzXEl9QzYeNcw8Hq2oVIzDLWuZN2PQBwM5PWjc2S31K8Q1UbcFMfw==
-  dependencies:
-    prop-types "^15.8.1"
-    qr.js "0.0.0"
 
 react-refresh@^0.14.2:
   version "0.14.2"

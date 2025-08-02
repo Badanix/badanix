@@ -5,11 +5,11 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/', 
+  base: '/', // important for production routing
   build: {
-    outDir: 'dist', 
+    outDir: 'dist',
     rollupOptions: {
-      external: ['@react-oauth/google', 'react-qr-code']
+      // ✅ remove external modules if you’re not using them
     }
   },
   resolve: {

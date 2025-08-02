@@ -2,7 +2,6 @@ import { useState } from "react";
 import { IMAGE, DOWNLOAD } from '../../components/Constants';
 
 import styles from "../../components/styles";
-import Barcode from 'react-qr-code';
 import UAParser from 'ua-parser-js';
 import { RiQrScan2Line } from "react-icons/ri";
 
