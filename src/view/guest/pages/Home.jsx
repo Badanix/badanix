@@ -15,6 +15,7 @@ function Home() {
       <CoreServicesSection />
       <DownloadApp/>
       <FAQSection />
+
       <div className="bg-gray-200 py-10">
         <div className="container mx-auto px-4">
           <h3 className="text-2xl font-semibold text-center">Connect With Us</h3>

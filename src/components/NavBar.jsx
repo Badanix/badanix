@@ -132,7 +132,7 @@ const NavBar = ({ textColor, className }) => {
             </button>
           </Link>
           <Link
-            to={"./auth-login"}
+            to={"/auth-login"}
             className={`p-2 rounded-xl hover:bg-secondary hover:text-white ${
               scrolled ? "text-primary" : `${textColor}`
             }`}
@@ -195,7 +195,7 @@ const NavBar = ({ textColor, className }) => {
                 Get Started
               </a>
               <Link
-                to={"./auth-login"}
+                to={"/auth-login"}
                 className="block hover:bg-white hover:text-primary p-2 rounded-xl border-2 text-center border-gray-400 mt-6 sm:my-4"
               >
                 Login
