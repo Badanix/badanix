@@ -1,7 +1,7 @@
 import AuthHeader from '../../partials/AuthHeader';
 // import { IMAGE } from '../../../components/constants';
-import GoogleLogin from '../../../components/GoogleLogin';
-import AppleLogin from '../../../components/AppleLogin';
+
+
 import { IoIosArrowDown, IoIosArrowUp, IoIosCloseCircle } from "react-icons/io";
 
 import styles from '../../../components/styles';
@@ -353,14 +353,7 @@ const AuthPatientRegister = () => {
         <span className="mx-4 text-gray-500">or Sign Up with</span>
         <div className="flex-grow border-t border-gray-300"></div>
       </div>
-      <div className="flex justify-center items-center -mt-[42px]">
-        <div className="p-5 flex justify-center items-center">
-          <GoogleLogin />
-        </div>
-        <div className="p-6 flex justify-center items-center ml-[-27px]">
-          <AppleLogin />
-        </div>
-      </div>
+
       <div className="block text-center text-lg text-gray-600 font-[600]">
         <p>
           Already have an account?{' '}
