@@ -3,11 +3,11 @@ import TopBar from "../../components/TopBar"
 import UseTopMenu from "../../hooks/UseTopMenu";
 import UseSideBarMenu from "@hooks/UseSideBarMenu";
 import MobileTopBar from "../../components/MobileTopBar";
-import PharmacyIcon from "../../assets/icons/Pharmacy.png"
+import PharmacyIcon from "../../assets/icons/pharmacy.png"
 
 
 const PharmacyHeader = () => {
-  const userImage= NAMES.userImage
+  const userImage= PharmacyIcon
   const siteTitle = NAMES.SITE_TITLE
   const { profileDropdownOpen, toggleTopbar }=UseTopMenu();
   const {  toggleSidebar } = UseSideBarMenu();
