@@ -12,7 +12,7 @@ import hospitalIcon from "../assets/icons/hospital.png";
 import labIcon from "../assets/icons/laboratory.png";
 import walletIcon from "../assets/icons/wallet.png";
 import InstitutionIcon from "../assets/icons/hospital.png";
-import PatientIcon from "../assets/icons/Patient.png";
+import PatientIcon from "../assets/icons/patient.png";
 import OrderIcon from "../assets/icons/Order.png"
 
 const SideBarMenu = ({ isSidebarOpen, toggleSidebar, institutionType }) => {
