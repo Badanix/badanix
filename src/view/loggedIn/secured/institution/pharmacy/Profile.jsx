@@ -64,7 +64,11 @@ const Profile = () => {
 
     const isValid = Object.values(errors).every((val) => val);
     if (!isValid) {
-      Swal.fire("Error", "Password validation failed. Check your inputs.", "error");
+      Swal.fire(
+        "Error",
+        "Password validation failed. Check your inputs.",
+        "error"
+      );
       return;
     }
 
@@ -75,25 +79,30 @@ const Profile = () => {
     }
 
     try {
-      const res = await fetch("https://api.digitalhospital.com.ng/api/v1/institution/password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          oldpassword: oldPassword,
-          password: newPassword,
-          password_confirmation: confirmPassword,
-        }),
-      });
+      const res = await fetch(
+        "https://api.digitalhospital.com.ng/api/v1/institution/password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            oldpassword: oldPassword,
+            password: newPassword,
+            password_confirmation: confirmPassword,
+          }),
+        }
+      );
 
       const data = await res.json();
 
       if (res.ok) {
-        Swal.fire("Success", "Password changed successfully!", "success").then(() => {
-          navigate("/auth-login");
-        });
+        Swal.fire("Success", "Password changed successfully!", "success").then(
+          () => {
+            navigate("/auth-login");
+          }
+        );
       } else {
         Swal.fire("Error", data.message || "Something went wrong", "error");
       }
@@ -109,17 +118,22 @@ const Profile = () => {
       <SideBarMenu
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
-        menuItems={PHARMACYSIDEBARMENU}
+        institutionType={userData?.data?.institution_type?.toLowerCase()}
       />
 
       {/* Main Content */}
       <div
-        className={`flex-1 ml-${isSidebarOpen ? "64" : "0 sm:ml-20"} transition-all duration-300`}
+        className={`flex-1 ml-${
+          isSidebarOpen ? "64" : "0 sm:ml-20"
+        } transition-all duration-300`}
       >
         <PharmacyHeader />
 
         <main className="p-6 bg-gray-100 flex-grow">
-          <Link to="/institution/pharmacy/Dashboard" className="underline flex space-x-2 text-secondary my-4">
+          <Link
+            to="/institution/pharmacy/Dashboard"
+            className="underline flex space-x-2 text-secondary my-4"
+          >
             <FaArrowLeft className="mt-1 text-primary" />
             <span>Back to Home</span>
           </Link>
@@ -144,7 +158,9 @@ const Profile = () => {
             <h2 className="text-xl font-bold mb-4">Change Password</h2>
             <form className="space-y-4" onSubmit={handleResetPassword}>
               <div>
-                <label className="block text-sm font-medium">Current Password</label>
+                <label className="block text-sm font-medium">
+                  Current Password
+                </label>
                 <input
                   type="password"
                   className="w-full mt-1 p-2 border rounded"
@@ -153,7 +169,9 @@ const Profile = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium">New Password</label>
+                <label className="block text-sm font-medium">
+                  New Password
+                </label>
                 <input
                   type="password"
                   className="w-full mt-1 p-2 border rounded"
@@ -165,7 +183,9 @@ const Profile = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium">Confirm New Password</label>
+                <label className="block text-sm font-medium">
+                  Confirm New Password
+                </label>
                 <input
                   type="password"
                   className="w-full mt-1 p-2 border rounded"
@@ -178,10 +198,16 @@ const Profile = () => {
               </div>
 
               <div className="text-sm text-red-500 space-y-1">
-                {!errors.length && <div>Password must be at least 8 characters</div>}
-                {!errors.uppercase && <div>Must include an uppercase letter</div>}
+                {!errors.length && (
+                  <div>Password must be at least 8 characters</div>
+                )}
+                {!errors.uppercase && (
+                  <div>Must include an uppercase letter</div>
+                )}
                 {!errors.number && <div>Must include a number</div>}
-                {!errors.specialChar && <div>Must include a special character (@$!%*?&)</div>}
+                {!errors.specialChar && (
+                  <div>Must include a special character (@$!%*?&)</div>
+                )}
                 {!errors.match && <div>Passwords do not match</div>}
               </div>
 
@@ -193,7 +219,10 @@ const Profile = () => {
                 >
                   Cancel
                 </button>
-                <button type="submit" className="px-4 py-2 bg-primary text-white rounded">
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-primary text-white rounded"
+                >
                   Update
                 </button>
               </div>

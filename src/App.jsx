@@ -177,7 +177,7 @@ const usePageTitle = () => {
       "institution/Laboratory/profile": "Profile",
 
       "/blog": "Blog",
-      "/doctors": "Doctors",
+      "/patient/doctors": "Doctors",
       "/DoctorsBooking": "Doctor's Booking",
       "/onboarding": `Patient's Profile Completion`,
       "/PatientImageUpload": "Profile Image",
@@ -936,7 +936,7 @@ function AppRouter({ toggleMode, darkMode }) {
        
 
           <Route
-            path="/doctors"
+            path="/patient/doctors"
             element={
               <InactivityProtectedRoute>
                 <ProtectedRoute

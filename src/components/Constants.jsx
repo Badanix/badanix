@@ -133,7 +133,9 @@ export const APIURLS={
 
 
 };
+
 export const IMAGE= {
+  faPatient : '/images/Home.svg',
   bitpay: '/images/bitpay.svg',
   coingate: '/images/coingate.svg',
   paystack: '/images/Paystack.jpg',
@@ -193,6 +195,7 @@ export const IMAGE= {
     articleThree:'https://images.pexels.com/photos/27892146/pexels-photo-27892146/free-photo-of-a-brown-bag-with-berries-and-sunglasses-on-it.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     articleFour:'https://images.pexels.com/photos/339620/pexels-photo-339620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     articleFive:'https://images.pexels.com/photos/8949916/pexels-photo-8949916.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+
   };
   export const DOWNLOAD={
     android_download:'https://play.google.com/store/apps/details?id=YOUR_APP_ID',
@@ -366,8 +369,7 @@ export const IMAGE= {
       ],
     };
     
-  
-  
+
     
     export const FAQ_DATA = [
       {
@@ -453,43 +455,7 @@ export const IMAGE= {
     
   ]
 
-  export const Doctors = [
-    {
-      img: 'https://static.vecteezy.com/system/resources/thumbnails/028/287/555/small_2x/an-indian-young-female-doctor-isolated-on-green-ai-generated-photo.jpg',
-      name: 'Dr. jennifer Hernandez',
-      title:'Surgeon',
-      location: 'Sandusky, Ohio',
-      languages: 'English, Spanish',
-      available: true,
-      days: 'Mon-Fri',
-      time:'01:00-23:00',
-      patients: 480,
-      price: 250,
-      online: true,
-      years:4,
-      rating: '3.4',
-      favorite: false,
-      about:'Morbi eu fermentum tellus. Morbi vel porttitor tortor. Quisque magna augue, semper vitae lorem nec, euismod luctus dui. Maecenas vitae dignissim leo. Suspendisse laoreet, dolor nec pulvinar consectetur, lacus ligula sodales mauris, et tempus felis mauris in dui. Morbi sit amet ornare leo. Fusce ut lacus vel erat convallis lacinia. Suspendisse laoreet eros diam, id rutrum ligula luctus tempor. Nunc ac massa vestibulum, congue diam quis, egestas turpis. Cras id nulla velit.Quisque et tellus tempor, eleifend nunc id, tristique nulla. Ut viverra quam nulla, ut gravida odio porttitor consectetur. Etiam porta pharetra aliquet. Praesent ac augue sit amet eros ultricies cursus. Donec quis leo arcu. Ut hendrerit erat in ultricies vehicula. Duis eget mattis diam, quis scelerisque nisi. Quisque augue justo, ultrices in rhoncus vel, ullamcorper vel felis. Mauris ornare, nisi in venenatis malesuada, justo nunc sagittis eros, vitae mollis odio purus id urna.'
-    },
-    
-{
-  img: 'https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg',
-  name: 'Dr. Garcia Rodriguez',
-  title:'Surgeon',
-  location: 'Toronto, Canada',
-  languages: 'English, Spanish',
-  available: true,
-  days: 'Mon-Fri',
-  time:'01:00-23:00',
-  patients: 480,
-  price: 250,
-  online: false,
-  years:4,
-  rating: '4.7',
-  favorite: true,
-  about:'Morbi eu fermentum tellus. Morbi vel porttitor tortor. Quisque magna augue, semper vitae lorem nec, euismod luctus dui. Maecenas vitae dignissim leo. Suspendisse laoreet, dolor nec pulvinar consectetur, lacus ligula sodales mauris, et tempus felis mauris in dui. Morbi sit amet ornare leo. Fusce ut lacus vel erat convallis lacinia. Suspendisse laoreet eros diam, id rutrum ligula luctus tempor. Nunc ac massa vestibulum, congue diam quis, egestas turpis. Cras id nulla velit.Quisque et tellus tempor, eleifend nunc id, tristique nulla. Ut viverra quam nulla, ut gravida odio porttitor consectetur. Etiam porta pharetra aliquet. Praesent ac augue sit amet eros ultricies cursus. Donec quis leo arcu. Ut hendrerit erat in ultricies vehicula. Duis eget mattis diam, quis scelerisque nisi. Quisque augue justo, ultrices in rhoncus vel, ullamcorper vel felis. Mauris ornare, nisi in venenatis malesuada, justo nunc sagittis eros, vitae mollis odio purus id urna.'
-},
-];
+
 
  export const cardSlider = [
   {
@@ -971,16 +937,22 @@ export const LABORATORYSIDEBARMENU=[
   { icon: FaBorderAll, label: "Order", link: "/institution/Laboratory/Order" },
   { icon: FaBookMedical, label: "Profile", link: "/institution/Laboratory/Profile" },
 ]
+
 export const DOCTORSIDEBARMENU = [
   { icon: FaUserMd, label: "Dashboard", link: "/doctor/Dashboard" },
-  // { icon: FaCalendarAlt, label: "Calendar", link: "/doctor/Calendar" },
+
   { icon: AiFillSchedule, label: "Appointments", link: "/doctor/Appointments" },
+
   { icon: FaFileMedical, label: "Patients", link: "/doctor/patients" },
-  // { icon: FaHistory, label: "Activity", link: "/doctor/activity" },
+
   { icon: FaWallet, label: "Payment", link: "/doctor/payment" },
+
   { icon: FaFileMedical, label: "Patient Note", link: "/doctor/PatientNote" },
+
   { icon: FaFileMedical, label: "Patient EHR", link: "/doctor/PatientEhr" },
+
   { icon: FaCog, label: "Settings", link: "/doctor/settings" },
+
   { icon: FaSignOutAlt, label: "Logout",  },
 ];
 
@@ -989,11 +961,12 @@ export const TOPBARMENU = [
   { name: 'Currency', icon: NAMES.selectedCurrency.symbol },
   { name: 'Logout', action: logout, icon: GrLogout }, // Logout uses action instead of link
 ];
+
 export const INSTITUTIONTOPBARMENU =[
-  // { name: 'Settings', link: '/pharmacy/settings', icon: IoSettings },
   { name: 'Currency',  icon: NAMES.selectedCurrency.symbol },
   { name: 'Logout', link: '/pharmacy/logout', icon: GrLogout },
 ]
+
 export const INSTITUTIONSIDEBARMENU = [
   // { name: 'Settings', link: '/institution/settings', icon: IoSettings },
    { icon: GrLogout, label: 'Logout', link: '/institution/logout'},
@@ -1067,7 +1040,7 @@ export  const Pharmacytransactions = [
     statusColor: 'text-red-500',
     statusBg: 'bg-red-100',
   },
-];
+]; 
 
 export const patientsData = [
   { id: 1, name: 'Robert Fox', appointment: 'Feb 6th, 11:00 am - 11:45 am', counseling: 'Individual Counseling', image: '/images/cardiologist.png', dob: "16/07/1977", EHRNO:283838, gender: 'Female', previousVisit:"25/02/2024",  },

@@ -23,6 +23,9 @@ import { FaUserDoctor } from "react-icons/fa6";
 import PatientHeader from "../../../../partials/PatientHeader";
 import { doctorSpecializationOptions } from "./ServicesForm";
 import { HiOfficeBuilding } from "react-icons/hi";
+import specializationImages from "../../../../../components/specializationImages";
+import fallbackImage from '../../../../../assets/icons/doctor.png'
+
 
 const DoctorCardContent = ({ img, title, details, onClose }) => (
   <div className="flex flex-col items-center p-4">
@@ -244,9 +247,9 @@ const DoctorsLists = () => {
           {loading ? (
             <div className="flex items-center justify-center h-screen">
               <div className="text-center">
-                <FaUserDoctor
-                  size={48}
-                  className="animate-bounce text-secondary mb-4 mx-auto "
+                <img
+                  src={fallbackImage}
+                  className="w-16 h-16 animate-bounce mx-auto mb-4"
                 />
                 <p className="text-gray-600 font-semibold">Loading</p>
               </div>
@@ -281,6 +284,7 @@ const DoctorsLists = () => {
                   {/* Doctors Grid */}
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mx-8 my-2 overflow-y-visible">
                     {paginatedDoctorsSpecialization.map((item, index) => {
+                       console.log("Specialization title:", item.title);
                       const iconColor =
                         index % 2 === 0 ? "text-primary" : "text-secondary";
                       return (
@@ -291,8 +295,12 @@ const DoctorsLists = () => {
                           onMouseEnter={() => handleMouseEnter(item)}
                           onMouseLeave={handleMouseLeave}
                         >
-                          <FaUserDoctor
-                            className={`w-24 h-24 object-cover rounded-full mb-2 ${iconColor}`}
+                          <img
+                            src={
+                              specializationImages[item.title] || fallbackImage
+                            }
+                            alt={item.title}
+                            className="w-24 h-24 object-cover rounded-full mb-2"
                           />
                           <p className="truncate text-center text-gray-800 w-full">
                             {item.title}
@@ -327,10 +335,14 @@ const DoctorsLists = () => {
                 <div className="hidden lg:block w-2/3 max-h-[70vh] px-8 py-4 shadow-2xl mx-0 mt-[60px] mr-9">
                   {hoveredDoctor || lastHoveredDoctor ? (
                     <div className="flex flex-col items-center text-center">
-                      <FaUserDoctor
-                        className={`w-24 h-24 object-cover rounded-full mb-2 ${
-                          hoveredDoctor ? "text-primary" : "text-secondary"
-                        }`}
+                      <img
+                        src={
+                          specializationImages[
+                            (hoveredDoctor || lastHoveredDoctor)?.title
+                          ] || fallbackImage
+                        }
+                        alt={(hoveredDoctor || lastHoveredDoctor)?.title}
+                        className="w-24 h-24 object-cover rounded-full mb-2"
                       />
                       <h3 className="text-xl font-semibold text-center mb-2">
                         {(hoveredDoctor || lastHoveredDoctor).title}
@@ -455,21 +467,7 @@ const DoctorsLists = () => {
                       {doctor.fullname}
                     </h5>
                     <div className="w-full p-3 ">
-                      <div className="flex justify-center mb-3 -mt-3">
-                        {/* <div className="flex items-center space-x-1">
-                {[...Array(5)].map((_, starIndex) => (
-                  <svg
-                    key={starIndex}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`h-4 w-4 ${starIndex < doctor.rating ? "text-yellow-400" : "text-gray-400"}`}
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.14 3.518a1 1 0 00.95.69h3.689c.969 0 1.371 1.24.588 1.81l-2.988 2.167a1 1 0 00-.364 1.118l1.14 3.518c.3.921-.755 1.688-1.538 1.118L10 13.011l-2.988 2.167c-.783.57-1.838-.197-1.538-1.118l1.14-3.518a1 1 0 00-.364-1.118L3.958 8.945c-.783-.57-.38-1.81.588-1.81h3.689a1 1 0 00.95-.69l1.14-3.518z" />
-                  </svg>
-                ))}
-              </div> */}
-                      </div>
+                      <div className="flex justify-center mb-3 -mt-3"></div>
                       <div className="text-center">
                         <div className="flex flex-wrap justify-between my-2">
                           <p className="flex items-center">
