@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 import DoctorIcon from "../assets/icons/doctor.png";
 import PharmacyIcon from "../assets/icons/pharmacy.png";
-import FaPatient from "../assets/icons/Patient.png";
+import FaPatient from "../assets/icons/patient.png";
 import scheduleIcon from "../assets/icons/schedule.png";
 import hospitalIcon from "../assets/icons/hospital.png";
 import labIcon from "../assets/icons/laboratory.png";
