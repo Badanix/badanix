@@ -4,8 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import PropTypes from "prop-types";
 
-// ✅ Import icons
-import HomeIcon from "../assets/icons/home.png";
 import DoctorIcon from "../assets/icons/doctor.png";
 import PharmacyIcon from "../assets/icons/pharmacy.png";
 import FaPatient from "../assets/icons/Patient.png";
