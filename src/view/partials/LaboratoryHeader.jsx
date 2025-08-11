@@ -1,31 +1,35 @@
-import { LABORATORYSIDEBARMENU, NAMES, TOPBARMENU } from "../../components/Constants";
-import TopBar from "../../components/TopBar"
+import {
+  LABORATORYSIDEBARMENU,
+  NAMES,
+  TOPBARMENU,
+} from "../../components/Constants";
+import TopBar from "../../components/TopBar";
 import UseTopMenu from "../../hooks/UseTopMenu";
 import UseSideBar from "@hooks/UseSideBarMenu";
 import MobileTopBar from "../../components/MobileTopBar";
 
 const LaboratoryHeader = () => {
-    const userImage= NAMES.userImage
-  const siteTitle = NAMES.SITE_TITLE
-  const { profileDropdownOpen, toggleTopbar }=UseTopMenu();
-  const {  toggleSidebar } = UseSideBar();
+  const userImage = NAMES.userImage;
+  const siteTitle = NAMES.SITE_TITLE;
+  const { profileDropdownOpen, toggleTopbar } = UseTopMenu();
+  const { toggleSidebar } = UseSideBar();
 
   return (
     <>
-    <TopBar siteTitle={siteTitle} 
-              userImage={userImage} 
-              toggleSidebar={toggleSidebar} 
-              NAMES={NAMES}
-              menuItems={TOPBARMENU} 
-              profileDropdownOpen={profileDropdownOpen}
-              toggleTopbar={toggleTopbar}
-              placeholder="Search for doctors, pharmacies, hospitals medications, articles..."
-              />
-          
-          <MobileTopBar menuItems={LABORATORYSIDEBARMENU} />
-  
-      </>
-  )
-}
+      <TopBar
+        siteTitle={siteTitle}
+        userImage={userImage}
+        toggleSidebar={toggleSidebar}
+        NAMES={NAMES}
+        menuItems={TOPBARMENU}
+        profileDropdownOpen={profileDropdownOpen}
+        toggleTopbar={toggleTopbar}
+        placeholder="Search for doctors, pharmacies, hospitals medications, articles..."
+      />
 
-export default LaboratoryHeader
+      <MobileTopBar menuItems={LABORATORYSIDEBARMENU} />
+    </>
+  );
+};
+
+export default LaboratoryHeader;

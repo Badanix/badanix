@@ -161,7 +161,6 @@ const DoctorsLists = () => {
           const token = localStorage.getItem("token");
 
           if (!token) {
-            console.error("No token found in localStorage");
             setDoctorData([]);
             setLoading(false);
             return;
@@ -185,7 +184,6 @@ const DoctorsLists = () => {
             Array.isArray(jsonResponse.data) ? jsonResponse.data : []
           );
         } catch (error) {
-          console.error("Error fetching doctors:", error);
           setDoctorData([]);
         } finally {
           setLoading(false);
@@ -243,7 +241,7 @@ const DoctorsLists = () => {
         <PatientHeader />
 
         {/* Dashboard Content */}
-        <main className="p-6 bg-gray-100 flex-grow">
+        <main className=" bg-gray-100 flex-grow">
           {loading ? (
             <div className="flex items-center justify-center h-screen">
               <div className="text-center">
@@ -284,13 +282,12 @@ const DoctorsLists = () => {
                   {/* Doctors Grid */}
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mx-8 my-2 overflow-y-visible">
                     {paginatedDoctorsSpecialization.map((item, index) => {
-                       console.log("Specialization title:", item.title);
                       const iconColor =
                         index % 2 === 0 ? "text-primary" : "text-secondary";
                       return (
                         <div
                           key={index}
-                          className="flex flex-col items-center text-center border-2 border-gray-200 rounded-lg bg-white shadow-md cursor-pointer my-3 px-4 py-2"
+                          className="flex flex-col items-center text-center border-2 border-gray-200 rounded-lg bg-white shadow-md cursor-pointer my-3 px-2 py-2"
                           onClick={() => handleDoctorsCards(item)}
                           onMouseEnter={() => handleMouseEnter(item)}
                           onMouseLeave={handleMouseLeave}
@@ -300,9 +297,9 @@ const DoctorsLists = () => {
                               specializationImages[item.title] || fallbackImage
                             }
                             alt={item.title}
-                            className="w-24 h-24 object-cover rounded-full mb-2"
+                            className="w-20 h-20 object-cover rounded-full mb-2"
                           />
-                          <p className="truncate text-center text-gray-800 w-full">
+                          <p className="truncate text-center text-gray-800 w-full" style={{fontSize: "13px"}}>
                             {item.title}
                           </p>
                         </div>
@@ -503,9 +500,6 @@ const DoctorsLists = () => {
                             {doctor.specialization}
                           </p>
                         </div>
-                        {/* <p className="mr-6 font-bold">
-                <span>Price: </span><span className="text-primary">{nairaSymbol}200{doctor.price}</span>
-              </p> */}
                       </div>
                     </div>
                   </div>

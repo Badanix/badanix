@@ -19,7 +19,6 @@ const Greet = ({className}) => {
 
   // Log the greeting to the console
   const greeting = getGreeting();
-  console.log(greeting);
 
   return (
     <div className={className}>{greeting}</div>

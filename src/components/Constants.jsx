@@ -18,12 +18,20 @@ import specialization from './specialization.json';
 export const userData= getUserData();
 export const defaultUrl= 'https://api.digitalhospital.com.ng/';
 
+// export const currencies = [
+//   { name: 'Naira', symbol: '₦', sign: 'NGN' },
+//   { name: 'Dollar', symbol: '$', sign: 'USD' },
+//   { name: 'Euro', symbol: '€', sign: 'EUR' },
+//   // Add more currencies as needed
+// ];
+
+
 export const currencies = [
-  { name: 'Naira', symbol: '₦', sign: 'NGN' },
-  { name: 'Dollar', symbol: '$', sign: 'USD' },
-  { name: 'Euro', symbol: '€', sign: 'EUR' },
-  // Add more currencies as needed
+  { name: 'Naira', symbol: '₦', sign: 'NGN', icon: null },
+  { name: 'Dollar', symbol: '$', sign: 'USD', icon: FaDollarSign },
+  { name: 'Euro', symbol: '€', sign: 'EUR', icon: null },
 ];
+
 
 // src/constants.js
 export const NAMES ={

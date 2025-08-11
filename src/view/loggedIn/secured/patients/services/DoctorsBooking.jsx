@@ -33,17 +33,15 @@ import moment from "moment";
 
 const DoctorsBooking = () => {
   const userData = getUserData();
-
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const doctorId = queryParams.get("doctor_id");
   const navigate = useNavigate();
   const [isBooking, setIsBooking] = useState(false);
   const [previewBooking, setPreviewBooking] = useState(false);
-  // const nairaSymbol =  NAMES.NairaSymbol;
-  const walletBalance = NAMES.WALLETBALANCE || 0;
+  const nairaSymbol = NAMES.NairaSymbol || "₦";
+  const walletBalance = Number(NAMES.WALLETBALANCE || 0);
   const [bookingData, setBookingData] = useState({});
-
   const [doctorDetails, setDoctorDetails] = useState(null);
   const [description, setDescription] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -54,9 +52,10 @@ const DoctorsBooking = () => {
   const [error, setError] = useState(null);
   const [errors, setErrors] = useState("");
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [availableDates, setAvailableDates] = useState([]);
+  const [availability, setAvailability] = useState({});
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+
   const formattedDate = date
     ? `${(date.getMonth() + 1).toString().padStart(2, "0")}/${date
         .getDate()
@@ -64,14 +63,13 @@ const DoctorsBooking = () => {
         .padStart(2, "0")}/${date.getFullYear()}`
     : "";
 
-  const [availability, setAvailability] = useState({});
-
   const isoFormattedDate = date
     ? `${date.getFullYear()}-${(date.getMonth() + 1)
         .toString()
         .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`
     : "";
 
+  // Fetch available doctor slots
   useEffect(() => {
     const fetchDoctorSlots = async () => {
       try {
@@ -94,38 +92,47 @@ const DoctorsBooking = () => {
           throw new Error(result.message || "Error fetching availability.");
         }
 
-        const today = moment().format("YYYY-MM-DD");
-        const availableDays = {};
+        if (Array.isArray(result.message)) {
+          const today = moment().format("YYYY-MM-DD");
+          const availableDays = {};
 
-        result.message.forEach((entry) => {
-          const date = entry.day;
-          availableDays[date] = {
-            customStyles: {
-              container: {
-                backgroundColor: moment(date).isBefore(today) ? "red" : "green",
-              },
-              text: { color: "#ffffff" },
-            },
-            disabled: moment(date).isBefore(today),
-            start_time: entry.start_time,
-            end_time: entry.end_time,
-          };
-        });
-
-        for (let i = 0; i < 30; i++) {
-          const date = moment().add(i, "days").format("YYYY-MM-DD");
-          if (!availableDays[date]) {
+          result.message.forEach((entry) => {
+            const date = entry.day;
             availableDays[date] = {
               customStyles: {
-                container: { backgroundColor: "red" },
+                container: {
+                  backgroundColor: moment(date).isBefore(today)
+                    ? "red"
+                    : "green",
+                },
                 text: { color: "#ffffff" },
               },
-              disabled: true,
+              disabled: moment(date).isBefore(today),
+              start_time: entry.start_time,
+              end_time: entry.end_time,
             };
-          }
-        }
+          });
 
-        setAvailability(availableDays);
+          // Fill next 30 days with disabled if not in availableDays
+          for (let i = 0; i < 30; i++) {
+            const date = moment().add(i, "days").format("YYYY-MM-DD");
+            if (!availableDays[date]) {
+              availableDays[date] = {
+                customStyles: {
+                  container: { backgroundColor: "red" },
+                  text: { color: "#ffffff" },
+                },
+                disabled: true,
+              };
+            }
+          }
+
+          setAvailability(availableDays);
+        } else {
+          // When message is not an array (likely an empty message string)
+          console.warn("No available slots:", result.message);
+          setAvailability({}); // Clear availability or handle gracefully
+        }
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "An unexpected error occurred."
@@ -138,21 +145,14 @@ const DoctorsBooking = () => {
     fetchDoctorSlots();
   }, [doctorId]);
 
-  const isDateAvailable = (date) => {
-    const formatted = moment(date).format("YYYY-MM-DD");
-    if (!availability[formatted]) return "neutral"; // Not in range
-    return availability[formatted].disabled ? "red" : "green";
-  };
-
-  const daysInMonth = (date) => {
-    const nextMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-    return new Date(nextMonth - 1).getDate();
-  };
-
-  const fetchDoctorData = async () => {
-    const token = localStorage.getItem("token");
-    if (token && doctorId) {
+  // Fetch doctor details
+  useEffect(() => {
+    const fetchDoctorData = async () => {
+      setLoading(true);
       try {
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("No token");
+
         const response = await fetch(
           `${APIURLS.APIURLPATIENTSFINDDoctorSpecializationSearch}?id=${doctorId}`,
           {
@@ -163,36 +163,31 @@ const DoctorsBooking = () => {
             },
           }
         );
-        if (!response.ok) {
-          throw new Error("Failed to fetch doctor data");
-        }
+
+        if (!response.ok) throw new Error("Failed to fetch doctor data");
+
         const data = await response.json();
 
-        const doctor = data.data.find(
+        const doctor = data.data?.find(
           (doctor) => doctor.id.toString() === doctorId
         );
 
-        setDoctorDetails(doctor);
+        if (!doctor) throw new Error("Doctor not found");
 
-        setLoading(false);
+        setDoctorDetails(doctor);
+        setError(null);
       } catch (error) {
-        console.error("Error fetching doctor data:", error);
-        setError("Failed to fetch doctor data");
+        console.error(error);
+        setError(error.message || "Error fetching doctor data");
+      } finally {
         setLoading(false);
       }
-    }
-  };
+    };
 
-  if (doctorId && loading) {
-    fetchDoctorData();
-  }
+    if (doctorId) fetchDoctorData();
+  }, [doctorId]);
 
-  if (error) {
-    return (
-      <div className="flex items-center justify-center h-screen">{error}</div>
-    );
-  }
-
+  // Fetch booking price data
   useEffect(() => {
     const fetchBookingPrice = async () => {
       try {
@@ -214,34 +209,16 @@ const DoctorsBooking = () => {
     fetchBookingPrice();
   }, []);
 
-  const handleBookingClick = () => {
-    const userData = getUserData();
+  // Helpers
 
-    if (!userData) {
-      console.log("No user data found.");
-      return;
-    }
-
-    const profileUpdated = userData?.data?.profile_updated;
-    console.log("Profile Updated:", profileUpdated);
-
-    if (profileUpdated !== 1) {
-      console.log(
-        "Redirecting to /onboarding because the profile is not updated."
-      );
-      window.location.href = "/onboarding";
-      return;
-    }
-
-    console.log("Profile is updated. Proceeding with booking...");
-    setIsBooking(true);
-    setPreviewBooking(false);
+  const isDateAvailable = (date) => {
+    const formatted = moment(date).format("YYYY-MM-DD");
+    if (!availability[formatted]) return "neutral";
+    return availability[formatted].disabled ? "red" : "green";
   };
 
-  const handleBookingSubmit = (event) => {
-    event.preventDefault();
-    setIsBooking(false);
-    setPreviewBooking(true);
+  const daysInMonth = (date) => {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
   };
 
   const calculateTotal = () => {
@@ -253,22 +230,44 @@ const DoctorsBooking = () => {
 
     const vat = NAMES?.VAT ? parseFloat(NAMES.VAT) : 0;
     const discount = NAMES?.DISCOUNT ? parseFloat(NAMES.DISCOUNT) : 0;
-    const total = price + vat - discount;
-    return total;
+    return price + vat - discount;
   };
 
   const navToWallet = () => {
     navigate("/wallet");
   };
+
+  const handleBookingClick = () => {
+    if (!userData) {
+      console.log("No user data found.");
+      return;
+    }
+
+    const profileUpdated = userData?.data?.profile_updated;
+
+    if (profileUpdated !== 1) {
+      window.location.href = "/onboarding";
+      return;
+    }
+
+    setIsBooking(true);
+    setPreviewBooking(false);
+  };
+
+  const handleBookingSubmit = (event) => {
+    event.preventDefault();
+    setIsBooking(false);
+    setPreviewBooking(true);
+  };
+
+  // Confirm booking and payment flow
   const confirmBooking = async () => {
     if (isProcessing) return;
 
     setIsProcessing(true);
     const totalAmount = parseFloat(calculateTotal());
     const balance = parseFloat(walletBalance || 0);
-
     const token = localStorage.getItem("token");
-
     const booking_type = 0;
 
     if (booking_type !== 0) {
@@ -289,15 +288,11 @@ const DoctorsBooking = () => {
 
     if (balance >= totalAmount) {
       try {
-        const doctorId = new URLSearchParams(window.location.search).get(
-          "doctor_id"
-        );
-
-        const bookingData = {
+        const bookingPayload = {
           id: doctorId,
           date: isoFormattedDate,
           purpose: description,
-          booking_type: booking_type,
+          booking_type,
         };
 
         const response = await fetch(APIURLS.APIPATIENTBOOKING, {
@@ -306,7 +301,7 @@ const DoctorsBooking = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(bookingData),
+          body: JSON.stringify(bookingPayload),
         });
 
         const data = await response.json();
@@ -326,14 +321,12 @@ const DoctorsBooking = () => {
             timer: 2000,
             showConfirmButton: false,
           });
+
           setTimeout(() => {
-            const newSchedule = {
-              img: doctorDetails.img,
-              title: doctorDetails.title,
-              name: doctorDetails.name,
-              date: formattedDate,
-            };
-            ScheduleLists.push(newSchedule);
+            // Instead of mutating imported ScheduleLists, just log here
+            // You should manage schedules in local state or via context
+            // ScheduleLists.push(newSchedule);
+
             setPreviewBooking(false);
             window.location.href = "/schedules";
           }, 2000);
@@ -372,11 +365,12 @@ const DoctorsBooking = () => {
       Swal.fire({
         icon: "error",
         title: "Insufficient Balance",
-        text: `Your wallet balance is only ${
-          NAMES.NairaSymbol
-        }${balance.toLocaleString("en-US", {
-          minimumFractionDigits: 2,
-        })}. Please add funds to complete your appointment fee.`,
+        text: `Your wallet balance is only ${nairaSymbol}${balance.toLocaleString(
+          "en-US",
+          {
+            minimumFractionDigits: 2,
+          }
+        )}. Please add funds to complete your appointment fee.`,
         customClass: {
           title: "text-xl font-bold text-red-600",
           popup: "bg-white rounded-lg shadow-lg p-6",
@@ -387,6 +381,32 @@ const DoctorsBooking = () => {
       setIsProcessing(false);
     }
   };
+
+  // Month navigation handlers (immutable date update)
+  const goToPreviousMonth = () => {
+    setCurrentMonth((prev) => {
+      const newDate = new Date(prev);
+      newDate.setMonth(newDate.getMonth() - 1);
+      return newDate;
+    });
+  };
+
+  const goToNextMonth = () => {
+    setCurrentMonth((prev) => {
+      const newDate = new Date(prev);
+      newDate.setMonth(newDate.getMonth() + 1);
+      return newDate;
+    });
+  };
+
+  // Minimal error boundary in component
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-screen text-red-600 font-bold">
+        {error}
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-gray-700">
@@ -426,13 +446,12 @@ const DoctorsBooking = () => {
               />
 
               {/* Image section with arrow */}
-              {!isBooking && !previewBooking && (
+              {!isBooking && !previewBooking && doctorDetails && (
                 <div className="relative w-full flex flex-col lg:flex-row lg:space-x-5">
-                  {doctorDetails && (
+                  {doctorDetails.prof_pics && (
                     <img
                       src={`${defaultUrl}${doctorDetails.prof_pics}`}
-                      alt={doctorDetails.fullname}
-                      className="w-full lg:w-[45%] h-[250px] lg:h-[80vh] object-cover object-top rounded-tl-xl rounded-bl-xl"
+                      alt={doctorDetails.fullname || "Doctor"}
                     />
                   )}
 
@@ -447,15 +466,14 @@ const DoctorsBooking = () => {
                   >
                     <div className="mt-6 mb-[50px]">
                       <h3 className="text-xl font-bold capitalize">
-                        {doctorDetails ? doctorDetails.fullname : ""}
+                        {doctorDetails.fullname || ""}
                       </h3>
 
-                      {doctorDetails && (
-                        <p className="text-gray-600 capitalize">
-                          {doctorDetails.specialization?.replace(/s$/, "") ||
-                            "No specialization"}{" "}
-                        </p>
-                      )}
+                      <p className="text-gray-600 capitalize">
+                        {doctorDetails.specialization
+                          ? doctorDetails.specialization.replace(/s$/, "")
+                          : "No specialization"}{" "}
+                      </p>
 
                       <div className="grid grid-cols-3 gap-4 mt-4">
                         <div className="bg-gray-100 rounded-md p-4 shadow-xl text-center">
@@ -467,15 +485,13 @@ const DoctorsBooking = () => {
                               className="hidden md:inline-block mr-1 text-primary font-bold"
                               size={20}
                             />
-                            {doctorDetails && (
-                              <p className="captialize">
-                                {doctorDetails.no_of_consultations}
-                                <span className="hidden md:inline-block">
-                                  {" "}
-                                  Attended
-                                </span>
-                              </p>
-                            )}
+                            <p className="captialize">
+                              {doctorDetails.no_of_consultations ?? 0}
+                              <span className="hidden md:inline-block">
+                                {" "}
+                                Attended
+                              </span>
+                            </p>
                           </div>
                         </div>
                         <div className="bg-gray-100 rounded-md p-4 shadow-xl text-center">
@@ -488,14 +504,7 @@ const DoctorsBooking = () => {
                               className="mr-1 text-primary font-bold hidden md:inline-block"
                               size={20}
                             />
-                            {doctorDetails && (
-                              <p>
-                                {doctorDetails.experience
-                                  ? doctorDetails.experience
-                                  : "0 "}
-                                Years
-                              </p>
-                            )}
+                            <p>{doctorDetails.experience ?? 0} Years</p>
                           </div>
                         </div>
                         <div className="bg-gray-100 rounded-md p-4 shadow-xl text-center">
@@ -507,7 +516,7 @@ const DoctorsBooking = () => {
                               className="hidden md:inline-block mr-1 text-primary font-bold"
                               size={20}
                             />
-                            {doctorDetails && <p>{doctorDetails.rating}</p>}
+                            <p>{doctorDetails.rating ?? "N/A"}</p>
                           </div>
                         </div>
                       </div>
@@ -516,24 +525,21 @@ const DoctorsBooking = () => {
                         <h3 className="text-lg font-bold uppercase text-primary">
                           About
                         </h3>
-                        {doctorDetails && (
-                          <p className="text-gray-600">
-                            {doctorDetails.about &&
-                            doctorDetails.about.length > 0
-                              ? doctorDetails.about.length > 150
-                                ? isReadMore
-                                  ? doctorDetails.about
-                                  : doctorDetails.about.slice(0, 150) + "..."
-                                : doctorDetails.about
-                              : "No information available"}
-                          </p>
-                        )}
+                        <p className="text-gray-600">
+                          {doctorDetails.about && doctorDetails.about.length > 0
+                            ? doctorDetails.about.length > 150
+                              ? isReadMore
+                                ? doctorDetails.about
+                                : doctorDetails.about.slice(0, 150) + "..."
+                              : doctorDetails.about
+                            : "No information available"}
+                        </p>
 
                         <button
                           className="text-primary underline mt-2 font-semibold"
                           onClick={() => setIsReadMore(!isReadMore)}
                         >
-                          <div className="flex">
+                          <div className="flex items-center">
                             <p>{isReadMore ? "Read Less" : "Read More"}</p>
                             <MdOutlineDoubleArrow
                               className="mt-[4px] ml-[3px]"
@@ -545,7 +551,7 @@ const DoctorsBooking = () => {
 
                       {!isBooking && !previewBooking && (
                         <button
-                          className={`mt-6 py-2 px-4 rounded-lg w-full bg-primary text-white cursor-pointer`}
+                          className="mt-6 py-2 px-4 rounded-lg w-full bg-primary text-white cursor-pointer"
                           onClick={handleBookingClick}
                         >
                           Book Appointment
@@ -556,17 +562,17 @@ const DoctorsBooking = () => {
                 </div>
               )}
 
-              {/* Render Booking Form when isBooking is true */}
-              {isBooking && (
+              {/* Booking Form */}
+              {isBooking && doctorDetails && (
                 <div className="relative w-full flex flex-col lg:flex-row lg:space-x-5">
                   <img
                     src={`${defaultUrl}${doctorDetails.prof_pics}`}
-                    alt={doctorDetails.fullname}
+                    alt={doctorDetails.fullname || "Doctor"}
                     className="w-full lg:w-[45%] h-[250px] lg:h-[80vh] object-cover object-top rounded-tl-xl rounded-bl-xl"
                   />
 
                   <div
-                    className="bg-gray-50 p-4 w-full relative "
+                    className="bg-gray-50 p-4 w-full relative"
                     style={{
                       borderTopLeftRadius: "20% 20px",
                       borderTopRightRadius: "20% 20px",
@@ -576,7 +582,6 @@ const DoctorsBooking = () => {
                   >
                     <div className="mt-6 lg:mt-[70px] mb-[50px]">
                       <h3 className="text-xl font-bold capitalize text-center">
-                        {" "}
                         Book{" "}
                         <span className="mr-1 text-secondary">
                           Dr. {doctorDetails.fullname}
@@ -593,11 +598,12 @@ const DoctorsBooking = () => {
                             <input
                               type="text"
                               name="name"
-                              value={userData?.data?.fullname}
+                              value={userData?.data?.fullname || ""}
                               className={styles.inputStyle}
                               readOnly
                             />
                           </div>
+
                           <div className="mb-4">
                             <label className="block text-gray-700 mb-2 font-semibold">
                               Age
@@ -605,18 +611,17 @@ const DoctorsBooking = () => {
                             <input
                               type="text"
                               name="age"
-                              value={`${
+                              value={
                                 userData?.data?.dob
-                                  ? calculateAge(userData?.data?.dob)
-                                  : null
-                              } Years`}
+                                  ? `${calculateAge(userData.data.dob)} Years`
+                                  : ""
+                              }
                               className={styles.inputStyle}
                               readOnly
                             />
                           </div>
 
                           <div className="mb-4">
-                            {/* Preferred Date Input and Icon */}
                             <label className="block text-gray-700 mb-2 font-semibold">
                               Preferred Date
                             </label>
@@ -625,19 +630,20 @@ const DoctorsBooking = () => {
                                 type="text"
                                 readOnly
                                 value={formattedDate}
-                                className={`${styles.inputStyle}`}
+                                className={styles.inputStyle}
                                 placeholder="Select a date"
                                 onClick={() => setShowModal(true)}
                               />
                               <button
-                                onClick={() => setShowModal(true)} // Open modal on icon click
-                                className="absolute  right-3 top-2 p-2   rounded-full hover:bg-primary hover:text-white"
+                                type="button"
+                                onClick={() => setShowModal(true)}
+                                className="absolute right-3 top-2 p-2 rounded-full hover:bg-primary hover:text-white"
                               >
                                 <FaCalendarAlt />
                               </button>
                             </div>
 
-                            {/* Modal */}
+                            {/* Modal for date selection */}
                             {showModal && (
                               <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
                                 <div className="bg-white p-4 rounded-lg shadow-lg max-w-md w-11/12 md:w-full">
@@ -652,19 +658,12 @@ const DoctorsBooking = () => {
                                     />
                                   </div>
 
-                                  {/* Month Navigation */}
+                                  {/* Month navigation */}
                                   <div className="flex justify-between items-center mb-4">
                                     <button
+                                      type="button"
                                       className="p-2 bg-gray-200 rounded hover:bg-gray-300"
-                                      onClick={() =>
-                                        setCurrentMonth(
-                                          new Date(
-                                            currentMonth.setMonth(
-                                              currentMonth.getMonth() - 1
-                                            )
-                                          )
-                                        )
-                                      }
+                                      onClick={goToPreviousMonth}
                                     >
                                       <FaChevronLeft />
                                     </button>
@@ -675,28 +674,22 @@ const DoctorsBooking = () => {
                                       {currentMonth.getFullYear()}
                                     </span>
                                     <button
+                                      type="button"
                                       className="p-2 bg-gray-200 rounded hover:bg-gray-300"
-                                      onClick={() =>
-                                        setCurrentMonth(
-                                          new Date(
-                                            currentMonth.setMonth(
-                                              currentMonth.getMonth() + 1
-                                            )
-                                          )
-                                        )
-                                      }
+                                      onClick={goToNextMonth}
                                     >
                                       <FaChevronRight />
                                     </button>
                                   </div>
 
-                                  {/* Error Message */}
+                                  {/* Error message */}
                                   {errors && (
                                     <div className="col-span-7 text-center text-red-500 p-2 rounded mb-4 w-full">
                                       {errors}
                                     </div>
                                   )}
 
+                                  {/* Days grid */}
                                   <div className="grid grid-cols-7 gap-2">
                                     {[
                                       "Sun",
@@ -741,28 +734,29 @@ const DoctorsBooking = () => {
                                           currentMonth.getMonth(),
                                           i + 1
                                         );
+                                        const availabilityStatus =
+                                          isDateAvailable(day);
+
                                         daysArray.push(
                                           <div
                                             key={i}
                                             className={`text-center w-10 h-8 p-1 rounded-full flex items-center justify-center
-                                                ${
-                                                  isDateAvailable(day) ===
-                                                  "green"
-                                                    ? "bg-green-500 cursor-pointer text-white hover:bg-green-600"
-                                                    : isDateAvailable(day) ===
-                                                      "red"
-                                                    ? "bg-red-500 text-white cursor-not-allowed hover:bg-gray-200"
-                                                    : "text-gray-700" // Past or outside 30-day range (no background)
-                                                }`}
+                                            ${
+                                              availabilityStatus === "green"
+                                                ? "bg-green-500 cursor-pointer text-white hover:bg-green-600"
+                                                : availabilityStatus === "red"
+                                                ? "bg-red-500 text-white cursor-not-allowed hover:bg-gray-200"
+                                                : "text-gray-700"
+                                            }`}
                                             onClick={() => {
                                               if (
-                                                isDateAvailable(day) === "green"
+                                                availabilityStatus === "green"
                                               ) {
                                                 setDate(day);
                                                 setShowModal(false);
                                                 setErrors("");
                                               } else if (
-                                                isDateAvailable(day) === "red"
+                                                availabilityStatus === "red"
                                               ) {
                                                 setErrors(
                                                   "Date Unavailable, please select ones in green!"
@@ -779,6 +773,7 @@ const DoctorsBooking = () => {
                                     })()}
                                   </div>
 
+                                  {/* Availability legend */}
                                   <div className="mt-7 flex justify-around">
                                     <div className="flex items-center">
                                       <div className="w-4 h-4 bg-green-500 mr-2 rounded-sm"></div>
@@ -807,6 +802,7 @@ const DoctorsBooking = () => {
                               required
                             />
                           </div>
+
                           <div className="mb-4 flex justify-between items-center mt-8">
                             <button
                               type="submit"
@@ -822,12 +818,12 @@ const DoctorsBooking = () => {
                 </div>
               )}
 
-              {/* Preview section when previewBooking is true */}
-              {previewBooking && (
+              {/* Preview Booking Section */}
+              {previewBooking && doctorDetails && (
                 <div className="relative w-full flex flex-col lg:flex-row lg:space-x-5">
                   <img
                     src={`${defaultUrl}${doctorDetails.prof_pics}`}
-                    alt={doctorDetails.fullname}
+                    alt={doctorDetails.fullname || "Doctor"}
                     className="w-full lg:w-[45%] h-[250px] lg:h-[80vh] object-cover object-top rounded-tl-xl rounded-bl-xl"
                   />
 
@@ -861,6 +857,7 @@ const DoctorsBooking = () => {
                               <p>Edit</p>
                             </div>
                           </div>
+
                           <div className="flex p-4 -mr-8 sm:mr-0 -mx-4 sm:mx-0">
                             <FaCalendarAlt className="text-primary mt-1 mr-3 text-xl" />
                             <p className="text-gray-600 mt-1 lg:mx-7">
@@ -892,13 +889,9 @@ const DoctorsBooking = () => {
                             </div>
                           </div>
                           <div className="py-4">
-                            <div className="flex items-start space-x-4">
-                              <p className="text-gray-700">
-                                {description
-                                  ? description
-                                  : "No reason provided."}
-                              </p>
-                            </div>
+                            <p className="text-gray-700">
+                              {description || "No reason provided."}
+                            </p>
                           </div>
                         </div>
 
@@ -910,13 +903,12 @@ const DoctorsBooking = () => {
                             </h3>
                           </div>
 
-                          {/* ✅ Added block to show booking amount */}
                           <div className="mt-4 flex justify-between">
                             <p className="text-gray-700 font-medium">
                               Booking Fee
                             </p>
                             <p className="text-primary font-bold">
-                              {NAMES.NairaSymbol}
+                              {nairaSymbol}
                               {parseFloat(
                                 bookingData?.booking_amount || 0
                               ).toLocaleString("en-US", {
@@ -941,21 +933,18 @@ const DoctorsBooking = () => {
                               <p>Edit</p>
                             </div>
                           </div>
+
                           <div className="py-4">
-                            {parseFloat(walletBalance || 0) >=
-                            parseFloat(calculateTotal()) ? (
+                            {walletBalance >= calculateTotal() ? (
                               <div className="flex justify-between border-2 border-gray-200 mx-2 p-4 rounded-xl">
                                 <div className="flex text-primary">
                                   <FaWallet size={40} />
                                   <p className="ml-4 mt-2">
-                                    Wallet Balance ({NAMES.NairaSymbol}
-                                    {parseFloat(walletBalance).toLocaleString(
-                                      "en-US",
-                                      {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                      }
-                                    )}
+                                    Wallet Balance ({nairaSymbol}
+                                    {walletBalance.toLocaleString("en-US", {
+                                      minimumFractionDigits: 2,
+                                      maximumFractionDigits: 2,
+                                    })}
                                     )
                                   </p>
                                 </div>
@@ -969,14 +958,11 @@ const DoctorsBooking = () => {
                                   />
                                   <div className="ml-4">
                                     <p>
-                                      Wallet Balance ({NAMES.NairaSymbol}
-                                      {parseFloat(walletBalance).toLocaleString(
-                                        "en-US",
-                                        {
-                                          minimumFractionDigits: 2,
-                                          maximumFractionDigits: 2,
-                                        }
-                                      )}
+                                      Wallet Balance ({nairaSymbol}
+                                      {walletBalance.toLocaleString("en-US", {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                      })}
                                       )
                                     </p>
                                     <p className="text-red-500 -mt-1">

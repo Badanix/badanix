@@ -50,7 +50,7 @@ const Dashboard = () => {
         <PharmacyHeader />
 
         {/* Dashboard Content */}
-        <main className="p-6 bg-gray-100 flex-grow">
+         <main className="p-6 bg-gray-100 flex-grow min-w-[320px] mt-5 md:mt-0">
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6 mt-6">
             {/* Standing Orders Section */}
             <div className="bg-primary p-6 rounded-lg shadow-lg text-white">

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { NAMES } from "./Constants";
 import { Link, useLocation } from "react-router-dom";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaCog } from "react-icons/fa";
 import PropTypes from "prop-types";
 
 import DoctorIcon from "../assets/icons/doctor.png";
@@ -13,7 +13,7 @@ import labIcon from "../assets/icons/laboratory.png";
 import walletIcon from "../assets/icons/wallet.png";
 import InstitutionIcon from "../assets/icons/hospital.png";
 import PatientIcon from "../assets/icons/patient.png";
-import OrderIcon from "../assets/icons/Order.png"
+import OrderIcon from "../assets/icons/Order.png";
 
 const SideBarMenu = ({ isSidebarOpen, toggleSidebar, institutionType }) => {
   const siteTitle = NAMES.SITE_TITLE;
@@ -60,7 +60,7 @@ const SideBarMenu = ({ isSidebarOpen, toggleSidebar, institutionType }) => {
             link: "/doctor/PatientEhr",
           },
           {
-            icon: scheduleIcon,
+            icon: FaCog,
             label: "Settings",
             link: "/doctor/settings",
           },
@@ -90,24 +90,19 @@ const SideBarMenu = ({ isSidebarOpen, toggleSidebar, institutionType }) => {
         if (institutionType === "hospital") {
           return [
             {
-              icon: InstitutionIcon,
-              label: "Hospital Dashboard",
-              link: "/institution/dashboard",
+              icon: hospitalIcon,
+              label: "Dashboard",
+              link: "/institution/hospital/dashboard",
             },
             {
-              icon: DoctorIcon,
-              label: "Doctors",
-              link: "/institution/doctors",
+              icon: OrderIcon,
+              label: "Orders",
+              link: "/institution/hospital/Order",
             },
             {
-              icon: scheduleIcon,
-              label: "Appointments",
-              link: "/institution/appointments",
-            },
-            {
-              icon: PatientIcon,
-              label: "Patients",
-              link: "/institution/patients",
+              icon: hospitalIcon,
+              label: "Profile",
+              link: "/institution/hospital/Profile",
             },
           ];
         }
@@ -115,24 +110,21 @@ const SideBarMenu = ({ isSidebarOpen, toggleSidebar, institutionType }) => {
         if (institutionType === "laboratory") {
           return [
             {
-              icon: InstitutionIcon,
-              label: "Lab Dashboard",
-              link: "/institution/dashboard",
+              icon: labIcon,
+              label: "Dashboard",
+              link: "/institution/laboratory/dashboard",
             },
+
+            {
+              icon: OrderIcon,
+              label: "Orders",
+              link: "/institution/laboratory/Order",
+            },
+
             {
               icon: labIcon,
-              label: "Tests",
-              link: "/institution/tests",
-            },
-            {
-              icon: PatientIcon,
-              label: "Patients",
-              link: "/institution/patients",
-            },
-            {
-              icon: scheduleIcon,
-              label: "Test Results",
-              link: "/institution/results",
+              label: "Profile",
+              link: "/institution/laboratory/Profile",
             },
           ];
         }
@@ -155,7 +147,7 @@ const SideBarMenu = ({ isSidebarOpen, toggleSidebar, institutionType }) => {
           { icon: PharmacyIcon, label: "Pharmacies", link: "/pharmacies" },
           { icon: labIcon, label: "Laboratories", link: "/laboratories" },
           { icon: walletIcon, label: "Wallet", link: "/wallet" },
-          { icon: FaBars, label: "Settings", link: "/settings" },
+          { icon: FaCog, label: "Settings", link: "/settings" },
         ];
     }
   };
@@ -188,6 +180,8 @@ const SideBarMenu = ({ isSidebarOpen, toggleSidebar, institutionType }) => {
         <ul>
           {menuItems.map((item, index) => {
             const isActive = location.pathname === item.link;
+            const IconComponent = item.icon;
+
             return (
               <li
                 key={index}
@@ -198,7 +192,15 @@ const SideBarMenu = ({ isSidebarOpen, toggleSidebar, institutionType }) => {
                 }`}
               >
                 <Link to={item.link} className="flex items-center w-full">
-                  <img src={item.icon} alt={item.label} className="w-8 h-8" />
+                  {typeof IconComponent === "string" ? (
+                    <img
+                      src={IconComponent}
+                      alt={item.label}
+                      className="w-8 h-8"
+                    />
+                  ) : (
+                    <IconComponent className="w-6 h-6 text-[#856443]"/>
+                  )}
                   <span
                     className={`${isSidebarOpen ? "block ml-4" : "hidden"}`}
                   >

@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import LaboratoryHeader from "../../../../partials/LaboratoryHeader";
 import { useNavigate } from "react-router-dom";
+import { getUserData } from "../../../../../components/Helper";
 
 const LabOnBoarding = () => {
   const siteTitle = NAMES.SITE_TITLE;
@@ -20,6 +21,7 @@ const LabOnBoarding = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+    const userData = getUserData();
 
   const [formData, setFormData] = useState({
     reg_no: "1234567890",
@@ -126,7 +128,7 @@ const LabOnBoarding = () => {
       <SideBarMenu
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
-        menuItems={LABORATORYSIDEBARMENU}
+        institutionType={userData?.data?.institution_type?.toLowerCase()}
       />
 
       {/* Main Content */}
@@ -388,7 +390,7 @@ const LabOnBoarding = () => {
                     onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded-md"
                   />
-                    <div className="flex justify-between mt-4">
+                  <div className="flex justify-between mt-4">
                     <button
                       type="button"
                       onClick={handlePrev}
@@ -606,7 +608,7 @@ const LabOnBoarding = () => {
                 </div>
               )}
 
-                {currentIndex === 15 && (
+              {currentIndex === 15 && (
                 <div className="mb-4">
                   <label className="block text-gray-700 font-medium mb-2">
                     Zip Code
@@ -913,7 +915,6 @@ const LabOnBoarding = () => {
                   </div>
                 </div>
               )}
-
             </form>
           </div>
         </main>

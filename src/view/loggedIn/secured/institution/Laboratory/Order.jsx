@@ -113,7 +113,12 @@ const Order = () => {
   return (
     <div className="flex min-h-screen bg-gray-100 overflow-x-auto">
 
-      <SideBarMenu isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} menuItems={LABORATORYSIDEBARMENU} />
+        <SideBarMenu
+        isSidebarOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}
+        institutionType={userData?.data?.institution_type?.toLowerCase()}
+        
+      />
 
       <div className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'sm:ml-20'}`}>
         <LaboratoryHeader />

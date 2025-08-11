@@ -130,8 +130,7 @@ const Order = () => {
         }`}
       >
         <PharmacyHeader />
-
-        <main className="p-6 bg-gray-100 flex-grow min-w-[320px]">
+        <main className="p-6 bg-gray-100 flex-grow min-w-[320px] mt-5 md:mt-0">
           <Link
             to={"/institution/pharmacy/Dashboard"}
             className="underline flex space-x-2 text-secondary my-4 "
