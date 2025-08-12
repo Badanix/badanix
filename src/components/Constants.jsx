@@ -2,7 +2,6 @@ import { FaUserTie, FaHospital,FaClinicMedical, FaUsers, FaArrowUp,  FaBookMedic
 import { FaUserDoctor } from "react-icons/fa6";
 import { MdAccountBalanceWallet,  MdLocalPharmacy, MdSick } from "react-icons/md";
 import { GiMedicines } from "react-icons/gi";
-
 import { HiDotsHorizontal } from "react-icons/hi";
 import { HiBanknotes } from "react-icons/hi2";
 import { FaUserMd, FaCalendarAlt, FaFileMedical, FaCog, FaSignOutAlt } from "react-icons/fa";
