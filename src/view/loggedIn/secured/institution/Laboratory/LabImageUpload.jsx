@@ -31,7 +31,7 @@ const navigate = useNavigate();
     setLoading(true);
 
     const formData = new FormData();
-    formData.append("prof_pics", imageFile);
+     formData.append("logo", imageFile);
 
     try {
       const response = await fetch(

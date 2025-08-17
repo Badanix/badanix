@@ -16,49 +16,55 @@ const navigate = useNavigate();
     }
   };
 
-  const uploadProfilePicture = async () => {
-    if (!imageFile) {
-      Swal.fire("No Image Selected", "Please select an image.", "warning");
-      return;
-    }
+const uploadProfilePicture = async () => {
+  if (!imageFile) {
+    Swal.fire("No Image Selected", "Please select an image.", "warning");
+    return;
+  }
 
-    const token = localStorage.getItem("token");
-    if (!token) {
-      Swal.fire("Error", "User not authenticated.", "error");
-      return;
-    }
+  const token = localStorage.getItem("token");
+  if (!token) {
+    Swal.fire("Error", "User not authenticated.", "error");
+    return;
+  }
 
-    setLoading(true);
+  setLoading(true);
 
-    const formData = new FormData();
-    formData.append("prof_pics", imageFile);
+  const formData = new FormData();
+  formData.append("logo", imageFile);
 
-    try {
-      const response = await fetch(
-        "https://api.digitalhospital.com.ng/api/v1/institution/avatar",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            // Don't set Content-Type! Let browser set multipart/form-data boundary
-          },
-          body: formData,
-        }
-      );
+  // 🔍 Debug log
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}:`, value);
+  }
 
-      if (response.ok) {
-        Swal.fire("Success", "Profile picture uploaded successfully!", "success");
-        navigate("/institution/pharmacy/PharmDocumentUpload");
-      } else {
-        const errorData = await response.json();
-        Swal.fire("Upload Failed", errorData.message || "Something went wrong.", "error");
+  try {
+    const response = await fetch(
+      "https://api.digitalhospital.com.ng/api/v1/institution/avatar",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
       }
-    } catch (error) {
-      Swal.fire("Error", "An error occurred while uploading the image.", "error");
-    } finally {
-      setLoading(false);
+    );
+
+    if (response.ok) {
+      Swal.fire("Success", "Profile picture uploaded successfully!", "success");
+      navigate("/institution/pharmacy/PharmDocumentUpload");
+    } else {
+      const errorData = await response.json();
+      Swal.fire("Upload Failed", errorData.message || "Something went wrong.", "error");
     }
-  };
+  } catch (error) {
+    Swal.fire("Error", "An error occurred while uploading the image.", "error");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white p-6 relative">

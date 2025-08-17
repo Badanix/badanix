@@ -587,7 +587,7 @@ const Dashboard = () => {
                           src={
                             appointment?.prof_pics
                               ? `${defaultUrl}${appointment.prof_pics}`
-                              : IMAGE.DefaultUser // fallback image if needed
+                              : IMAGE.DefaultUser 
                           }
                           alt={appointment?.fullname || "Patient"}
                           className="w-12 h-12 rounded-full object-cover"

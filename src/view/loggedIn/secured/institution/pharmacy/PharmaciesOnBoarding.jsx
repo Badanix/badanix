@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import PharmacyHeader from "../../../../partials/PharmacyHeader";
 import { useNavigate } from "react-router-dom";
+import { getUserData } from "../../../../../components/Helper";
 
 const PharmaciesOnBoarding = () => {
   const siteTitle = NAMES.SITE_TITLE;
@@ -20,6 +21,7 @@ const PharmaciesOnBoarding = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+   const userData = getUserData();
 
   const [formData, setFormData] = useState({
     reg_no: "1234567890",
@@ -123,10 +125,10 @@ const PharmaciesOnBoarding = () => {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <SideBarMenu
+     <SideBarMenu
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
-        menuItems={PHARMACYSIDEBARMENU}
+        institutionType={userData?.data?.institution_type?.toLowerCase()}
       />
 
       {/* Main Content */}

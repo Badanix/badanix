@@ -130,7 +130,7 @@ const DefaultProfile = ({ initialAccountSettings }) => {
                 className="w-[120px] h-[120px] rounded-full"
               />
               <div>
-                <label
+                {/* <label
                   htmlFor="prof_pics"
                   className="block text-center cursor-pointer text-primary"
                 >
@@ -138,7 +138,7 @@ const DefaultProfile = ({ initialAccountSettings }) => {
                     className="absolute top-0 right-0 bg-white p-1 rounded-full text-primary cursor-pointer"
                     size={30}
                   />
-                </label>
+                </label> */}
                 <input
                   type="file"
                   id="prof_pics"
@@ -155,16 +155,6 @@ const DefaultProfile = ({ initialAccountSettings }) => {
             <div className="mt-8 text-center">
               <p className="font-bold">{fullName}</p>
               <p className="text-primary font-semibold">{userEmail}</p>
-
-              <div className="p-4 bg-primary text-white mt-4 rounded-xl ">
-                {/* <h4 className="text-xl font-mono font-bold">Earning</h4>
-                <p className="capitalize"> your current earning Balance is:</p>
-                <div className="bg-secondary p-4 my-4 rounded-2xl">
-                  <h6>Total Earnings</h6>
-                  <p>{`${currencySymbol}${walletBalance}`}</p>
-                </div> */}
-
-              </div>
             </div>
           </div>
 
