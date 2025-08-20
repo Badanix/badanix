@@ -39,6 +39,7 @@ import {
   Profile,
   PatientImageUpload,
   DoctorRate,
+  DiamondCollection,
 } from "./view/loggedIn/secured/patients";
 
 import {
@@ -201,6 +202,7 @@ const usePageTitle = () => {
       "/services": "Services",
       "/prescriptionreports": "Prescription Reports",
       "/userregistration": "Complete Registration",
+      "/diamondcollection" : "Diamond Collection"
     };
     document.title = `${pageTitleMap[path]} | ${siteTitle}`;
   }, [location.pathname]);
@@ -801,6 +803,20 @@ function AppRouter({ toggleMode, darkMode }) {
               <InactivityProtectedRoute>
                 <ProtectedRoute
                   component={DoctorRate}
+                  allowedRoles={[1]}
+                  toggleMode={toggleMode}
+                  darkMode={darkMode}
+                />
+              </InactivityProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/diamondcollection"
+            element={
+              <InactivityProtectedRoute>
+                <ProtectedRoute
+                  component={DiamondCollection}
                   allowedRoles={[1]}
                   toggleMode={toggleMode}
                   darkMode={darkMode}

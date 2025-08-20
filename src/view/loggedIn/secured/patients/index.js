@@ -19,4 +19,4 @@ export {default as Laboratories} from './services/Laboratories';
 export {default as PatientImageUpload} from './PatientImageUpload';
 export {default as DoctorRate } from './DoctorRate'
 
-
+export {default as DiamondCollection } from './DiamondCollection'

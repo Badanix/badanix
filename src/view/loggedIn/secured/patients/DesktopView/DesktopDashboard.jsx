@@ -42,7 +42,6 @@ import {
 import { MdAccountBalanceWallet } from "react-icons/md";
 
 const Dashboard = () => {
-  // const { upcomingSchedule, upcomingMedication } = UpcomingItems({ ScheduleLists, MedicationLists });
   const userData = getUserData();
   const walletBalance = userData?.data?.acctbal;
   const navigate = useNavigate();
@@ -51,6 +50,10 @@ const Dashboard = () => {
   const displayDotorsRatingVerified = PATIENTSFINDDoctorByRating.filter(
     (item) => item.verified === 1 && item.status === 1
   );
+
+  const collectDiamond = ()=>{
+    navigate("/diamondcollection")
+  }
 
   const {
     completedAppointmentsCount,
@@ -758,34 +761,12 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Toggle Info */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-gray-100 p-3 rounded mb-4 gap-2">
-                <p>
-                  You can get{" "}
-                  <span className="text-primary font-bold dark:text-secondary">
-                    4
-                  </span>{" "}
-                  {NAMES.SITE_TITLE} Diamonds
-                </p>
-                <div className="text-primary font-bold dark:text-secondary rounded-full cursor-pointer">
-                  {toggle ? "Claim" : "Claimed"}
-                </div>
-              </div>
-
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-between">
-                {["collect diamonds", "diamonds History"].map((action) => (
-                  <button
-                    key={action}
-                    className={`w-full sm:w-auto py-2 px-4 rounded capitalize ${
-                      action === "collect diamonds"
-                        ? "bg-primary dark:bg-secondary text-white"
-                        : "bg-secondary text-white"
-                    }`}
-                  >
-                    {action}
+                  <button onClick={collectDiamond}
+                    className="w-full sm:w-auto py-2 px-4 rounded capitalize bg-primary dark:bg-secondary text-white">
+                      collect diamonds
                   </button>
-                ))}
               </div>
             </div>
           </div>

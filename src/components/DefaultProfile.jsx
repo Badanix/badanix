@@ -130,15 +130,7 @@ const DefaultProfile = ({ initialAccountSettings }) => {
                 className="w-[120px] h-[120px] rounded-full"
               />
               <div>
-                {/* <label
-                  htmlFor="prof_pics"
-                  className="block text-center cursor-pointer text-primary"
-                >
-                  <HiPencilAlt
-                    className="absolute top-0 right-0 bg-white p-1 rounded-full text-primary cursor-pointer"
-                    size={30}
-                  />
-                </label> */}
+        
                 <input
                   type="file"
                   id="prof_pics"
