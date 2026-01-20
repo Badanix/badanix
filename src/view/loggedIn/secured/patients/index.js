@@ -9,7 +9,7 @@ export {default as Profile} from './Profile';
 export {default as PatientOnBoarding} from './OnBoarding'
 
 
-export {default as Doctors} from './services/DoctorsLists';
+export {default as DoctorsLists} from './services/DoctorsLists';
 export {default as DoctorsBooking} from './services/DoctorsBooking';
 
 export {default as Schedules} from './services/Schedules';

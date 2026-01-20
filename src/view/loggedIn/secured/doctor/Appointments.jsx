@@ -244,8 +244,9 @@ const Appointments = () => {
         <DoctorsHeader />
 
         {/* Dashboard Content */}
-        <main className="p-6 bg-gray-100 flex-grow">
-          <div className="  md:w-2/3 md:mx-auto mb-0">
+        <main className="p-6 flex-grow">
+          <div className="">
+            
             <div className="flex justify-between items-center mb-4 mt-[60px] md:mt-3 text-primary">
               <FaArrowLeft
                 className="text-xl cursor-pointer"
@@ -255,16 +256,17 @@ const Appointments = () => {
               <h2 className="text-2xl font-semibold flex-grow text-center">
                 Appointments
               </h2>
-              {/* <FaSearch size={24} className="text-primary cursor-pointer" /> */}
             </div>
 
-            <div className="container w-full lg:w-[70vw] mx-auto p-4">
-              <div className="flex mb-6  space-x-2 p-2  overflow-x-scroll md:overflow-x-auto scrollbar-thin ">
+        
+              <div className="flex justify-start space-x-5 mb-6">
+
+
                 {["pending", "upcoming", "completed", "cancelled"].map(
                   (status) => (
                     <button
                       key={status}
-                      className={` rounded-full   flex-1 py-2 px-3 font-semibold ${
+                      className={`rounded-full py-2 px-3 font-semibold ${
                         activeTab === status
                           ? "bg-secondary text-white"
                           : "bg-gray-200 text-gray-800"
@@ -276,13 +278,13 @@ const Appointments = () => {
                   )
                 )}
               </div>
-            </div>
+          
 
             <div
               className={`${
                 activeTab === "pending" || activeTab === 0
-                  ? "border-primary w-full lg:w-[70vw] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6"
-                  : "w-[21rem] custom-xs:w-80  custom-sm:w-full   rounded-lg p-4 mb-4 flex flex-col"
+                  ? "border-primary w-full lg:w-[70vw] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6"
+                  : "w-[21rem] custom-xs:w-80  custom-sm:w-full rounded-lg  mb-4 flex flex-col"
               }`}
             >
               {filteredAppointments.length === 0 ? (
@@ -687,7 +689,7 @@ const Appointments = () => {
                         <p className="text-gray-600 w-1/3">Patient Name</p>
                         <input
                           value={selectedSchedule.fullname}
-                          className="block border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1 text-gray-700 dark:text-white bg-white dark:bg-gray-800 focus:outline-none w-2/3"
+                          className="block border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1 text-gray-700 dark:text-white bg-white focus:outline-none w-2/3"
                           readOnly
                         />
                       </div>

@@ -68,7 +68,7 @@ const Banner = () => {
             Get a medical consultation with our
             <br /> Medical E-Specialists
           </p>
-          <Link to={"/doctors"}>
+          <Link to={"/doctorsLists"}>
             <button
               type="button"
               className="bg-white text-primary dark:text-secondary py-1 px-2 mb-5 rounded-full hover:bg-opacity-90 transition duration-300"

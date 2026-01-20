@@ -51,7 +51,7 @@ const Dashboard = () => {
 
   const fetchUserDetails = async (client_id) => {
     try {
-      const token = await AsyncStorage.getItem("token");
+      const token = localStorage.getItem("token");
       if (!token) return;
 
       const response = await fetch(
@@ -62,12 +62,17 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
+      if (!response.ok) {
+        console.error("User fetch error:", response.status);
+        return;
+      }
+
       const result = await response.json();
-      if (response.status === 200 && result.data) {
-        setUsers((prevUsers) => new Map(prevUsers).set(client_id, result.data));
+      if (result?.data) {
+        setUsers((prev) => new Map(prev).set(client_id, result.data));
       }
     } catch (error) {
       console.error("Error fetching user details:", error);
@@ -76,7 +81,7 @@ const Dashboard = () => {
 
   const fetchAppointments = async () => {
     try {
-      const token = await AsyncStorage.getItem("token");
+      const token = localStorage.getItem("token");
       if (!token) return loading(false);
 
       const response = await fetch(
@@ -87,7 +92,7 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       const result = await response.json();
@@ -107,7 +112,7 @@ const Dashboard = () => {
         pendingAppointments(allPending);
 
         const todayPending = allPending.filter((appt) =>
-          isSameLocalDay(appt.date, new Date())
+          isSameLocalDay(appt.date, new Date()),
         );
         setAppointments(todayPending);
 
@@ -137,9 +142,9 @@ const Dashboard = () => {
           ? parsedData.data.status
           : parsedData.status;
         const profileUpdatedValue = parsedData.data
-          ? parsedData.data.profile_updated ??
-            parsedData.data.setting?.profile_updated
-          : parsedData.profile_updated ?? parsedData.setting?.profile_updated;
+          ? (parsedData.data.profile_updated ??
+            parsedData.data.setting?.profile_updated)
+          : (parsedData.profile_updated ?? parsedData.setting?.profile_updated);
 
         console.log("Raw values:", { statusValue, profileUpdatedValue });
 
@@ -435,7 +440,7 @@ const Dashboard = () => {
                 ) : (
                   <>
                     <div className="flex justify-between flex-wrap items-center gap-2 mb-4">
-                      <h4 className="font-semibold uppercase text-sm sm:text-base">
+                      <h4 className="font-semibold uppercase text-sm sm:text-base text-red-500">
                         {`You have ${
                           upcomingAppointentsCount > 0
                             ? `${upcomingAppointentsCount} Appointment${
@@ -496,7 +501,7 @@ const Dashboard = () => {
                         <span>
                           {mostRecentUpcomingAppointment
                             ? `Session Date: ${formatDateWithOrdinalSuffix(
-                                mostRecentUpcomingAppointment.date
+                                mostRecentUpcomingAppointment.date,
                               )}`
                             : `Today: ${format(new Date(), "eee, d MMM")}`}
                         </span>
@@ -509,7 +514,7 @@ const Dashboard = () => {
                         <span>
                           {mostRecentUpcomingAppointment
                             ? `Time: ${formatTime(
-                                mostRecentUpcomingAppointment.start_time
+                                mostRecentUpcomingAppointment.start_time,
                               )}`
                             : `Time: ${format(new Date(), "hh:mm a")}`}
                         </span>
@@ -525,9 +530,9 @@ const Dashboard = () => {
                                 mostRecentUpcomingAppointment.end_time
                                 ? "bg-gray-500 cursor-not-allowed"
                                 : currentTime <
-                                  mostRecentUpcomingAppointment.start_time
-                                ? "bg-secondary hover:bg-primary cursor-pointer"
-                                : "bg-primary hover:bg-secondary animate-wiggle cursor-pointer"
+                                    mostRecentUpcomingAppointment.start_time
+                                  ? "bg-secondary hover:bg-primary cursor-pointer"
+                                  : "bg-primary hover:bg-secondary animate-wiggle cursor-pointer"
                               : "bg-gray-500 cursor-not-allowed"
                             : "bg-gray-300 cursor-not-allowed"
                         }`}
@@ -575,64 +580,70 @@ const Dashboard = () => {
                   </p>
                 </div>
 
-                <ul className="space-y-4">
-                  {pendingAppointments.slice(0, 6).map((appointment) => (
-                    <li
-                      key={appointment.id}
-                      className="flex flex-wrap md:flex-nowrap justify-between items-center gap-4 border-b pb-4"
-                    >
-                      {/* Patient image and name */}
-                      <div className="flex items-center space-x-3 w-full sm:w-2/5">
-                        <img
-                          src={
-                            appointment?.prof_pics
-                              ? `${defaultUrl}${appointment.prof_pics}`
-                              : IMAGE.DefaultUser 
-                          }
-                          alt={appointment?.fullname || "Patient"}
-                          className="w-12 h-12 rounded-full object-cover"
-                        />
-                        <p className="font-semibold capitalize truncate">
-                          {appointment?.fullname
-                            ? appointment.fullname.split(" ")[0]
-                            : "Unknown"}
+                {pendingAppointments.length === 0 ? (
+                  <p className="text-red-600 font-bold text-center">
+                    No Appointment Requests
+                  </p>
+                ) : (
+                  <ul className="space-y-4">
+                    {pendingAppointments.slice(0, 6).map((appointment) => (
+                      <li
+                        key={appointment.id}
+                        className="flex flex-wrap md:flex-nowrap justify-between items-center gap-4 border-b pb-4"
+                      >
+                        {/* Patient image and name */}
+                        <div className="flex items-center space-x-3 w-full sm:w-2/5">
+                          <img
+                            src={
+                              appointment?.prof_pics
+                                ? `${defaultUrl}${appointment.prof_pics}`
+                                : IMAGE.DefaultUser
+                            }
+                            alt={appointment?.fullname || "Patient"}
+                            className="w-12 h-12 rounded-full object-cover"
+                          />
+                          <p className="font-semibold capitalize truncate">
+                            {appointment?.fullname
+                              ? appointment.fullname.split(" ")[0]
+                              : "Unknown"}
+                          </p>
+                        </div>
+
+                        {/* Purpose */}
+                        <p className="text-sm text-gray-500 capitalize w-1/4 text-center">
+                          {appointment?.purpose || "N/A"}
                         </p>
-                      </div>
 
-                      {/* Purpose */}
-                      <p className="text-sm text-gray-500 capitalize w-1/4 text-center">
-                        {appointment?.purpose || "N/A"}
-                      </p>
+                        {/* Date */}
+                        <p className="text-sm text-gray-500 w-1/4 text-center">
+                          {appointment?.date
+                            ? formatDateWithOrdinalSuffix(appointment.date)
+                            : "N/A"}
+                        </p>
 
-                      {/* Date */}
-                      <p className="text-sm text-gray-500 w-1/4 text-center">
-                        {appointment?.date
-                          ? formatDateWithOrdinalSuffix(appointment.date)
-                          : "N/A"}
-                      </p>
-
-                      {/* Status */}
-                      <div className="w-full md:w-1/4 flex justify-end text-sm">
-                        {appointment.status === "1" ? (
-                          <span className="text-green-600 font-bold">
-                            Accepted
-                          </span>
-                        ) : appointment.status === "0" ? (
-                          <span className="text-red-600 font-bold">
-                            Declined
-                          </span>
-                        ) : (
-                          <button
-                            className="bg-secondary px-2 py-1 rounded-xl text-white hidden md:block"
-                            onClick={() => navigate("/doctor/appointments")}
-                          >
-                            View User
-                          </button>
-                        )}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                        {/* Status */}
+                        <div className="w-full md:w-1/4 flex justify-end text-sm">
+                          {appointment.status === "1" ? (
+                            <span className="text-green-600 font-bold">
+                              Accepted
+                            </span>
+                          ) : appointment.status === "0" ? (
+                            <span className="text-red-600 font-bold">
+                              Declined
+                            </span>
+                          ) : (
+                            <button
+                              className="bg-secondary px-2 py-1 rounded-xl text-white hidden md:block"
+                              onClick={() => navigate("/doctor/appointments")}
+                            >
+                              View User
+                            </button>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </div>
@@ -781,7 +792,7 @@ const Dashboard = () => {
                       navigate(
                         action === "See Wallet"
                           ? "/doctor/Payment"
-                          : "/doctor/Transactions"
+                          : "/doctor/Transactions",
                       )
                     }
                     className={`py-2 px-4 rounded w-full sm:w-auto text-sm ${

@@ -3,14 +3,10 @@ import { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { ImSearch } from "react-icons/im";
 import { GrUserExpert } from "react-icons/gr";
-import SideBarMenu from "../../../../../components/SideBarMenu";
-
-import UseSideBarMenu from "../../../../../hooks/UseSideBarMenu";
 
 import Search from "../../../../../components/Search";
 import {
   Doctor,
-  PATIENTSIDEBARMENU,
   APIURLS,
   defaultUrl,
 } from "../../../../../components/Constants";
@@ -20,12 +16,10 @@ import PropTypes from "prop-types";
 import { MdEventAvailable, MdLanguage, MdSick } from "react-icons/md";
 
 import { FaUserDoctor } from "react-icons/fa6";
-import PatientHeader from "../../../../partials/PatientHeader";
 import { doctorSpecializationOptions } from "./ServicesForm";
 import { HiOfficeBuilding } from "react-icons/hi";
 import specializationImages from "../../../../../components/specializationImages";
-import fallbackImage from '../../../../../assets/icons/doctor.png'
-
+import fallbackImage from "../../../../../assets/icons/doctor.png";
 
 const DoctorCardContent = ({ img, title, details, onClose }) => (
   <div className="flex flex-col items-center p-4">
@@ -45,9 +39,6 @@ const DoctorCardContent = ({ img, title, details, onClose }) => (
 );
 
 const DoctorsLists = () => {
-  const { isSidebarOpen, toggleSidebar } = UseSideBarMenu();
-
-  // const nairaSymbol =  NAMES.NairaSymbol;
   const [doctorsCards, setDoctorsCards] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -223,150 +214,131 @@ const DoctorsLists = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <SideBarMenu
-        isSidebarOpen={isSidebarOpen}
-        toggleSidebar={toggleSidebar}
-        menuItems={PATIENTSIDEBARMENU}
-      />
+    <div className="">
+      <main className="flex-grow">
+        {loading ? (
+          <div className="flex items-center justify-center h-screen">
+            <div className="text-center">
+              <img
+                src={fallbackImage}
+                className="w-16 h-16 animate-bounce mx-auto mb-4"
+              />
+              <p className="text-gray-600 font-semibold">Loading</p>
+            </div>
+          </div>
+        ) : (
+          <>
+            {/* List of Doctors */}
+            <div className="sm:flex">
+              <div>
+                <div className="flex space-x-3 items-center text-primary p-4 border-b border-gray-200">
+                  <FaArrowLeft
+                    className="text-xl cursor-pointer"
+                    onClick={goBack}
+                  />
+                  <p className="font-semibold text-lg uppercase">
+                    Doctor Categories
+                  </p>
+                </div>
 
-      {/* Main Content */}
-      <div
-        className={`flex-1 transition-all duration-300 ml-${
-          isSidebarOpen ? "64" : "0 sm:ml-20"
-        }`}
-      >
-        {/* Topbar */}
-        <PatientHeader />
+                {/* Search */}
+                <div className="mt-4">
+                  <Search
+                    placeholder="Search for Doctor's Category such as dermatologists, surgeons, etc"
+                    searchValue=""
+                    onSearchChange={() => {}}
+                    items={doctorSpecializationOptions}
+                    onFilterChange={handleFilterChange}
+                    customClassName="w-full lg:min-w-[70vw]"
+                  />
+                </div>
 
-        {/* Dashboard Content */}
-        <main className=" bg-gray-100 flex-grow">
-          {loading ? (
-            <div className="flex items-center justify-center h-screen">
-              <div className="text-center">
-                <img
-                  src={fallbackImage}
-                  className="w-16 h-16 animate-bounce mx-auto mb-4"
-                />
-                <p className="text-gray-600 font-semibold">Loading</p>
+                {/* Doctors Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mx-8 my-2 overflow-y-visible">
+                  {paginatedDoctorsSpecialization.map((item, index) => {
+                    const iconColor =
+                      index % 2 === 0 ? "text-primary" : "text-secondary";
+                    return (
+                      <div
+                        key={index}
+                        className="flex flex-col items-center text-center border-2 border-gray-200 rounded-lg bg-white shadow-md cursor-pointer my-3 px-2 py-2"
+                        onClick={() => handleDoctorsCards(item)}
+                        onMouseEnter={() => handleMouseEnter(item)}
+                        onMouseLeave={handleMouseLeave}
+                      >
+                        <img
+                          src={
+                            specializationImages[item.title] || fallbackImage
+                          }
+                          alt={item.title}
+                          className="w-20 h-20 object-cover rounded-full mb-2"
+                        />
+                        <p
+                          className="truncate text-center text-gray-800 w-full"
+                          style={{ fontSize: "13px" }}
+                        >
+                          {item.title}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Pagination Controls */}
+                <div className="flex justify-between items-center mt-4 px-8">
+                  <button
+                    onClick={handlePreviousPage}
+                    disabled={currentPage === 1}
+                    className="bg-secondary text-white py-2 px-4 rounded-lg disabled:opacity-50"
+                  >
+                    Previous
+                  </button>
+                  <p>
+                    Page {currentPage} of {totalPage}
+                  </p>
+                  <button
+                    onClick={handleNextPage}
+                    disabled={currentPage === totalPage}
+                    className="bg-primary text-white py-2 px-4 rounded-lg disabled:opacity-50"
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+
+              {/* Right Side: Hovered Doctor Info */}
+              <div className="hidden lg:block w-2/3 max-h-[70vh] px-8 py-4 shadow-2xl mx-0 mt-[60px] mr-9">
+                {hoveredDoctor || lastHoveredDoctor ? (
+                  <div className="flex flex-col items-center text-center">
+                    <img
+                      src={
+                        specializationImages[
+                          (hoveredDoctor || lastHoveredDoctor)?.title
+                        ] || fallbackImage
+                      }
+                      alt={(hoveredDoctor || lastHoveredDoctor)?.title}
+                      className="w-24 h-24 object-cover rounded-full mb-2"
+                    />
+                    <h3 className="text-xl font-semibold text-center mb-2">
+                      {(hoveredDoctor || lastHoveredDoctor).title}
+                    </h3>
+                    <p className="text-gray-600 text-center">
+                      {(hoveredDoctor || lastHoveredDoctor).description}
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-gray-500 text-center">
+                    No doctor available
+                  </p>
+                )}
               </div>
             </div>
-          ) : (
-            <>
-              {/* List of Doctors */}
-              <div className="sm:flex">
-                <div>
-                  <div className="flex space-x-3 items-center text-primary p-4 border-b border-gray-200">
-                    <FaArrowLeft
-                      className="text-xl cursor-pointer"
-                      onClick={goBack}
-                    />
-                    <p className="font-semibold text-lg uppercase">
-                      Doctor Categories
-                    </p>
-                  </div>
-
-                  {/* Search */}
-                  <div className="mt-4">
-                    <Search
-                      placeholder="Search for Doctor's Category such as dermatologists, surgeons, etc"
-                      searchValue=""
-                      onSearchChange={() => {}}
-                      items={doctorSpecializationOptions}
-                      onFilterChange={handleFilterChange}
-                      customClassName="w-full lg:min-w-[70vw]"
-                    />
-                  </div>
-
-                  {/* Doctors Grid */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mx-8 my-2 overflow-y-visible">
-                    {paginatedDoctorsSpecialization.map((item, index) => {
-                      const iconColor =
-                        index % 2 === 0 ? "text-primary" : "text-secondary";
-                      return (
-                        <div
-                          key={index}
-                          className="flex flex-col items-center text-center border-2 border-gray-200 rounded-lg bg-white shadow-md cursor-pointer my-3 px-2 py-2"
-                          onClick={() => handleDoctorsCards(item)}
-                          onMouseEnter={() => handleMouseEnter(item)}
-                          onMouseLeave={handleMouseLeave}
-                        >
-                          <img
-                            src={
-                              specializationImages[item.title] || fallbackImage
-                            }
-                            alt={item.title}
-                            className="w-20 h-20 object-cover rounded-full mb-2"
-                          />
-                          <p className="truncate text-center text-gray-800 w-full" style={{fontSize: "13px"}}>
-                            {item.title}
-                          </p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  {/* Pagination Controls */}
-                  <div className="flex justify-between items-center mt-4 px-8">
-                    <button
-                      onClick={handlePreviousPage}
-                      disabled={currentPage === 1}
-                      className="bg-secondary text-white py-2 px-4 rounded-lg disabled:opacity-50"
-                    >
-                      Previous
-                    </button>
-                    <p>
-                      Page {currentPage} of {totalPage}
-                    </p>
-                    <button
-                      onClick={handleNextPage}
-                      disabled={currentPage === totalPage}
-                      className="bg-primary text-white py-2 px-4 rounded-lg disabled:opacity-50"
-                    >
-                      Next
-                    </button>
-                  </div>
-                </div>
-
-                {/* Right Side: Hovered Doctor Info */}
-                <div className="hidden lg:block w-2/3 max-h-[70vh] px-8 py-4 shadow-2xl mx-0 mt-[60px] mr-9">
-                  {hoveredDoctor || lastHoveredDoctor ? (
-                    <div className="flex flex-col items-center text-center">
-                      <img
-                        src={
-                          specializationImages[
-                            (hoveredDoctor || lastHoveredDoctor)?.title
-                          ] || fallbackImage
-                        }
-                        alt={(hoveredDoctor || lastHoveredDoctor)?.title}
-                        className="w-24 h-24 object-cover rounded-full mb-2"
-                      />
-                      <h3 className="text-xl font-semibold text-center mb-2">
-                        {(hoveredDoctor || lastHoveredDoctor).title}
-                      </h3>
-                      <p className="text-gray-600 text-center">
-                        {(hoveredDoctor || lastHoveredDoctor).description}
-                      </p>
-                    </div>
-                  ) : (
-                    <p className="text-gray-500 text-center">
-                      No doctor available
-                    </p>
-                  )}
-                </div>
-              </div>
-            </>
-          )}
-        </main>
-      </div>
+          </>
+        )}
+      </main>
 
       {doctorsCards && (
         <div
-          className={`fixed inset-y-0 right-0 bg-gray-100 z-50 overflow-auto mb-10 w-full transform translate-x-0 top-[73px] md:top-[90px] bottom-0 h-full ${
-            isSidebarOpen
-              ? "w-[63%] md:w-[73%] lg:w-[83%]"
-              : "md:w-[90.5%] lg:w-[94.3%]"
-          }`}
+          className={`fixed inset-y-0 right-0 bg-gray-100 z-50 overflow-auto mb-10 w-full transform translate-x-0 top-[73px] md:top-[90px] bottom-0 h-full `}
         >
           {/* Conditional Header */}
           <div className="flex justify-between items-center text-primary p-4 border-b border-gray-200">
@@ -432,7 +404,7 @@ const DoctorsLists = () => {
               className={`${
                 doctorSpecialization.length === 0 && !loading
                   ? "flex items-center justify-center h-screen"
-                  : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4"
+                  : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4"
               }`}
             >
               {doctorSpecialization.length === 0 && !loading ? (
@@ -458,7 +430,7 @@ const DoctorsLists = () => {
                     <img
                       src={`${defaultUrl}${doctor.prof_pics}`}
                       alt={doctor.fullname}
-                      className="w-[450px] h-[250px] object-cover rounded-tl-md rounded-bl-md"
+                      className="w-[450px] h-[150px] object-cover rounded-tl-md rounded-bl-md"
                     />
                     <h5 className="text-lg font-semibold text-primary capitalize">
                       {doctor.fullname}

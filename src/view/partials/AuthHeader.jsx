@@ -4,7 +4,6 @@ import styles from "../../components/styles";
 const AuthHeader = () => {
   return (
     <div>
-      {/* Header */}
       <div className={styles.registerHeader}>
         <a href="/">
           <img
@@ -15,11 +14,8 @@ const AuthHeader = () => {
         </a>
 
         <div className={styles.registerHeader}>
-          {/* You can add other components here, like a theme toggle if needed */}
-          {/* <ToggleTheme/> */}
         </div>
       </div>
-      {/* End of header */}
     </div>
   );
 };

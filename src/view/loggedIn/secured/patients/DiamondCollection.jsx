@@ -149,60 +149,46 @@ const DiamondCollection = () => {
   };
 
   return (
-    <div className="md:flex h-screen bg-gray-100">
-      <SideBarMenu
-        isSidebarOpen={isSidebarOpen}
-        toggleSidebar={toggleSidebar}
-        menuItems={PATIENTSIDEBARMENU}
-      />
+    <div className="">
+      <main className="flex-grow">
+        <h2 className="text-2xl font-bold mb-6">Diamond Collection</h2>
 
-      <div
-        className={`flex-1 ${
-          isSidebarOpen ? "ml-64 " : "ml-0 sm:ml-20"
-        } transition-all duration-300`}
-      >
-        <PatientHeader />
-
-        <main className="p-4 sm:p-6 bg-gray-100 flex-grow">
-          <h2 className="text-2xl font-bold mb-6">Diamond Collection</h2>
-
-          {countdown && (
-            <div className="text-red-500 font-bold mb-4">
-              Next collection in {countdown}
-            </div>
-          )}
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-6">
-            {days.map((day) => (
-              <div
-                key={day.id}
-                className="flex flex-col items-center p-4 bg-white shadow-md rounded-xl"
-              >
-                <img
-                  src={day.image}
-                  alt={`Day ${day.id}`}
-                  className={`w-40 h-20 mb-2 transition-transform duration-300 ${
-                    day.status === "collected" ? "scale-110 opacity-80" : ""
-                  }`}
-                />
-                <p className="font-semibold">Day {day.id}</p>
-
-                <button
-                  disabled={day.status === "collected" || countdown}
-                  onClick={() => handleCollect(day.id)}
-                  className={`mt-2 px-4 py-2 rounded-lg btn-sm text-white font-medium transition-all ${
-                    day.status === "collected" || countdown
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-secondary"
-                  }`}
-                >
-                  {day.status === "collected" ? "Collected" : "Collect"}
-                </button>
-              </div>
-            ))}
+        {countdown && (
+          <div className="text-red-500 font-bold mb-4">
+            Next collection in {countdown}
           </div>
-        </main>
-      </div>
+        )}
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-6">
+          {days.map((day) => (
+            <div
+              key={day.id}
+              className="flex flex-col items-center p-4 bg-white shadow-md rounded-xl"
+            >
+              <img
+                src={day.image}
+                alt={`Day ${day.id}`}
+                className={`w-40 h-20 mb-2 transition-transform duration-300 ${
+                  day.status === "collected" ? "scale-110 opacity-80" : ""
+                }`}
+              />
+              <p className="font-semibold">Day {day.id}</p>
+
+              <button
+                disabled={day.status === "collected" || countdown}
+                onClick={() => handleCollect(day.id)}
+                className={`mt-2 px-4 py-2 rounded-lg btn-sm text-white font-medium transition-all ${
+                  day.status === "collected" || countdown
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-secondary"
+                }`}
+              >
+                {day.status === "collected" ? "Collected" : "Collect"}
+              </button>
+            </div>
+          ))}
+        </div>
+      </main>
     </div>
   );
 };

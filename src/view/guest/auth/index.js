@@ -6,3 +6,4 @@ export { default as ResetCode } from './ResetCode';
 export { default as VerifyEmail } from './VerifyEmail';
 export { default as ForgotPassword } from './ForgotPassword';
 export { default as Location } from './Location';
+// export { default as AdminRegister } from './AdminRegister';

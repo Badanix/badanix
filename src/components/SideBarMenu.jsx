@@ -161,9 +161,9 @@ const SideBarMenu = ({ isSidebarOpen, toggleSidebar, institutionType }) => {
     <aside
       className={`${
         isSidebarOpen
-          ? "w-64 overflow-y-scroll scrollbar-thin bg-primary dark:bg-secondary"
-          : "w-20 sm:bg-primary dark:bg-secondary"
-      } h-full text-white fixed transition-all duration-300 hidden sm:block`}
+          ? "w-64 overflow-y-scroll scrollbar-thin bg-white dark:bg-white"
+          : "w-20 sm:bg-white dark:bg-white"
+      } h-full text-primary fixed transition-all duration-300 hidden sm:block`}
     >
       <div className="flex justify-between items-center p-4">
         <h1

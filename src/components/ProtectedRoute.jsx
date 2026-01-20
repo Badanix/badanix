@@ -2,13 +2,12 @@ import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ component: Component, allowedRoles }) => {
-  const isAuthenticated = !!localStorage.getItem('token');  // Check if the user is logged in
-  const roleId = parseInt(localStorage.getItem('role_id'), 10);  // Get user role from local storage
+  const isAuthenticated = !!localStorage.getItem('token');  
+  const roleId = parseInt(localStorage.getItem('role_id'), 10);  
 
-  // Case 1: If the user is not authenticated, they can only access /auth-login
   if (!isAuthenticated) {
     if (window.location.pathname === '/auth-login') {
-      return <Component />;  // Allow access to login page
+      return <Component />; 
     }
     return <Navigate to="/auth-login" />;  // Redirect to login page for other routes
   }

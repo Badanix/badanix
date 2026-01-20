@@ -93,7 +93,7 @@ const MobileSecuredHeader = () => {
 
         {/* Full-width Notification Panel on mobile */}
         {showNotification && (
-          <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex justify-end sm:justify-center">
+          <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex justify-end sm:justify-center mt-10">
             <Notification
               onClose={handleCloseNotification}
               showNotification={showNotification}

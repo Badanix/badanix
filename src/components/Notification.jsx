@@ -8,9 +8,7 @@ const Notification = ({ onClose, showNotification, className }) => {
 
   return (
     <div
-    className={` ${className} ${
-      showNotification ? 'w-11/12 mx-auto translate-x-0' : ' translate-x-full duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)] z-50 animate-spin'
-    }`}
+    className='p-4 bg-white'
     
   >
     <div className='flex justify-between items-center text-primary dark:text-secondary p-4 border-b border-gray-200 transform transition-transform'>

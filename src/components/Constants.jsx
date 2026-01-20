@@ -16,6 +16,7 @@ import specialization from './specialization.json';
 
 export const userData= getUserData();
 export const defaultUrl= 'https://api.digitalhospital.com.ng/';
+export const defaultUrls= 'https://api.digitalhospital.com.ng/api/v1/';
 
 // export const currencies = [
 //   { name: 'Naira', symbol: '₦', sign: 'NGN' },
@@ -280,8 +281,9 @@ export const IMAGE= {
     {name: 'Coinbase', icon: IMAGE.coinbase},
     {name: 'Edge', icon: IMAGE.edge},
   ];
+
   export const SERVICES = [
-    { icon: <FaUserDoctor size={30} />, name: "Doctors", link: '/doctors' }, 
+    { icon: <FaUserDoctor size={30} />, name: "Doctors", link: '/doctorsLists' }, 
     { icon: <GiMedicines size={30} />, name: "Pharmacies", link: '/pharmacies' },
     { icon: <FaClinicMedical size={30} />, name: "Hospitals", link: '/hospitals' },
     { icon: <BiSolidClinic size={30} />, name: "Laboratories", link: '/laboratories' },

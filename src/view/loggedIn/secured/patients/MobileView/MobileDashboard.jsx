@@ -28,13 +28,13 @@ const MobileDashboard = () => {
 
       <ServicesMenu />
 
-      <TopSpecialists />
+      {/* <TopSpecialists /> */}
 
       <div>
-        <CardSlider />
+        {/* <CardSlider /> */}
       </div>
 
-      <NearbyInstitution />
+      {/* <NearbyInstitution /> */}
     </div>
   );
 };

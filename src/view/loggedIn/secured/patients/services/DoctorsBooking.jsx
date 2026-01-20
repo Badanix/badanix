@@ -409,338 +409,316 @@ const DoctorsBooking = () => {
   }
 
   return (
-    <div className="flex h-screen bg-gray-700">
-      <SideBarMenu
-        isSidebarOpen={isSidebarOpen}
-        toggleSidebar={toggleSidebar}
-        menuItems={PATIENTSIDEBARMENU}
-      />
-
-      <div
-        className={`flex-1 ml-${
-          isSidebarOpen ? "64" : "0 sm:ml-20"
-        } transition-all duration-300`}
-      >
-        <PatientHeader />
-
-        <main className="p-6 bg-gray-100 flex-grow">
-          {loading ? (
-            <div className="flex items-center justify-center h-screen">
-              <div className="text-center">
-                <FaUserDoctor
-                  size={48}
-                  className="text-secondary mb-4 mx-auto animate-bounce"
-                />
-                <p className="text-gray-600 font-semibold">Loading...</p>
-              </div>
-            </div>
-          ) : (
-            <>
-              <div className="sm:flex justify-between mb-0">
-                <div className="mb-4"></div>
-              </div>
-
-              <FaArrowLeft
-                className="text-xl cursor-pointer mt-[60px] md:mt-0 mb-2 md:mb-5 text-primary"
-                onClick={() => navigate(-1)}
+    <div className="">
+      <main className="flex-grow">
+        {loading ? (
+          <div className="flex items-center justify-center h-screen">
+            <div className="text-center">
+              <FaUserDoctor
+                size={48}
+                className="text-secondary mb-4 mx-auto animate-bounce"
               />
+              <p className="text-gray-600 font-semibold">Loading...</p>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="sm:flex justify-between mb-0">
+              <div className="mb-4"></div>
+            </div>
 
-              {/* Image section with arrow */}
-              {!isBooking && !previewBooking && doctorDetails && (
-                <div className="relative w-full flex flex-col lg:flex-row lg:space-x-5">
+            <FaArrowLeft
+              className="text-xl cursor-pointer mt-[60px] md:mt-0 mb-2 md:mb-5 text-primary"
+              onClick={() => navigate(-1)}
+            />
+
+            {/* Image section with arrow */}
+            {!isBooking && !previewBooking && doctorDetails && (
+              <div className="relative w-full flex flex-col lg:flex-row lg:space-x-5">
+                <div className="w-50">
                   {doctorDetails.prof_pics && (
                     <img
                       src={`${defaultUrl}${doctorDetails.prof_pics}`}
                       alt={doctorDetails.fullname || "Doctor"}
                     />
                   )}
+                </div>
 
-                  <div
-                    className="bg-gray-50 p-4 w-full relative"
-                    style={{
-                      borderTopLeftRadius: "20% 20px",
-                      borderTopRightRadius: "20% 20px",
-                      marginTop: "-25px",
-                      zIndex: 10,
-                    }}
-                  >
-                    <div className="mt-6 mb-[50px]">
-                      <h3 className="text-xl font-bold capitalize">
-                        {doctorDetails.fullname || ""}
-                      </h3>
+                <div
+                  className="bg-gray-50 p-4 w-full relative"
+                  style={{
+                    borderTopLeftRadius: "20% 20px",
+                    borderTopRightRadius: "20% 20px",
+                    marginTop: "-25px",
+                    zIndex: 10,
+                  }}
+                >
+                  <div className="mt-6 mb-[50px]">
+                    <h3 className="text-xl font-bold capitalize">
+                      {doctorDetails.fullname || ""}
+                    </h3>
 
-                      <p className="text-gray-600 capitalize">
-                        {doctorDetails.specialization
-                          ? doctorDetails.specialization.replace(/s$/, "")
-                          : "No specialization"}{" "}
-                      </p>
+                    <p className="text-gray-600 capitalize">
+                      {doctorDetails.specialization
+                        ? doctorDetails.specialization.replace(/s$/, "")
+                        : "No specialization"}{" "}
+                    </p>
 
-                      <div className="grid grid-cols-3 gap-4 mt-4">
-                        <div className="bg-gray-100 rounded-md p-4 shadow-xl text-center">
-                          <p className="font-bold text-primary capitalize">
-                            Patients
+                    <div className="grid grid-cols-2 gap-4 mt-4">
+                      <div className="bg-gray-100 rounded-md p-4 shadow-xl text-center">
+                        <p className="font-bold text-primary capitalize">
+                          Patients
+                        </p>
+                        <div className="flex justify-center items-center mt-2">
+                          <MdSick
+                            className="hidden md:inline-block mr-1 text-primary font-bold"
+                            size={20}
+                          />
+                          <p className="captialize">
+                            {doctorDetails.no_of_consultations ?? 0}
+                            <span className="hidden md:inline-block">
+                              {" "}
+                              Attended
+                            </span>
                           </p>
-                          <div className="flex justify-center items-center mt-2">
-                            <MdSick
-                              className="hidden md:inline-block mr-1 text-primary font-bold"
-                              size={20}
-                            />
-                            <p className="captialize">
-                              {doctorDetails.no_of_consultations ?? 0}
-                              <span className="hidden md:inline-block">
-                                {" "}
-                                Attended
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                        <div className="bg-gray-100 rounded-md p-4 shadow-xl text-center">
-                          <p className="font-bold text-primary capitalize truncate w-full">
-                            Experience
-                          </p>
-
-                          <div className="flex justify-center items-center mt-2">
-                            <MdOutlineWorkOutline
-                              className="mr-1 text-primary font-bold hidden md:inline-block"
-                              size={20}
-                            />
-                            <p>{doctorDetails.experience ?? 0} Years</p>
-                          </div>
-                        </div>
-                        <div className="bg-gray-100 rounded-md p-4 shadow-xl text-center">
-                          <p className="font-bold text-primary capitalize">
-                            Rating
-                          </p>
-                          <div className="flex justify-center items-center mt-2">
-                            <FaStar
-                              className="hidden md:inline-block mr-1 text-primary font-bold"
-                              size={20}
-                            />
-                            <p>{doctorDetails.rating ?? "N/A"}</p>
-                          </div>
                         </div>
                       </div>
 
-                      <div className="mt-6">
-                        <h3 className="text-lg font-bold uppercase text-primary">
-                          About
-                        </h3>
-                        <p className="text-gray-600">
-                          {doctorDetails.about && doctorDetails.about.length > 0
-                            ? doctorDetails.about.length > 150
-                              ? isReadMore
-                                ? doctorDetails.about
-                                : doctorDetails.about.slice(0, 150) + "..."
-                              : doctorDetails.about
-                            : "No information available"}
+                      <div className="bg-gray-100 rounded-md p-4 shadow-xl text-center">
+                        <p className="font-bold text-primary capitalize truncate w-full">
+                          Experience
                         </p>
 
-                        <button
-                          className="text-primary underline mt-2 font-semibold"
-                          onClick={() => setIsReadMore(!isReadMore)}
-                        >
-                          <div className="flex items-center">
-                            <p>{isReadMore ? "Read Less" : "Read More"}</p>
-                            <MdOutlineDoubleArrow
-                              className="mt-[4px] ml-[3px]"
-                              size={20}
-                            />
-                          </div>
-                        </button>
+                        <div className="flex justify-center items-center mt-2">
+                          <MdOutlineWorkOutline
+                            className="mr-1 text-primary font-bold hidden md:inline-block"
+                            size={20}
+                          />
+                          <p>{doctorDetails.experience ?? 0}</p>
+                        </div>
                       </div>
-
-                      {!isBooking && !previewBooking && (
-                        <button
-                          className="mt-6 py-2 px-4 rounded-lg w-full bg-primary text-white cursor-pointer"
-                          onClick={handleBookingClick}
-                        >
-                          Book Appointment
-                        </button>
-                      )}
                     </div>
+
+                    <div className="mt-6">
+                      <h3 className="text-lg font-bold uppercase text-primary">
+                        About
+                      </h3>
+                      <p className="text-gray-600">
+                        {doctorDetails.about && doctorDetails.about.length > 0
+                          ? doctorDetails.about.length > 150
+                            ? isReadMore
+                              ? doctorDetails.about
+                              : doctorDetails.about.slice(0, 150) + "..."
+                            : doctorDetails.about
+                          : "No information available"}
+                      </p>
+
+                      <button
+                        className="text-primary underline mt-2 font-semibold"
+                        onClick={() => setIsReadMore(!isReadMore)}
+                      >
+                        <div className="flex items-center">
+                          <p>{isReadMore ? "Read Less" : "Read More"}</p>
+                          <MdOutlineDoubleArrow
+                            className="mt-[4px] ml-[3px]"
+                            size={20}
+                          />
+                        </div>
+                      </button>
+                    </div>
+
+                    {!isBooking && !previewBooking && (
+                      <button
+                        className="mt-6 py-2 px-4 rounded-lg w-full bg-primary text-white cursor-pointer"
+                        onClick={handleBookingClick}
+                      >
+                        Book Appointment
+                      </button>
+                    )}
                   </div>
                 </div>
-              )}
+              </div>
+            )}
 
-              {/* Booking Form */}
-              {isBooking && doctorDetails && (
-                <div className="relative w-full flex flex-col lg:flex-row lg:space-x-5">
-                  <img
-                    src={`${defaultUrl}${doctorDetails.prof_pics}`}
-                    alt={doctorDetails.fullname || "Doctor"}
-                    className="w-full lg:w-[45%] h-[250px] lg:h-[80vh] object-cover object-top rounded-tl-xl rounded-bl-xl"
-                  />
+            {/* Booking Form */}
+            {isBooking && doctorDetails && (
+              <div className="relative w-full flex flex-col lg:flex-row lg:space-x-5">
+                <img
+                  src={`${defaultUrl}${doctorDetails.prof_pics}`}
+                  alt={doctorDetails.fullname || "Doctor"}
+                  className="w-full lg:w-[45%] h-[250px] lg:h-[80vh] object-cover object-top rounded-tl-xl rounded-bl-xl"
+                />
 
-                  <div
-                    className="bg-gray-50 p-4 w-full relative"
-                    style={{
-                      borderTopLeftRadius: "20% 20px",
-                      borderTopRightRadius: "20% 20px",
-                      marginTop: "-25px",
-                      zIndex: 10,
-                    }}
-                  >
-                    <div className="mt-6 lg:mt-[70px] mb-[50px]">
-                      <h3 className="text-xl font-bold capitalize text-center">
-                        Book{" "}
-                        <span className="mr-1 text-secondary">
-                          Dr. {doctorDetails.fullname}
-                        </span>{" "}
-                        Now
-                      </h3>
+                <div
+                  className="bg-gray-50 p-4 w-full relative"
+                  style={{
+                    borderTopLeftRadius: "20% 20px",
+                    borderTopRightRadius: "20% 20px",
+                    marginTop: "-25px",
+                    zIndex: 10,
+                  }}
+                >
+                  <div className="mt-6 lg:mt-[70px] mb-[50px]">
+                    <h3 className="text-xl font-bold capitalize text-center">
+                      Book{" "}
+                      <span className="mr-1 text-secondary">
+                        Dr. {doctorDetails.fullname}
+                      </span>{" "}
+                      Now
+                    </h3>
 
-                      <div className="tablet:w-[50vw] lg:w-[34vw] md:w-[60vw] mx-auto">
-                        <form onSubmit={handleBookingSubmit}>
-                          <div className="mb-4">
-                            <label className="block text-gray-700 mb-2 font-semibold">
-                              Name
-                            </label>
+                    <div className="tablet:w-[50vw] lg:w-[34vw] md:w-[60vw] mx-auto">
+                      <form onSubmit={handleBookingSubmit}>
+                        <div className="mb-4">
+                          <label className="block text-gray-700 mb-2 font-semibold">
+                            Name
+                          </label>
+                          <input
+                            type="text"
+                            name="name"
+                            value={userData?.data?.fullname || ""}
+                            className={styles.inputStyle}
+                            readOnly
+                          />
+                        </div>
+
+                        <div className="mb-4">
+                          <label className="block text-gray-700 mb-2 font-semibold">
+                            Age
+                          </label>
+                          <input
+                            type="text"
+                            name="age"
+                            value={
+                              userData?.data?.dob
+                                ? `${calculateAge(userData.data.dob)} Years`
+                                : ""
+                            }
+                            className={styles.inputStyle}
+                            readOnly
+                          />
+                        </div>
+
+                        <div className="mb-4">
+                          <label className="block text-gray-700 mb-2 font-semibold">
+                            Preferred Date
+                          </label>
+                          <div className="flex items-center space-x-2 relative">
                             <input
                               type="text"
-                              name="name"
-                              value={userData?.data?.fullname || ""}
-                              className={styles.inputStyle}
                               readOnly
+                              value={formattedDate}
+                              className={styles.inputStyle}
+                              placeholder="Select a date"
+                              onClick={() => setShowModal(true)}
                             />
+                            <button
+                              type="button"
+                              onClick={() => setShowModal(true)}
+                              className="absolute right-3 top-2 p-2 rounded-full hover:bg-primary hover:text-white"
+                            >
+                              <FaCalendarAlt />
+                            </button>
                           </div>
 
-                          <div className="mb-4">
-                            <label className="block text-gray-700 mb-2 font-semibold">
-                              Age
-                            </label>
-                            <input
-                              type="text"
-                              name="age"
-                              value={
-                                userData?.data?.dob
-                                  ? `${calculateAge(userData.data.dob)} Years`
-                                  : ""
-                              }
-                              className={styles.inputStyle}
-                              readOnly
-                            />
-                          </div>
+                          {/* Modal for date selection */}
+                          {showModal && (
+                            <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+                              <div className="bg-white p-4 rounded-lg shadow-lg max-w-md w-11/12 md:w-full">
+                                <div className="flex justify-between">
+                                  <h3 className="text-lg font-semibold mb-4">
+                                    Select a Date
+                                  </h3>
+                                  <FaRegWindowClose
+                                    size={27}
+                                    onClick={() => setShowModal(false)}
+                                    className="cursor-pointer"
+                                  />
+                                </div>
 
-                          <div className="mb-4">
-                            <label className="block text-gray-700 mb-2 font-semibold">
-                              Preferred Date
-                            </label>
-                            <div className="flex items-center space-x-2 relative">
-                              <input
-                                type="text"
-                                readOnly
-                                value={formattedDate}
-                                className={styles.inputStyle}
-                                placeholder="Select a date"
-                                onClick={() => setShowModal(true)}
-                              />
-                              <button
-                                type="button"
-                                onClick={() => setShowModal(true)}
-                                className="absolute right-3 top-2 p-2 rounded-full hover:bg-primary hover:text-white"
-                              >
-                                <FaCalendarAlt />
-                              </button>
-                            </div>
+                                {/* Month navigation */}
+                                <div className="flex justify-between items-center mb-4">
+                                  <button
+                                    type="button"
+                                    className="p-2 bg-gray-200 rounded hover:bg-gray-300"
+                                    onClick={goToPreviousMonth}
+                                  >
+                                    <FaChevronLeft />
+                                  </button>
+                                  <span className="font-semibold">
+                                    {currentMonth.toLocaleString("default", {
+                                      month: "long",
+                                    })}{" "}
+                                    {currentMonth.getFullYear()}
+                                  </span>
+                                  <button
+                                    type="button"
+                                    className="p-2 bg-gray-200 rounded hover:bg-gray-300"
+                                    onClick={goToNextMonth}
+                                  >
+                                    <FaChevronRight />
+                                  </button>
+                                </div>
 
-                            {/* Modal for date selection */}
-                            {showModal && (
-                              <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-                                <div className="bg-white p-4 rounded-lg shadow-lg max-w-md w-11/12 md:w-full">
-                                  <div className="flex justify-between">
-                                    <h3 className="text-lg font-semibold mb-4">
-                                      Select a Date
-                                    </h3>
-                                    <FaRegWindowClose
-                                      size={27}
-                                      onClick={() => setShowModal(false)}
-                                      className="cursor-pointer"
-                                    />
+                                {/* Error message */}
+                                {errors && (
+                                  <div className="col-span-7 text-center text-red-500 p-2 rounded mb-4 w-full">
+                                    {errors}
                                   </div>
+                                )}
 
-                                  {/* Month navigation */}
-                                  <div className="flex justify-between items-center mb-4">
-                                    <button
-                                      type="button"
-                                      className="p-2 bg-gray-200 rounded hover:bg-gray-300"
-                                      onClick={goToPreviousMonth}
+                                {/* Days grid */}
+                                <div className="grid grid-cols-7 gap-2">
+                                  {[
+                                    "Sun",
+                                    "Mon",
+                                    "Tue",
+                                    "Wed",
+                                    "Thu",
+                                    "Fri",
+                                    "Sat",
+                                  ].map((day, index) => (
+                                    <div
+                                      key={index}
+                                      className="text-center font-semibold"
                                     >
-                                      <FaChevronLeft />
-                                    </button>
-                                    <span className="font-semibold">
-                                      {currentMonth.toLocaleString("default", {
-                                        month: "long",
-                                      })}{" "}
-                                      {currentMonth.getFullYear()}
-                                    </span>
-                                    <button
-                                      type="button"
-                                      className="p-2 bg-gray-200 rounded hover:bg-gray-300"
-                                      onClick={goToNextMonth}
-                                    >
-                                      <FaChevronRight />
-                                    </button>
-                                  </div>
-
-                                  {/* Error message */}
-                                  {errors && (
-                                    <div className="col-span-7 text-center text-red-500 p-2 rounded mb-4 w-full">
-                                      {errors}
+                                      {day}
                                     </div>
-                                  )}
+                                  ))}
 
-                                  {/* Days grid */}
-                                  <div className="grid grid-cols-7 gap-2">
-                                    {[
-                                      "Sun",
-                                      "Mon",
-                                      "Tue",
-                                      "Wed",
-                                      "Thu",
-                                      "Fri",
-                                      "Sat",
-                                    ].map((day, index) => (
-                                      <div
-                                        key={index}
-                                        className="text-center font-semibold"
-                                      >
-                                        {day}
-                                      </div>
-                                    ))}
+                                  {(() => {
+                                    const firstDayOfMonth = new Date(
+                                      currentMonth.getFullYear(),
+                                      currentMonth.getMonth(),
+                                      1
+                                    );
+                                    const startingDay =
+                                      firstDayOfMonth.getDay();
+                                    const daysArray = [];
 
-                                    {(() => {
-                                      const firstDayOfMonth = new Date(
+                                    for (let i = 0; i < startingDay; i++) {
+                                      daysArray.push(
+                                        <div key={`empty-${i}`} />
+                                      );
+                                    }
+
+                                    for (
+                                      let i = 0;
+                                      i < daysInMonth(currentMonth);
+                                      i++
+                                    ) {
+                                      const day = new Date(
                                         currentMonth.getFullYear(),
                                         currentMonth.getMonth(),
-                                        1
+                                        i + 1
                                       );
-                                      const startingDay =
-                                        firstDayOfMonth.getDay();
-                                      const daysArray = [];
+                                      const availabilityStatus =
+                                        isDateAvailable(day);
 
-                                      for (let i = 0; i < startingDay; i++) {
-                                        daysArray.push(
-                                          <div key={`empty-${i}`} />
-                                        );
-                                      }
-
-                                      for (
-                                        let i = 0;
-                                        i < daysInMonth(currentMonth);
-                                        i++
-                                      ) {
-                                        const day = new Date(
-                                          currentMonth.getFullYear(),
-                                          currentMonth.getMonth(),
-                                          i + 1
-                                        );
-                                        const availabilityStatus =
-                                          isDateAvailable(day);
-
-                                        daysArray.push(
-                                          <div
-                                            key={i}
-                                            className={`text-center w-10 h-8 p-1 rounded-full flex items-center justify-center
+                                      daysArray.push(
+                                        <div
+                                          key={i}
+                                          className={`text-center w-10 h-8 p-1 rounded-full flex items-center justify-center
                                             ${
                                               availabilityStatus === "green"
                                                 ? "bg-green-500 cursor-pointer text-white hover:bg-green-600"
@@ -748,198 +726,213 @@ const DoctorsBooking = () => {
                                                 ? "bg-red-500 text-white cursor-not-allowed hover:bg-gray-200"
                                                 : "text-gray-700"
                                             }`}
-                                            onClick={() => {
-                                              if (
-                                                availabilityStatus === "green"
-                                              ) {
-                                                setDate(day);
-                                                setShowModal(false);
-                                                setErrors("");
-                                              } else if (
-                                                availabilityStatus === "red"
-                                              ) {
-                                                setErrors(
-                                                  "Date Unavailable, please select ones in green!"
-                                                );
-                                              }
-                                            }}
-                                          >
-                                            {day.getDate()}
-                                          </div>
-                                        );
-                                      }
+                                          onClick={() => {
+                                            if (
+                                              availabilityStatus === "green"
+                                            ) {
+                                              setDate(day);
+                                              setShowModal(false);
+                                              setErrors("");
+                                            } else if (
+                                              availabilityStatus === "red"
+                                            ) {
+                                              setErrors(
+                                                "Date Unavailable, please select ones in green!"
+                                              );
+                                            }
+                                          }}
+                                        >
+                                          {day.getDate()}
+                                        </div>
+                                      );
+                                    }
 
-                                      return daysArray;
-                                    })()}
+                                    return daysArray;
+                                  })()}
+                                </div>
+
+                                {/* Availability legend */}
+                                <div className="mt-7 flex justify-around">
+                                  <div className="flex items-center">
+                                    <div className="w-4 h-4 bg-green-500 mr-2 rounded-sm"></div>
+                                    <p>Available</p>
                                   </div>
-
-                                  {/* Availability legend */}
-                                  <div className="mt-7 flex justify-around">
-                                    <div className="flex items-center">
-                                      <div className="w-4 h-4 bg-green-500 mr-2 rounded-sm"></div>
-                                      <p>Available</p>
-                                    </div>
-                                    <div className="flex items-center">
-                                      <div className="w-4 h-4 bg-red-500 mr-2 rounded-sm"></div>
-                                      <p>Not Available</p>
-                                    </div>
+                                  <div className="flex items-center">
+                                    <div className="w-4 h-4 bg-red-500 mr-2 rounded-sm"></div>
+                                    <p>Not Available</p>
                                   </div>
                                 </div>
                               </div>
-                            )}
-                          </div>
+                            </div>
+                          )}
+                        </div>
 
-                          <div className="mb-4">
-                            <label className="block text-gray-700 font-semibold mb-2">
-                              Purpose
-                            </label>
-                            <textarea
-                              name="purpose"
-                              className={styles.inputStyle}
-                              rows="4"
-                              value={description}
-                              onChange={(e) => setDescription(e.target.value)}
-                              required
-                            />
-                          </div>
+                        <div className="mb-4">
+                          <label className="block text-gray-700 font-semibold mb-2">
+                            Purpose
+                          </label>
+                          <textarea
+                            name="purpose"
+                            className={styles.inputStyle}
+                            rows="4"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            required
+                          />
+                        </div>
 
-                          <div className="mb-4 flex justify-between items-center mt-8">
-                            <button
-                              type="submit"
-                              className="bg-primary text-white py-2 px-4 rounded-lg w-full"
-                            >
-                              Confirm Booking
-                            </button>
-                          </div>
-                        </form>
-                      </div>
+                        <div className="mb-4 flex justify-between items-center mt-8">
+                          <button
+                            type="submit"
+                            className="bg-primary text-white py-2 px-4 rounded-lg w-full"
+                          >
+                            Confirm Booking
+                          </button>
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </div>
-              )}
+              </div>
+            )}
 
-              {/* Preview Booking Section */}
-              {previewBooking && doctorDetails && (
-                <div className="relative w-full flex flex-col lg:flex-row lg:space-x-5">
-                  <img
-                    src={`${defaultUrl}${doctorDetails.prof_pics}`}
-                    alt={doctorDetails.fullname || "Doctor"}
-                    className="w-full lg:w-[45%] h-[250px] lg:h-[80vh] object-cover object-top rounded-tl-xl rounded-bl-xl"
-                  />
+            {/* Preview Booking Section */}
+            {previewBooking && doctorDetails && (
+              <div className="relative w-full flex flex-col lg:flex-row lg:space-x-5">
+                <img
+                  src={`${defaultUrl}${doctorDetails.prof_pics}`}
+                  alt={doctorDetails.fullname || "Doctor"}
+                  className="w-full lg:w-[45%] h-[250px] lg:h-[80vh] object-cover object-top rounded-tl-xl rounded-bl-xl"
+                />
 
-                  <div
-                    className="bg-gray-50 p-4 w-full relative"
-                    style={{
-                      borderTopLeftRadius: "20% 20px",
-                      borderTopRightRadius: "20% 20px",
-                      marginTop: "-25px",
-                      zIndex: 10,
-                    }}
-                  >
-                    <div className="mt-6 lg:mt-[70px] mb-[50px]">
-                      <h3 className="text-xl font-bold capitalize text-center pb-3 text-primary">
-                        Preview Your Booking
-                      </h3>
+                <div
+                  className="bg-gray-50 p-4 w-full relative"
+                  style={{
+                    borderTopLeftRadius: "20% 20px",
+                    borderTopRightRadius: "20% 20px",
+                    marginTop: "-25px",
+                    zIndex: 10,
+                  }}
+                >
+                  <div className="mt-6 lg:mt-[70px] mb-[50px]">
+                    <h3 className="text-xl font-bold capitalize text-center pb-3 text-primary">
+                      Preview Your Booking
+                    </h3>
 
-                      <div className="tablet:w-[50vw] lg:w-[34vw] md:w-[60vw] mx-auto">
-                        {/* Date Section */}
-                        <div className="border-b-2 border-t-2 border-gray-200 py-4 lg:mx-5 tablet:mx-5 md:mx-5">
-                          <div className="flex justify-between">
-                            <h3 className="font-bold text-primary">Date</h3>
-                            <div
-                              className="flex text-primary mt-1 cursor-pointer"
-                              onClick={() => {
-                                setPreviewBooking(false);
-                                setIsBooking(true);
-                              }}
-                            >
-                              <FaEdit />
-                              <p>Edit</p>
-                            </div>
-                          </div>
-
-                          <div className="flex p-4 -mr-8 sm:mr-0 -mx-4 sm:mx-0">
-                            <FaCalendarAlt className="text-primary mt-1 mr-3 text-xl" />
-                            <p className="text-gray-600 mt-1 lg:mx-7">
-                              {date
-                                ? new Intl.DateTimeFormat("en-US", {
-                                    weekday: "long",
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "numeric",
-                                  }).format(new Date(date))
-                                : "No date selected"}
-                            </p>
+                    <div className="tablet:w-[50vw] lg:w-[34vw] md:w-[60vw] mx-auto">
+                      {/* Date Section */}
+                      <div className="border-b-2 border-t-2 border-gray-200 py-4 lg:mx-5 tablet:mx-5 md:mx-5">
+                        <div className="flex justify-between">
+                          <h3 className="font-bold text-primary">Date</h3>
+                          <div
+                            className="flex text-primary mt-1 cursor-pointer"
+                            onClick={() => {
+                              setPreviewBooking(false);
+                              setIsBooking(true);
+                            }}
+                          >
+                            <FaEdit />
+                            <p>Edit</p>
                           </div>
                         </div>
 
-                        {/* Purpose Section */}
-                        <div className="border-b-2 border-gray-200 py-4 lg:mx-7 tablet:mx-5 md:mx-5">
-                          <div className="flex justify-between">
-                            <h3 className="font-bold text-primary">Purpose</h3>
-                            <div
-                              className="flex text-primary mt-1 cursor-pointer"
-                              onClick={() => {
-                                setPreviewBooking(false);
-                                setIsBooking(true);
-                              }}
-                            >
-                              <FaEdit />
-                              <p>Edit</p>
-                            </div>
+                        <div className="flex p-4 -mr-8 sm:mr-0 -mx-4 sm:mx-0">
+                          <FaCalendarAlt className="text-primary mt-1 mr-3 text-xl" />
+                          <p className="text-gray-600 mt-1 lg:mx-7">
+                            {date
+                              ? new Intl.DateTimeFormat("en-US", {
+                                  weekday: "long",
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                }).format(new Date(date))
+                              : "No date selected"}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Purpose Section */}
+                      <div className="border-b-2 border-gray-200 py-4 lg:mx-7 tablet:mx-5 md:mx-5">
+                        <div className="flex justify-between">
+                          <h3 className="font-bold text-primary">Purpose</h3>
+                          <div
+                            className="flex text-primary mt-1 cursor-pointer"
+                            onClick={() => {
+                              setPreviewBooking(false);
+                              setIsBooking(true);
+                            }}
+                          >
+                            <FaEdit />
+                            <p>Edit</p>
                           </div>
-                          <div className="py-4">
-                            <p className="text-gray-700">
-                              {description || "No reason provided."}
-                            </p>
+                        </div>
+                        <div className="py-4">
+                          <p className="text-gray-700">
+                            {description || "No reason provided."}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Payment Information Section */}
+                      <div className="border-b-2 border-gray-200 py-4 lg:mx-7 tablet:mx-5 md:mx-5">
+                        <div className="flex justify-between">
+                          <h3 className="font-bold text-primary capitalize">
+                            Payment Information
+                          </h3>
+                        </div>
+
+                        <div className="mt-4 flex justify-between">
+                          <p className="text-gray-700 font-medium">
+                            Booking Fee
+                          </p>
+                          <p className="text-primary font-bold">
+                            {nairaSymbol}
+                            {parseFloat(
+                              bookingData?.booking_amount || 0
+                            ).toLocaleString("en-US", {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2,
+                            })}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Payment Method Section */}
+                      <div className="border-b-2 border-gray-200 py-4 lg:mx-7">
+                        <div className="flex justify-between items-center mt-4">
+                          <h3 className="font-bold text-primary">
+                            Payment Method
+                          </h3>
+                          <div
+                            className="flex text-primary cursor-pointer"
+                            onClick={navToWallet}
+                          >
+                            <FaEdit className="mt-1" />
+                            <p>Edit</p>
                           </div>
                         </div>
 
-                        {/* Payment Information Section */}
-                        <div className="border-b-2 border-gray-200 py-4 lg:mx-7 tablet:mx-5 md:mx-5">
-                          <div className="flex justify-between">
-                            <h3 className="font-bold text-primary capitalize">
-                              Payment Information
-                            </h3>
-                          </div>
-
-                          <div className="mt-4 flex justify-between">
-                            <p className="text-gray-700 font-medium">
-                              Booking Fee
-                            </p>
-                            <p className="text-primary font-bold">
-                              {nairaSymbol}
-                              {parseFloat(
-                                bookingData?.booking_amount || 0
-                              ).toLocaleString("en-US", {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2,
-                              })}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Payment Method Section */}
-                        <div className="border-b-2 border-gray-200 py-4 lg:mx-7">
-                          <div className="flex justify-between items-center mt-4">
-                            <h3 className="font-bold text-primary">
-                              Payment Method
-                            </h3>
-                            <div
-                              className="flex text-primary cursor-pointer"
-                              onClick={navToWallet}
-                            >
-                              <FaEdit className="mt-1" />
-                              <p>Edit</p>
+                        <div className="py-4">
+                          {walletBalance >= calculateTotal() ? (
+                            <div className="flex justify-between border-2 border-gray-200 mx-2 p-4 rounded-xl">
+                              <div className="flex text-primary">
+                                <FaWallet size={40} />
+                                <p className="ml-4 mt-2">
+                                  Wallet Balance ({nairaSymbol}
+                                  {walletBalance.toLocaleString("en-US", {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  })}
+                                  )
+                                </p>
+                              </div>
                             </div>
-                          </div>
-
-                          <div className="py-4">
-                            {walletBalance >= calculateTotal() ? (
-                              <div className="flex justify-between border-2 border-gray-200 mx-2 p-4 rounded-xl">
-                                <div className="flex text-primary">
-                                  <FaWallet size={40} />
-                                  <p className="ml-4 mt-2">
+                          ) : (
+                            <div className="flex justify-between border-2 border-gray-200 mx-2 p-4 rounded-xl mt-2 opacity-80">
+                              <div className="flex">
+                                <FaWallet size={40} className="text-primary" />
+                                <div className="ml-4">
+                                  <p>
                                     Wallet Balance ({nairaSymbol}
                                     {walletBalance.toLocaleString("en-US", {
                                       minimumFractionDigits: 2,
@@ -947,66 +940,47 @@ const DoctorsBooking = () => {
                                     })}
                                     )
                                   </p>
+                                  <p className="text-red-500 -mt-1">
+                                    Insufficient funds
+                                  </p>
                                 </div>
                               </div>
-                            ) : (
-                              <div className="flex justify-between border-2 border-gray-200 mx-2 p-4 rounded-xl mt-2 opacity-80">
-                                <div className="flex">
-                                  <FaWallet
-                                    size={40}
-                                    className="text-primary"
-                                  />
-                                  <div className="ml-4">
-                                    <p>
-                                      Wallet Balance ({nairaSymbol}
-                                      {walletBalance.toLocaleString("en-US", {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                      })}
-                                      )
-                                    </p>
-                                    <p className="text-red-500 -mt-1">
-                                      Insufficient funds
-                                    </p>
-                                  </div>
-                                </div>
-                                <div className="ml-4 mt-3">
-                                  <a
-                                    href="/wallet"
-                                    className="bg-primary rounded-lg p-2 text-white"
-                                  >
-                                    Add Money
-                                  </a>
-                                </div>
+                              <div className="ml-4 mt-3">
+                                <a
+                                  href="/wallet"
+                                  className="bg-primary rounded-lg p-2 text-white"
+                                >
+                                  Add Money
+                                </a>
                               </div>
-                            )}
-                          </div>
+                            </div>
+                          )}
                         </div>
+                      </div>
 
-                        {/* Confirm Booking Button */}
-                        <div className="mb-4 flex justify-between items-center">
-                          <button
-                            type="button"
-                            disabled={isProcessing || paymentSuccess}
-                            className="bg-primary text-white py-2 px-4 rounded-lg w-full"
-                            onClick={confirmBooking}
-                          >
-                            {isProcessing
-                              ? "Processing..."
-                              : paymentSuccess
-                              ? "Payment Successful"
-                              : "Book Now"}
-                          </button>
-                        </div>
+                      {/* Confirm Booking Button */}
+                      <div className="mb-4 flex justify-between items-center">
+                        <button
+                          type="button"
+                          disabled={isProcessing || paymentSuccess}
+                          className="bg-primary text-white py-2 px-4 rounded-lg w-full"
+                          onClick={confirmBooking}
+                        >
+                          {isProcessing
+                            ? "Processing..."
+                            : paymentSuccess
+                            ? "Payment Successful"
+                            : "Book Now"}
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
-              )}
-            </>
-          )}
-        </main>
-      </div>
+              </div>
+            )}
+          </>
+        )}
+      </main>
     </div>
   );
 };
