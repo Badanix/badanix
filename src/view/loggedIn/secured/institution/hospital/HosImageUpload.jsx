@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
- import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const HosImageUpload = () => {
   const [imageFile, setImageFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [loading, setLoading] = useState(false);
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const onFileChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
@@ -17,12 +17,24 @@ const navigate = useNavigate();
   };
 
   const uploadProfilePicture = async () => {
+    console.clear();
+
+    console.log("🔵 Upload button clicked");
+
     if (!imageFile) {
+      console.warn("❌ No image selected");
       Swal.fire("No Image Selected", "Please select an image.", "warning");
       return;
     }
 
+    console.log("🟢 Selected file object:", imageFile);
+    console.log("🟢 File name:", imageFile.name);
+    console.log("🟢 File size (KB):", (imageFile.size / 1024).toFixed(2));
+    console.log("🟢 File type:", imageFile.type);
+
     const token = localStorage.getItem("token");
+    console.log("🔑 Token exists:", !!token);
+
     if (!token) {
       Swal.fire("Error", "User not authenticated.", "error");
       return;
@@ -31,30 +43,62 @@ const navigate = useNavigate();
     setLoading(true);
 
     const formData = new FormData();
-    formData.append("prof_pics", imageFile);
+    formData.append("logo", imageFile);
+
+    console.log("📦 FormData contents:");
+    for (let pair of formData.entries()) {
+      console.log(`   ➜ ${pair[0]}:`, pair[1]);
+    }
 
     try {
+      console.log("🚀 Sending request...");
+
       const response = await fetch(
         "https://api.digitalhospital.com.ng/api/v1/institution/avatar",
         {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
-            // Don't set Content-Type! Let browser set multipart/form-data boundary
           },
           body: formData,
-        }
+        },
       );
 
+      console.log("📡 Response status:", response.status);
+      console.log("📡 Response ok:", response.ok);
+
+      const text = await response.text(); // raw response
+      console.log("📨 Raw server response:", text);
+
+      let data = {};
+      try {
+        data = JSON.parse(text);
+        console.log("📨 Parsed JSON:", data);
+      } catch {
+        console.warn("⚠️ Response is NOT JSON");
+      }
+
       if (response.ok) {
-        Swal.fire("Success", "Profile picture uploaded successfully!", "success");
+        Swal.fire(
+          "Success",
+          "Profile picture uploaded successfully!",
+          "success",
+        );
         navigate("/institution/hospital/HosDocumentUpload");
       } else {
-        const errorData = await response.json();
-        Swal.fire("Upload Failed", errorData.message || "Something went wrong.", "error");
+        Swal.fire(
+          "Upload Failed",
+          data.message || "Something went wrong.",
+          "error",
+        );
       }
     } catch (error) {
-      Swal.fire("Error", "An error occurred while uploading the image.", "error");
+      console.error("🔥 Fetch error:", error);
+      Swal.fire(
+        "Error",
+        "An error occurred while uploading the image.",
+        "error",
+      );
     } finally {
       setLoading(false);
     }

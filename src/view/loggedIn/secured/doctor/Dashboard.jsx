@@ -452,7 +452,7 @@ const Dashboard = () => {
 
                       {mostRecentUpcomingAppointment && (
                         <div
-                          className="flex items-center text-secondary cursor-pointer"
+             className="flex items-center text-secondary cursor-pointer"
                           onClick={() => navigate("/doctor/appointments")}
                         >
                           <span className="rounded-full px-2 py-1 text-sm font-bold">

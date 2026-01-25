@@ -18,7 +18,13 @@ const TopBar = ({
   envelopeIcon,
 }) => {
   const { notifications } = useNotification();
-  const userData = getUserData();
+const userData = getUserData();
+
+console.log("FULL userData:", userData);
+console.log("userData.data:", userData?.data);
+console.log("role_id:", userData?.data?.role_id);
+console.log("logo:", userData?.data?.logo);
+console.log("prof_pics:", userData?.data?.prof_pics);
 
   const getTargetUrl = useTargetUrl();
 
@@ -131,7 +137,6 @@ const TopBar = ({
           <div className="flex cursor-pointer" onClick={() => toggleTopbar()}>
             <div className="sm:bg-white sm:rounded-full sm:p-1">
               <img
-                // eslint-disable-next-line react/prop-types
                 src={
                   userData?.data?.role_id === 3
                     ? `${defaultUrl}${userData?.data?.logo}`

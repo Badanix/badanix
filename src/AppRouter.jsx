@@ -6,14 +6,10 @@ import {
   useLocation,
 } from "react-router-dom";
 import VideoCall from "./components/VideoCall";
-
-import Preloader from "./components/Preloader";
-
 import PatientProtectedRoute from "./components/PatientProtectedRoute";
 import PatientLayout from "./layout/PatientLayout";
-
-import DoctorsLayout from "./layout/DoctorsLayout";
 import DoctorProtectedRoute from "./components/DoctorProtectedRoute";
+import InstitutionProtectedRoute from "./components/InstitutionProtectedRoute";
 import InstLayout from "./layout/InstLayout";
 import HomeLayout from "./layout/HomeLayout";
 
@@ -279,146 +275,154 @@ function AppRouter() {
       </Route>
 
       {/*  laboratory*/}
-      <Route element={<InstLayout />}>
-        <Route
-          path="/institution/Laboratory/dashboard"
-          element={<LabDashboard />}
-        />
+      <Route element={<InstitutionProtectedRoute />}>
+        <Route element={<InstLayout />}>
+          <Route
+            path="/institution/Laboratory/dashboard"
+            element={<LabDashboard />}
+          />
 
-        <Route
-          path="/institution/Laboratory/onboarding"
-          element={<LabOnboarding />}
-        />
+          <Route
+            path="/institution/Laboratory/onboarding"
+            element={<LabOnboarding />}
+          />
 
-        <Route path="/institution/Laboratory/order" element={<LabOrder />} />
+          <Route path="/institution/Laboratory/order" element={<LabOrder />} />
 
-        <Route
-          path="/institution/Laboratory/profile"
-          element={<LabProfile />}
-        />
+          <Route
+            path="/institution/Laboratory/profile"
+            element={<LabProfile />}
+          />
 
-        <Route
-          path="/institution/Laboratory/LabImageUpload"
-          element={LabImageUpload}
-        />
-        <Route
-          path="/institution/Laboratory/LabDocumentUpload"
-          element={<LabDocumentUpload />}
-        />
+          <Route
+            path="/institution/Laboratory/LabImageUpload"
+            element={LabImageUpload}
+          />
+          <Route
+            path="/institution/Laboratory/LabDocumentUpload"
+            element={<LabDocumentUpload />}
+          />
+        </Route>
       </Route>
 
       {/* pharmacy */}
+
       <Route element={<InstLayout />}>
-        <Route
-          path="/institution/pharmacy/dashboard"
-          element={<PharmaciesDashboard />}
-        />
+        <Route element={<InstitutionProtectedRoute />}>
+          <Route
+            path="/institution/pharmacy/dashboard"
+            element={<PharmaciesDashboard />}
+          />
 
-        <Route
-          path="/institution/pharmacy/wallet"
-          element={<PharmaciesWallet />}
-        />
+          <Route
+            path="/institution/pharmacy/wallet"
+            element={<PharmaciesWallet />}
+          />
 
-        <Route
-          path="/institution/pharmacy/order"
-          element={<PharmaciesOrder />}
-        />
+          <Route
+            path="/institution/pharmacy/order"
+            element={<PharmaciesOrder />}
+          />
 
-        <Route
-          path="/institution/pharmacy/profile"
-          element={<PharmaciesProfile />}
-        />
+          <Route
+            path="/institution/pharmacy/profile"
+            element={<PharmaciesProfile />}
+          />
 
-        <Route
-          path="/institution/pharmacy/activity"
-          element={<PharmaciesActivity />}
-        />
+          <Route
+            path="/institution/pharmacy/activity"
+            element={<PharmaciesActivity />}
+          />
 
-        <Route
-          path="/institution/pharmacy/settings"
-          element={<PharmaciesSettings />}
-        />
+          <Route
+            path="/institution/pharmacy/settings"
+            element={<PharmaciesSettings />}
+          />
 
-        <Route
-          path="/institution/pharmacy/onboarding"
-          element={<PharmaciesOnBoarding />}
-        />
+          <Route
+            path="/institution/pharmacy/onboarding"
+            element={<PharmaciesOnBoarding />}
+          />
 
-        <Route
-          path="/institution/pharmacy/PharmImageUpload"
-          element={<PharmImageUpload />}
-        />
+          <Route
+            path="/institution/pharmacy/PharmImageUpload"
+            element={<PharmImageUpload />}
+          />
 
-        <Route
-          path="/institution/pharmacy/PharmDocumentUpload"
-          element={<PharmDocumentUpload />}
-        />
+          <Route
+            path="/institution/pharmacy/PharmDocumentUpload"
+            element={<PharmDocumentUpload />}
+          />
+        </Route>
       </Route>
 
       {/*hospital */}
-      <Route element={<InstLayout />}>
-        <Route
-          path="/institution/hospital/dashboard"
-          element={<HospitalDashboard />}
-        />
+      <Route element={<InstitutionProtectedRoute />}>
+        <Route element={<InstLayout />}>
+          <Route
+            path="/institution/hospital/dashboard"
+            element={<HospitalDashboard />}
+          />
 
-        <Route
-          path="/institution/hospital/onboarding"
-          element={<HospitalOnboarding />}
-        />
+          <Route
+            path="/institution/hospital/onboarding"
+            element={<HospitalOnboarding />}
+          />
 
-        <Route
-          path="/institution/hospital/HosImageUpload"
-          element={<HosImageUpload />}
-        />
+          <Route
+            path="/institution/hospital/HosImageUpload"
+            element={<HosImageUpload />}
+          />
 
-        <Route
-          path="/institution/hospital/HosDocumentUpload"
-          element={<HosDocumentUpload />}
-        />
+          <Route
+            path="/institution/hospital/HosDocumentUpload"
+            element={<HosDocumentUpload />}
+          />
 
-        <Route path="/institution/hospital/order" element={<HospitalOrder />} />
+          <Route
+            path="/institution/hospital/order"
+            element={<HospitalOrder />}
+          />
 
-        <Route
-          path="/institution/hospital/profile"
-          element={<HospitalProfile />}
-        />
+          <Route
+            path="/institution/hospital/profile"
+            element={<HospitalProfile />}
+          />
+        </Route>
       </Route>
 
       {/* Doctor */}
       <Route element={<DoctorProtectedRoute />}>
-       
-          <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
+        <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
 
-          <Route path="/doctor/calendar" element={<DoctorCalendar />} />
+        <Route path="/doctor/calendar" element={<DoctorCalendar />} />
 
-          <Route path="/doctor/appointments" element={<DoctorAppointments />} />
+        <Route path="/doctor/appointments" element={<DoctorAppointments />} />
 
-          <Route path="/doctor/activity" element={<DoctorActivities />} />
+        <Route path="/doctor/activity" element={<DoctorActivities />} />
 
-          <Route path="/doctor/patients" element={<DoctorPatients />} />
+        <Route path="/doctor/patients" element={<DoctorPatients />} />
 
-          <Route path="/doctor/payment" element={<DoctorPayment />} />
+        <Route path="/doctor/payment" element={<DoctorPayment />} />
 
-          <Route path="/doctor/profile" element={<DoctorProfile />} />
+        <Route path="/doctor/profile" element={<DoctorProfile />} />
 
-          <Route path="/doctor/ImageUpload" element={<ImageUpload />} />
+        <Route path="/doctor/ImageUpload" element={<ImageUpload />} />
 
-          <Route
-            path="/doctor/DoctorDocumentUpload"
-            element={<DoctorDocumentUpload />}
-          />
+        <Route
+          path="/doctor/DoctorDocumentUpload"
+          element={<DoctorDocumentUpload />}
+        />
 
-          <Route path="/doctor/PatientNote" element={<PatientNote />} />
+        <Route path="/doctor/PatientNote" element={<PatientNote />} />
 
-          <Route path="/doctor/PatientEhr" element={<PatientEhr />} />
+        <Route path="/doctor/PatientEhr" element={<PatientEhr />} />
 
-          <Route path="/doctor/Transactions" element={<Transactions />} />
+        <Route path="/doctor/Transactions" element={<Transactions />} />
 
-          <Route path="/doctor/settings" element={<DoctorSettings />} />
+        <Route path="/doctor/settings" element={<DoctorSettings />} />
 
-          <Route path="/doctor/onboarding" element={<DoctorOnBoarding />} />
-        
+        <Route path="/doctor/onboarding" element={<DoctorOnBoarding />} />
       </Route>
 
       {/* Patients */}

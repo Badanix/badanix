@@ -30,13 +30,72 @@ function AdminDoctorsLists() {
     navigate(`/admin/doctors/${doctor.id}`);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this doctor?")) return;
 
+    const previousDoctors = doctors;
+
+    // optimistic UI update
     setDoctors((prev) => prev.filter((doc) => doc.id !== id));
 
-    console.log("DELETE DOCTOR ID:", id);
+    try {
+      const res = await fetch(`${defaultUrls}admin/delete-user/doctors/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${token}`, // if required
+        },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || data.status === false) {
+        throw new Error(data.message || "Failed to delete doctor");
+      }
+
+      alert("Doctor deleted successfully");
+    } catch (err) {
+      // rollback if delete fails
+      setDoctors(previousDoctors);
+      alert(err.message || "Error deleting doctor");
+      console.error("DELETE DOCTOR ERROR:", err);
+    }
   };
+
+const handleToggleStatus = async (id) => {
+  const previousDoctors = doctors;
+
+  // optimistic toggle
+  setDoctors((prev) =>
+    prev.map((doc) =>
+      doc.id === id ? { ...doc, status: doc.status === 1 ? 0 : 1 } : doc
+    )
+  );
+
+  try {
+    const res = await fetch(
+      `${defaultUrls}toggle-account/users/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok || data.status === false) {
+      throw new Error(data.message || "Failed to toggle verification");
+    }
+  } catch (err) {
+    // rollback on failure
+    setDoctors(previousDoctors);
+    alert(err.message || "Error updating verification status");
+    console.error("TOGGLE STATUS ERROR:", err);
+  }
+};
+
 
   if (loading) return <p className="p-4">Loading doctors...</p>;
   if (error) return <p className="p-4 text-red-500">{error}</p>;
@@ -96,21 +155,19 @@ function AdminDoctorsLists() {
                       <td className="px-4 py-3 truncate max-w-xs">
                         {doc.specialization}
                       </td>
-                  
 
                       <td className="px-4 py-3">
-                        <span
-                          className={`px-2 py-1 text-sm rounded-full ${
+                        <button
+                          onClick={() => handleToggleStatus(doc.id)}
+                          className={`px-3 py-1 text-sm rounded-full transition ${
                             doc.status === 1
-                              ? "bg-green-100 text-green-700"
-                              : "bg-red-100 text-red-600"
+                              ? "bg-primaryLight text-white hover:opacity-90"
+                              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                           }`}
                         >
-                          {doc.status === 1 ? "Active" : "Inactive"}
-                        </span>
+                          {doc.status === 1 ? "Verified" : "Not Verified"}
+                        </button>
                       </td>
-
-                  
 
                       <td className="px-4 py-3 text-sm text-gray-600">
                         {new Date(doc.created_at).toLocaleDateString()}
