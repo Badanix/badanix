@@ -1,5 +1,19 @@
 import React, { useState } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
+import {
+  FaHome,
+  FaTachometerAlt,
+  FaUsers,
+  FaUserMd,
+  FaHospital,
+  FaFileMedical,
+  FaMoneyBillWave,
+  FaExchangeAlt,
+  FaCalendarCheck,
+  FaCog,
+  FaSignOutAlt,
+} from "react-icons/fa";
+
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -8,6 +22,8 @@ const AdminLayout = () => {
   const handleLogout = () => {
     navigate("/admin/login");
   };
+
+  const linkClass = "flex items-center gap-3 hover:text-secondary transition";
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -29,36 +45,51 @@ const AdminLayout = () => {
         <h2 className="text-xl font-bold mb-6">Admin Panel</h2>
 
         <nav className="flex flex-col space-y-4">
-          <Link to="/admin/users" className="hover:text-secondary">
-            Users
+          <Link to="/" className={linkClass}>
+            <FaHome /> Back to Home
           </Link>
-          <Link to="/admin/doctors" className="hover:text-secondary">
-            Doctors
+
+          <Link to="/admin/dashboard" className={linkClass}>
+            <FaTachometerAlt /> Dashboard
           </Link>
-          <Link to="/admin/hospitals" className="hover:text-secondary">
-            Hospitals
+
+          <Link to="/admin/users" className={linkClass}>
+            <FaUsers /> Users
           </Link>
-          <Link to="/admin/pharmacies" className="hover:text-secondary">
-            Pharmacies
+
+          <Link to="/admin/doctors" className={linkClass}>
+            <FaUserMd /> Doctors
           </Link>
-          <Link to="/admin/withdrawals" className="hover:text-secondary">
-            Withdrawals
+
+          <Link to="/admin/allinstitutions" className={linkClass}>
+            <FaHospital /> Institutions
           </Link>
-          <Link to="/admin/transactions" className="hover:text-secondary">
-            Transactions
+
+          <Link to="/admin/allmedicalrecords" className={linkClass}>
+            <FaFileMedical /> Medical Records
           </Link>
-          <Link to="/admin/bookings" className="hover:text-secondary">
-            Bookings
+
+          <Link to="/admin/withdrawals" className={linkClass}>
+            <FaMoneyBillWave /> Withdrawals
           </Link>
-          <Link to="/admin/settings" className="hover:text-secondary">
-            Settings
+
+          <Link to="/admin/transactions" className={linkClass}>
+            <FaExchangeAlt /> Transactions
+          </Link>
+
+          <Link to="/admin/bookings" className={linkClass}>
+            <FaCalendarCheck /> Bookings
+          </Link>
+
+          <Link to="/admin/settings" className={linkClass}>
+            <FaCog /> Settings
           </Link>
 
           <button
             onClick={handleLogout}
-            className="mt-6 bg-red-600 hover:bg-red-700 py-2 rounded"
+            className="mt-6 flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 py-2 rounded"
           >
-            Logout
+            <FaSignOutAlt /> Logout
           </button>
         </nav>
       </aside>
@@ -79,7 +110,11 @@ const AdminLayout = () => {
               strokeWidth="2"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           </button>
 
@@ -87,9 +122,7 @@ const AdminLayout = () => {
             Admin Dashboard
           </h1>
 
-          <div className="text-sm text-gray-600">
-            Welcome, Admin
-          </div>
+          <div className="text-sm text-gray-600">Welcome, Admin</div>
         </header>
 
         {/* Page Content */}

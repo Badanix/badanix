@@ -4,40 +4,48 @@ import { useNavigate } from "react-router-dom";
 
 function AllBookings() {
   const [bookings, setBookings] = useState([]);
-  const [filteredBookings, setFilteredBookings] = useState([]);
-  const [statusFilter, setStatusFilter] = useState(4); // 4 = all
+  const [users, setUsers] = useState({});
+  const [doctors, setDoctors] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [statusFilter, setStatusFilter] = useState(4);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${defaultUrls}admin/allBookings/4`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch bookings");
-        return res.json();
-      })
-      .then((data) => {
-        console.log("ALL BOOKINGS RESPONSE:", data);
-        const list = Array.isArray(data.data) ? data.data : [];
-        setBookings(list);
-        setFilteredBookings(list);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("FETCH ERROR:", err);
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
+    setLoading(true);
 
-  // 🔹 Filter when status changes
-  useEffect(() => {
-    if (statusFilter === 4) {
-      setFilteredBookings(bookings);
-    } else {
-      setFilteredBookings(bookings.filter(bk => bk.status === statusFilter));
-    }
-  }, [statusFilter, bookings]);
+    // 🔹 Fetch bookings
+    fetch(`${defaultUrls}admin/allBookings/${statusFilter}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setBookings(Array.isArray(data.data) ? data.data : []);
+      })
+      .catch((err) => setError(err.message));
+
+    // 🔹 Fetch users
+    fetch(`${defaultUrls}admin/allUsers/users`)
+      .then((res) => res.json())
+      .then((data) => {
+        const map = {};
+        (data.data || []).forEach((c) => {
+          map[c.id] = c.fullname;
+        });
+        setUsers(map);
+      });
+
+    // 🔹 Fetch doctors
+    fetch(`${defaultUrls}admin/allUsers/doctors`)
+      .then((res) => res.json())
+      .then((data) => {
+        const map = {};
+        (data.data || []).forEach((d) => {
+          map[d.id] = d.fullname;
+        });
+        setDoctors(map);
+        setLoading(false);
+      })
+      .catch((err) => setError(err.message));
+  }, [statusFilter]);
 
   const getStatus = (status) => {
     switch (status) {
@@ -61,8 +69,6 @@ function AllBookings() {
     <div className="p-6 bg-white rounded-xl shadow">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold text-primary">All Bookings</h2>
-
-        {/* 🔹 Status Filter */}
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(Number(e.target.value))}
@@ -76,56 +82,78 @@ function AllBookings() {
         </select>
       </div>
 
-      {filteredBookings.length === 0 ? (
+      {bookings.length === 0 ? (
         <p>No bookings found</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full table-auto border border-gray-200 rounded-lg">
             <thead className="bg-primary text-white">
               <tr>
-                <th className="px-4 py-3 text-left">ID</th>
-                <th className="px-4 py-3 text-left">Patient</th>
-                <th className="px-4 py-3 text-left">Doctor</th>
-                <th className="px-4 py-3 text-left">Date</th>
-                <th className="px-4 py-3 text-left">Time</th>
-                <th className="px-4 py-3 text-left">Status</th>
-                <th className="px-4 py-3 text-left">Created</th>
+                <th className="px-4 py-3">ID</th>
+                <th className="px-4 py-3">Patient Name</th>
+                <th className="px-4 py-3">Doctor Name</th>
+                <th className="px-4 py-3">Purpose</th>
+                <th className="px-4 py-3">Date</th>
+                <th className="px-4 py-3">Start Time</th> {/* new column */}
+                <th className="px-4 py-3">End Time</th> {/* new column */}
+                <th className="px-4 py-3">Status</th>
+                <th className="px-4 py-3">Created</th>
                 <th className="px-4 py-3 text-center">Actions</th>
               </tr>
             </thead>
 
             <tbody>
-              {filteredBookings.map((bk) => {
+              {bookings.map((bk) => {
                 const status = getStatus(bk.status);
 
                 return (
                   <tr key={bk.id} className="border-b hover:bg-gray-50">
                     <td className="px-4 py-3">{bk.id}</td>
-                    <td className="px-4 py-3">{bk.patient_name || "-"}</td>
-                    <td className="px-4 py-3">{bk.doctor_name || "-"}</td>
-                    <td className="px-4 py-3">{bk.date || "-"}</td>
-                    <td className="px-4 py-3">{bk.time || "-"}</td>
+                    <td className="px-4 py-3">
+                      {users[bk.client_id] || `Client #${bk.client_id}`}
+                    </td>
+                    <td className="px-4 py-3">
+                      {doctors[bk.doctor_id] || `Doctor #${bk.doctor_id}`}
+                    </td>
+                    <td className="px-4 py-3">{bk.purpose || "-"}</td>
+                    <td className="px-4 py-3">
+                      {bk.date ? new Date(bk.date).toLocaleDateString() : "-"}
+                    </td>
+                    <td className="px-4 py-3">
+                      {bk.start_time
+                        ? new Date(
+                            `1970-01-01T${bk.start_time}`,
+                          ).toLocaleTimeString("en-US", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })
+                        : "-"}
+                    </td>
 
                     <td className="px-4 py-3">
-                      <span className={`px-2 py-1 text-sm rounded-full ${status.style}`}>
+                      {bk.end_time
+                        ? new Date(
+                            `1970-01-01T${bk.end_time}`,
+                          ).toLocaleTimeString("en-US", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })
+                        : "-"}
+                    </td>
+
+                    {/* separate end time */}
+                    <td className="px-4 py-3">
+                      <span
+                        className={`px-2 py-1 text-sm rounded-full ${status.style}`}
+                      >
                         {status.label}
                       </span>
                     </td>
-
-               <td className="px-4 py-3 text-sm text-gray-600">
-  {bk.created_at
-    ? new Date(bk.created_at).toLocaleString("en-GB", {
-        weekday: "short",   
-        day: "2-digit",      // e.g., 20
-        month: "short",      // e.g., Jan
-        year: "numeric",     // e.g., 2026
-        hour: "2-digit",     // e.g., 14
-        minute: "2-digit",   // e.g., 30
-      })
-    : "-"}
-</td>
-
-
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      {bk.created_at
+                        ? new Date(bk.created_at).toLocaleString("en-GB")
+                        : "-"}
+                    </td>
                     <td className="px-4 py-3 text-center">
                       <button
                         onClick={() => navigate(`/admin/bookings/${bk.id}`)}

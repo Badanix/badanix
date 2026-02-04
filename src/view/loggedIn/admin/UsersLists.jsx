@@ -12,6 +12,7 @@ function UsersLists() {
     fetch(`${defaultUrls}admin/allUsers/users`)
       .then((res) => res.json())
       .then((data) => {
+        console.log("USERS API RESPONSE:", data);
         setUsers(Array.isArray(data.data) ? data.data : []);
         setLoading(false);
       })
@@ -26,43 +27,39 @@ function UsersLists() {
     navigate(`/admin/users/${user.id}`);
   };
 
- const handleDelete = async (id) => {
-  if (!window.confirm("Are you sure you want to delete this user?")) return;
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this user?")) return;
 
-  // keep a copy in case delete fails
-  const previousUsers = users;
+    // keep a copy in case delete fails
+    const previousUsers = users;
 
-  // optimistic UI update
-  setUsers((prev) => prev.filter((user) => user.id !== id));
+    // optimistic UI update
+    setUsers((prev) => prev.filter((user) => user.id !== id));
 
-  try {
-    const res = await fetch(
-      `${defaultUrls}admin/delete-user/users/${id}`,
-      {
+    try {
+      const res = await fetch(`${defaultUrls}admin/delete-user/users/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           // add auth token if needed
           // Authorization: `Bearer ${token}`,
         },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || data.status === false) {
+        throw new Error(data.message || "Failed to delete user");
       }
-    );
 
-    const data = await res.json();
-
-    if (!res.ok || data.status === false) {
-      throw new Error(data.message || "Failed to delete user");
+      alert("User deleted successfully");
+    } catch (err) {
+      // rollback UI if delete fails
+      setUsers(previousUsers);
+      alert(err.message || "Error deleting user");
+      console.error("DELETE ERROR:", err);
     }
-
-    alert("User deleted successfully");
-  } catch (err) {
-    // rollback UI if delete fails
-    setUsers(previousUsers);
-    alert(err.message || "Error deleting user");
-    console.error("DELETE ERROR:", err);
-  }
-};
-
+  };
 
   if (loading) return <p className="p-4">Loading users...</p>;
   if (error) return <p className="p-4 text-red-500">{error}</p>;

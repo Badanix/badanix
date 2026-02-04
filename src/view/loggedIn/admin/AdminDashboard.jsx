@@ -1,24 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { defaultUrls } from "../../../components/Constants";
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
     users: 0,
     doctors: 0,
-    hospitals: 0,
-    pharmacies: 0,
+    institutions: 0,
+    bookings: 0,
     withdrawals: 0,
   });
 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    // 🔁 Replace with real API calls later
-    setStats({
-      users: 1240,
-      doctors: 86,
-      hospitals: 14,
-      pharmacies: 32,
-      withdrawals: 6,
-    });
+    fetch(`${defaultUrls}admin/statistics`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("API RESPONSE:", data);
+
+        const d = data.data;
+
+        setStats({
+          users: d.total_users || 0,
+          doctors: d.total_doctors || 0,
+          institutions: d.total_institutions || 0,
+          bookings: d.total_bookings || 0,
+          withdrawals: d.total_pending_bookings || 0,
+        });
+
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("FETCH ERROR:", err);
+        setError(err.message);
+        setLoading(false);
+      });
   }, []);
 
   return (
@@ -46,14 +64,14 @@ const AdminDashboard = () => {
           link="/admin/doctors"
         />
         <DashboardCard
-          title="Hospitals"
-          value={stats.hospitals}
-          link="/admin/hospitals"
+          title="Institutions"
+          value={stats.institutions}
+          link="/admin/allinstitutions"
         />
         <DashboardCard
-          title="Pharmacies"
-          value={stats.pharmacies}
-          link="/admin/pharmacies"
+          title="Total Bookings"
+          value={stats.bookings}
+          link="/admin/bookings"
         />
       </div>
 
@@ -63,10 +81,14 @@ const AdminDashboard = () => {
           Quick Actions
         </h2>
 
-        <div className="grid grid-cols-1 custom-mini:grid-cols-2 custom-xl:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 custom-mini:grid-cols-2 custom-xl:grid-cols-4 gap-4">
           <QuickAction
             label="Verify Doctors"
             to="/admin/doctors"
+          />
+          <QuickAction
+            label="Verify Institutions"
+            to="/admin/allinstitutions"
           />
           <QuickAction
             label="Withdrawal Requests"

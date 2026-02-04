@@ -114,8 +114,7 @@ import AdminLayout from "./view/loggedIn/admin/AdminLayout";
 
 import UsersLists from "./view/loggedIn/admin/UsersLists";
 import AdminDoctorsLists from "./view/loggedIn/admin/AdminDoctorsLists";
-import HospitalLists from "./view/loggedIn/admin/HospitalLists";
-import PharmaciesLists from "./view/loggedIn/admin/PharmaciesLists";
+import AllInstitutions from "./view/loggedIn/admin/AllInstitutions";
 import Withdrawals from "./view/loggedIn/admin/Withdrawals";
 import AdminSettings from "./view/loggedIn/admin/AdminSettings";
 import AdminDashboard from "./view/loggedIn/admin/AdminDashboard";
@@ -125,6 +124,8 @@ import SingleUsers from "./view/loggedIn/admin/SingleUsers";
 import SingleDoctors from "./view/loggedIn/admin/SingleDoctors";
 import AllTransactions from "./view/loggedIn/admin/AllTransactions";
 import AllBookings from "./view/loggedIn/admin/AllBookings";
+import { AllMedicalRecords, SingleInstitution } from "./view/loggedIn/admin";
+import SingleEhr from "./view/loggedIn/admin/SingleEhr";
 
 function AppRouter() {
   const location = useLocation();
@@ -266,12 +267,14 @@ function AppRouter() {
         <Route path="users/:id" element={<SingleUsers />} />
         <Route path="doctors" element={<AdminDoctorsLists />} />
         <Route path="doctors/:id" element={<SingleDoctors />} />
-        <Route path="hospitals" element={<HospitalLists />} />
-        <Route path="pharmacies" element={<PharmaciesLists />} />
+        <Route path="allinstitutions" element={<AllInstitutions />} />
+        <Route path="institutions/:id" element={<SingleInstitution />} />
         <Route path="withdrawals" element={<Withdrawals />} />
         <Route path="settings" element={<AdminSettings />} />
         <Route path="transactions" element={<AllTransactions />} />
         <Route path="bookings" element={<AllBookings />} />
+        <Route path="allmedicalrecords" element={<AllMedicalRecords />} />
+        <Route path="medical-record/:ehr" element={<SingleEhr />} />
       </Route>
 
       {/*  laboratory*/}

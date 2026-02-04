@@ -74,9 +74,9 @@ const handleToggleStatus = async (id) => {
 
   try {
     const res = await fetch(
-      `${defaultUrls}toggle-account/users/${id}`,
+      `${defaultUrls}admin/toggle-account/doctors/${id}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -95,6 +95,7 @@ const handleToggleStatus = async (id) => {
     console.error("TOGGLE STATUS ERROR:", err);
   }
 };
+
 
 
   if (loading) return <p className="p-4">Loading doctors...</p>;
@@ -156,18 +157,42 @@ const handleToggleStatus = async (id) => {
                         {doc.specialization}
                       </td>
 
-                      <td className="px-4 py-3">
-                        <button
-                          onClick={() => handleToggleStatus(doc.id)}
-                          className={`px-3 py-1 text-sm rounded-full transition ${
-                            doc.status === 1
-                              ? "bg-primaryLight text-white hover:opacity-90"
-                              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                          }`}
-                        >
-                          {doc.status === 1 ? "Verified" : "Not Verified"}
-                        </button>
-                      </td>
+                     <td className="px-4 py-3">
+  <div className="flex items-center gap-3">
+    {/* Toggle Switch */}
+    <button
+      onClick={() => handleToggleStatus(doc.id)}
+      title={
+        doc.status === 1
+          ? "Click to UNVERIFY this doctor"
+          : "Click to VERIFY this doctor"
+      }
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300
+        ${doc.status === 1 ? "bg-green-600" : "bg-gray-300"}`}
+    >
+      <span
+        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300
+          ${doc.status === 1 ? "translate-x-6" : "translate-x-1"}`}
+      />
+    </button>
+
+    {/* Status Text */}
+    <span
+      className={`text-sm font-medium
+        ${doc.status === 1 ? "text-green-700" : "text-gray-600"}`}
+    >
+      {doc.status === 1 ? "Verified" : "Not Verified"}
+    </span>
+  </div>
+
+  {/* Helper text for admin */}
+  <p className="text-xs text-gray-400 mt-1">
+    {doc.status === 1
+      ? "Doctor is visible as VERIFIED to users"
+      : "Doctor is NOT verified yet"}
+  </p>
+</td>
+
 
                       <td className="px-4 py-3 text-sm text-gray-600">
                         {new Date(doc.created_at).toLocaleDateString()}
