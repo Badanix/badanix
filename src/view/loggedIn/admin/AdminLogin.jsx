@@ -51,7 +51,7 @@ const AdminLogin = () => {
       <div className="w-full max-w-md bg-white shadow-custom rounded-2xl p-6 custom-xs:p-7 custom-md:p-8 m-5">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-primary">Admin Login</h1>
-          <p className="text-sm text-gray-500 mt-1">Enter your credentials to access your account</p>
+          <p className="text-sm text-gray-500 mt-1">Enter your credentials to access admin account</p>
         </div>
 
         {error && (
